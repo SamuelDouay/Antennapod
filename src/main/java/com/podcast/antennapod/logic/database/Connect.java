@@ -18,7 +18,7 @@ public class Connect {
         try {
             this.connection = DriverManager.getConnection(ConfigProperties.getInstance().getProperty("jdbc.database"));
         } catch ( Exception e ) {
-            logger.error(e.getClass().getName() + ": " + e.getMessage());
+            logger.error("{}: {}", e.getClass().getName(), e.getMessage());
             System.exit(0);
         }
         logger.info("Opened database successfully");
@@ -33,11 +33,14 @@ public class Connect {
     }
 
     public ResultSet executeQuery(String query) {
+        ResultSet resultSet;
         try {
-            return this.connection.createStatement().executeQuery(query);
+            resultSet =  this.connection.createStatement().executeQuery(query);
         } catch (SQLException e) {
+            logger.error("{}: {}", e.getClass().getName(), e.getMessage());
             throw new RuntimeException(e);
         }
-
+        logger.info("Requête succes : %s".formatted(query));
+        return resultSet;
     }
 }

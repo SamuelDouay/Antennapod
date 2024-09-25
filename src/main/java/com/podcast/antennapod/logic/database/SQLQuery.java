@@ -1,10 +1,7 @@
 package com.podcast.antennapod.logic.database;
 
-import com.podcast.antennapod.logic.config.ConfigProperties;
 import com.podcast.antennapod.old.abonnement.Episode;
 import com.podcast.antennapod.old.abonnement.Podcast;
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
 
 import java.sql.*;
 import java.util.ArrayList;
@@ -12,33 +9,6 @@ import java.util.HashMap;
 import java.util.List;
 
 public class SQLQuery {
-    private static final Logger logger = LogManager.getLogger();
-
-    public static void main(String[] args) throws SQLException {
-        logger.info("Hello World !");
-        logger.trace("Entering method processOrder().");
-        logger.debug("Received order with ID 12345.");
-        logger.info("Order shipped successfully.");
-        logger.warn("Potential security vulnerability detected in user input: '...'");
-        logger.error("Failed to process order. Error: {. . .}");
-        logger.fatal("System crashed. Shutting down...");
-        System.out.println(getPodcast());
-
-        ConfigProperties configProperties = ConfigProperties.getInstance();
-
-        logger.info(configProperties.getProperty("page.name"));
-        String page_name = configProperties.getProperty("page.name");
-        String[]  page = page_name.split(",");
-
-        for(String s : page) {
-            logger.info(configProperties.getProperty("page."+s+".name"));
-
-            logger.info(configProperties.getProperty("page."+s+".icon"));
-        }
-
-
-    }
-
     public static HashMap<String, String> getPodcast() throws SQLException {
         ResultSet resultSet = Connect.getInstance().executeQuery("SELECT * from FEEDS LIMIT 10;");
         HashMap<String, String> res = new HashMap<>();
