@@ -9,7 +9,7 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 public class MainView extends Application {
-    public final static Logger logger = LogManager.getLogger();
+    public static final Logger logger = LogManager.getLogger();
     @Override
     public void start(Stage stage) {
         stage.setScene(new Scene(new VBox(new Label("Test")), 320, 240));
