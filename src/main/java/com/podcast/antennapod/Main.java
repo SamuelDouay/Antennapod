@@ -9,6 +9,7 @@ import java.io.IOException;
 public class Main {
     private final static Logger logger = LogManager.getLogger();
 
+    // test
     public static void main(String[] args) {
         try {
             logger.info("Start application");
