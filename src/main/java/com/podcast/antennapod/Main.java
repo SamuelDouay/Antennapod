@@ -8,10 +8,16 @@ import java.io.IOException;
 
 public class Main {
     private final static Logger logger = LogManager.getLogger();
-
-    public static void main(String[] args) throws IOException {
+    
+    public static void main(String[] args) {
         logger.info("Start application");
-        MainView.main(args);
-        logger.info("Close application");
+        try {
+            MainView.main(args);
+        } catch (IOException e) {
+            logger.error("Une erreur est survenue lors de l'exécution", e);
+            System.exit(1);  // Quitte l'application avec un code d'erreur
+        } finally {
+            logger.info("Close application");
+        }
     }
 }
