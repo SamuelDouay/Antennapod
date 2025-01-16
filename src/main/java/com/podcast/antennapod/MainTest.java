@@ -125,7 +125,7 @@ public class MainTest {
         try {
             Thread.sleep(milli);
 
-        } catch (Exception e) {
+        } catch (InterruptedException e) {
             e.printStackTrace();
         }
         return "CompletableFuture Result";

@@ -9,9 +9,13 @@ import java.io.IOException;
 public class Main {
     private final static Logger logger = LogManager.getLogger();
 
-    public static void main(String[] args) throws IOException {
-        logger.info("Start application");
-        MainView.main(args);
-        logger.info("Close application");
+    public static void main(String[] args) {
+        try {
+            logger.info("Start application");
+            MainView.main(args);
+            logger.info("Close application");
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 }
