@@ -8,12 +8,12 @@ import java.io.IOException;
 
 public class Main {
     private final static Logger logger = LogManager.getLogger();
-    
+
     public static void main(String[] args) {
         logger.info("Start application");
         try {
             MainView.main(args);
-        } catch (IOException e) {
+        } catch (Exception e) {
             logger.error("Une erreur est survenue lors de l'exécution", e);
             System.exit(1);  // Quitte l'application avec un code d'erreur
         } finally {
