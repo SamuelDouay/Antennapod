@@ -17,7 +17,7 @@ public class ConfigPropertiesTest {
 
     @Test
     @DisplayName("Test Database Config")
-    public void firstTest() {
-        assertEquals(configProperties.getProperty("jdbc.pilote"), "org.sqlite.JDBC", "Pilote jdbc");
+    void firstTest() {
+        assertEquals("org.sqlite.JDBC", configProperties.getProperty("jdbc.pilote"), "Pilote jdbc");
     }
 }
