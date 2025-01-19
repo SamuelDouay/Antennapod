@@ -1,3 +1,0 @@
-UPDATEE FILE....
-
-This project uses Semantic Versioning. We recommended using the latest and specific release version.
