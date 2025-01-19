@@ -1,6 +1,5 @@
 package com.podcast.antennapod;
 
-import com.podcast.antennapod.logic.config.ConfigProperties;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -8,18 +7,15 @@ import java.net.URI;
 import java.net.http.HttpClient;
 import java.net.http.HttpRequest;
 import java.net.http.HttpResponse;
-import java.util.HashMap;
 import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
-import java.util.concurrent.Future;
-
-import static com.podcast.antennapod.logic.database.SQLQuery.getPodcast;
 
 public class MainTest {
     private static final Logger logger = LogManager.getLogger();
 
     public static void main(String[] args) throws Exception {
+
         logger.info("Debut de la fonction et du multi");
 
         ExecutorService executorService = Executors.newSingleThreadExecutor();
@@ -27,16 +23,13 @@ public class MainTest {
             return getTestAsync(1000);
         }, executorService);
 
-        completableFutureResult.thenAccept(result -> {
-                    logger.info("Promise Result: " + result);
-                })
+        completableFutureResult.thenAccept(result -> logger.info("Promise Result: " + result))
                 .exceptionally(throwable -> {
                     logger.error("Error occurred: " + throwable.getMessage());
                     return null;
                 });
 
         logger.info("Doing other tasks...");
-        logger.info(getTestAsync(500));
 
 
         CompletableFuture<String> completableFuture = CompletableFuture.supplyAsync(() -> {
