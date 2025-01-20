@@ -5,7 +5,7 @@ import javafx.scene.image.Image;
 public class Menu {
     private String name;
     private int nbEpisode;
-    public Image image;
+    private Image image;
     private boolean isActive;
 
     public Menu(String name, int nbEpisode, Image image, boolean isActive) {

@@ -6,6 +6,9 @@ import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
 
 public class ButtonStyle {
+
+    private ButtonStyle()
+
     public static void setButtonStyle(HBox hBox) {
         hBox.setBackground(null);
         hBox.setBorder(null);

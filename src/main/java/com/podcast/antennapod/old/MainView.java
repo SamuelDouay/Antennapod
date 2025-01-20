@@ -20,6 +20,7 @@ import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 
 import java.sql.SQLException;
+import java.util.Map;
 import java.util.HashMap;
 import java.util.List;
 
@@ -107,7 +108,7 @@ public class MainView extends Application {
         try {
             HashMap<String, String> podcast = SQLQuery.getPodcast();
 
-            for(String title : podcast.keySet()) {
+            for(Map.Entry<String, Object> title : podcast.keySet()) {
                 Podcast a = new Podcast(title, podcast.get(title));
                 hbox.getChildren().add(a.getPodcastImage());
             }

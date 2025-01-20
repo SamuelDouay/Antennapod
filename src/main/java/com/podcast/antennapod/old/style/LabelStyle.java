@@ -7,6 +7,9 @@ import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
 
 public class LabelStyle {
+
+    private LabelStyle()
+
     public static void setTextOnDefault(Label label) {
         label.setFont(Font.font("Inter", FontWeight.MEDIUM, 12));
         label.setTextFill(Paint.valueOf(Color.web("#1A2B2C").toString()));

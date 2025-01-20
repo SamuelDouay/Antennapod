@@ -5,12 +5,12 @@ import java.util.Date;
 public class Episode {
     private String title;
     private Date date;
-    private String image_url;
+    private String imageUrl;
 
-    public Episode(String title, Date date, String image_url) {
+    public Episode(String title, Date date, String imageUrl) {
         this.title = title;
         this.date = date;
-        this.image_url = image_url;
+        this.imageUrl = imageUrl;
     }
 
     public String getTitle() {
@@ -21,8 +21,8 @@ public class Episode {
         return date;
     }
 
-    public String getImage_url() {
-        return image_url;
+    public String getImageUrl() {
+        return imageUrl;
     }
 }
 
