@@ -8,7 +8,7 @@ import javafx.scene.text.FontWeight;
 
 public class LabelStyle {
 
-    private LabelStyle()
+    private LabelStyle();
 
     public static void setTextOnDefault(Label label) {
         label.setFont(Font.font("Inter", FontWeight.MEDIUM, 12));
