@@ -108,7 +108,7 @@ public class MainView extends Application {
         try {
             HashMap<String, String> podcast = SQLQuery.getPodcast();
 
-            for(Map.Entry<String, Object> title : podcast.keySet()) {
+            for (String title : podcast.keySet()) {
                 Podcast a = new Podcast(title, podcast.get(title));
                 hbox.getChildren().add(a.getPodcastImage());
             }
