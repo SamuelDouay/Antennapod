@@ -33,14 +33,27 @@ public class Connect {
     }
 
     public ResultSet executeQuery(String query) {
-        ResultSet resultSet;
+        ResultSet resultSet = null;
+        Statement statement = null;
+        
         try {
-            resultSet =  this.connection.createStatement().executeQuery(query);
+            statement = this.connection.createStatement();
+            resultSet = statement.executeQuery(query);
+            logger.info("Requête succès : {}", query);
+            return resultSet;
         } catch (SQLException e) {
-            logger.error("{}: {}", e.getClass().getName(), e.getMessage());
-            throw new RuntimeException(e);
+            logger.error("Erreur d'exécution de la requête : {} - {}", e.getClass().getName(), e.getMessage());
+            throw new RuntimeException("Erreur lors de l'exécution de la requête SQL", e);
+        } finally {
+            if (resultSet == null) {  // En cas d'échec, on ferme le statement
+                try {
+                    if (statement != null) {
+                        statement.close();
+                    }
+                } catch (SQLException e) {
+                    logger.error("Erreur lors de la fermeture du statement : {}", e.getMessage());
+                }
+            }
         }
-        logger.info("Requête succes : %s".formatted(query));
-        return resultSet;
     }
 }
