@@ -8,11 +8,12 @@ import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Connection;
+import java.sql.Statement;
 
 public class Connect {
     private static Connect instance;
-        private Connection connection;
-        private static final Logger logger = LogManager.getLogger();
+    private Connection connection;
+    private static final Logger logger = LogManager.getLogger();
 
     private Connect(){
         try {

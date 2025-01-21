@@ -4,7 +4,6 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 import java.net.URI;
-import java.net.URISyntaxException;
 import java.net.http.HttpClient;
 import java.net.http.HttpRequest;
 import java.net.http.HttpResponse;
@@ -111,8 +110,6 @@ public class MainTest {
                 throw new RuntimeException("Erreur lors de l'exécution de la requête HTTP", e.getCause());
             }
     
-        } catch (URISyntaxException e) {
-            throw new RuntimeException("URL invalide", e);
         } catch (Exception e) {
             throw new RuntimeException("Erreur inattendue lors de la requête HTTP", e);
         }
