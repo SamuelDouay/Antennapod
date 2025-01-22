@@ -81,37 +81,51 @@ public class MainTest {
 
     public static String request() {
         logger.debug("Configuration du client HTTP");
-        HttpClient client = HttpClient.newHttpClient();
+        HttpClient client = HttpClient.newBuilder()
+                .connectTimeout(Duration.ofSeconds(30))
+                .build();
+        CompletableFuture<String> response = null;
         
         try {
             HttpRequest request = HttpRequest.newBuilder()
                     .uri(URI.create("https://feeds.acast.com/public/shows/5e6a404cd22bfc26784b114c"))
-                    .timeout(Duration.ofSeconds(30))  // Ajout d'un timeout
+                    .timeout(Duration.ofSeconds(30))
                     .build();
     
             logger.info("Envoi de la requête HTTP vers Acast");
-            CompletableFuture<String> response = client.sendAsync(request, HttpResponse.BodyHandlers.ofString())
+            response = client.sendAsync(request, HttpResponse.BodyHandlers.ofString())
                     .thenApply(HttpResponse::body);
     
-            try {
-                // Utilisation de get avec timeout au lieu d'une boucle while
-                String responseBody = response.get(30, TimeUnit.SECONDS);
-                logger.info("Réponse HTTP reçue, taille: {} caractères", responseBody.length());
-                logger.debug("Contenu de la réponse: {}", responseBody);
-                return responseBody;
-                
-            } catch (InterruptedException e) {
-                Thread.currentThread().interrupt(); // Restauration du flag d'interruption
-                throw new RuntimeException("Requête HTTP interrompue", e);
-            } catch (TimeoutException e) {
-                response.cancel(true); // Annulation de la requête
-                throw new RuntimeException("Timeout de la requête HTTP après 30 secondes", e);
-            } catch (ExecutionException e) {
-                throw new RuntimeException("Erreur lors de l'exécution de la requête HTTP", e.getCause());
-            }
+            String responseBody = response.get(30, TimeUnit.SECONDS);
+            logger.info("Réponse HTTP reçue, taille: {} caractères", responseBody.length());
+            logger.debug("Contenu de la réponse: {}", responseBody);
+            return responseBody;
     
+        } catch (InterruptedException e) {
+            Thread.currentThread().interrupt();
+            throw new RuntimeException("Requête HTTP interrompue", e);
+        } catch (TimeoutException e) {
+            throw new RuntimeException("Timeout de la requête HTTP après 30 secondes", e);
+        } catch (ExecutionException e) {
+            throw new RuntimeException("Erreur lors de l'exécution de la requête HTTP", e.getCause());
         } catch (Exception e) {
             throw new RuntimeException("Erreur inattendue lors de la requête HTTP", e);
+        } finally {
+            try {
+                if (response != null && !response.isDone()) {
+                    logger.warn("Annulation de la requête HTTP en cours");
+                    response.cancel(true);
+                }
+                
+                if (client != null) {
+                    logger.debug("Fermeture du client HTTP");
+                    client.close();
+                }
+            } catch (Exception e) {
+                logger.error("Erreur lors de la fermeture des ressources HTTP", e);
+            } finally {
+                logger.debug("Nettoyage des ressources HTTP terminé");
+            }
         }
     }
 }

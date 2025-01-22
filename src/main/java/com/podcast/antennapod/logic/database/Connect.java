@@ -38,22 +38,52 @@ public class Connect {
         Statement statement = null;
         
         try {
-            statement = this.connection.createStatement();
+            statement = this.connection.createStatement(
+                ResultSet.TYPE_SCROLL_INSENSITIVE,
+                ResultSet.CONCUR_READ_ONLY);
             resultSet = statement.executeQuery(query);
-            logger.info("Requête succès : {}", query);
+            logger.info("Requête exécutée avec succès : {}", query);
             return resultSet;
+    
         } catch (SQLException e) {
             logger.error("Erreur d'exécution de la requête : {} - {}", e.getClass().getName(), e.getMessage());
+            closeResources(resultSet, statement);
             throw new RuntimeException("Erreur lors de l'exécution de la requête SQL", e);
+    
+        } catch (Exception e) {
+            logger.error("Erreur inattendue : {} - {}", e.getClass().getName(), e.getMessage());
+            closeResources(resultSet, statement);
+            throw new RuntimeException("Erreur inattendue lors de l'exécution de la requête SQL", e);
+    
         } finally {
-            if (resultSet == null) {  // En cas d'échec, on ferme le statement
-                try {
-                    if (statement != null) {
-                        statement.close();
-                    }
-                } catch (SQLException e) {
-                    logger.error("Erreur lors de la fermeture du statement : {}", e.getMessage());
-                }
+            // Si l'exécution échoue, on ferme les ressources
+            if (resultSet == null) {
+                closeResources(null, statement);
+            }
+            // Si l'exécution réussit, le ResultSet et le Statement doivent rester ouverts
+            // pour être utilisés par l'appelant
+        }
+    }
+    
+    /**
+     * Ferme proprement les ressources JDBC
+     */
+    private void closeResources(ResultSet rs, Statement stmt) {
+        if (rs != null) {
+            try {
+                rs.close();
+                logger.debug("ResultSet fermé avec succès");
+            } catch (SQLException e) {
+                logger.error("Erreur lors de la fermeture du ResultSet : {}", e.getMessage());
+            }
+        }
+        
+        if (stmt != null) {
+            try {
+                stmt.close();
+                logger.debug("Statement fermé avec succès");
+            } catch (SQLException e) {
+                logger.error("Erreur lors de la fermeture du Statement : {}", e.getMessage());
             }
         }
     }
