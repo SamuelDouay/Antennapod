@@ -55,18 +55,18 @@ public class Connect {
     
         } finally {
             // Si l'exécution échoue, on ferme les ressources
-            if (rs != null) {
+            if (resultSet != null) {
                 try {
-                    rs.close();
+                    resultSet.close();
                     logger.debug("ResultSet fermé avec succès");
                 } catch (SQLException e) {
                     logger.error("Erreur lors de la fermeture du ResultSet : {}", e.getMessage());
                 }
             }
             
-            if (stmt != null) {
+            if (statement != null) {
                 try {
-                    stmt.close();
+                    statement.close();
                     logger.debug("Statement fermé avec succès");
                 } catch (SQLException e) {
                     logger.error("Erreur lors de la fermeture du Statement : {}", e.getMessage());
