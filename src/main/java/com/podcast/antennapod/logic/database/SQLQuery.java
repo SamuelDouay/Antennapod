@@ -9,13 +9,18 @@ import java.util.HashMap;
 import java.util.List;
 
 public class SQLQuery {
+    private static final String TITLE = "title";
+    private static final String IMG_URL = "image_url";
+    private static final String DATE = "date";
+    private static final String PODCAST_IMG = "podcast_img";
+
     public static HashMap<String, String> getPodcast() throws SQLException {
         ResultSet resultSet = Connect.getInstance().executeQuery("SELECT * from FEEDS LIMIT 10;");
         HashMap<String, String> res = new HashMap<>();
 
         while (resultSet.next()) {
-            String title = resultSet.getString("title");
-            String img = resultSet.getString("image_url");
+            String title = resultSet.getString(TITLE);
+            String img = resultSet.getString(IMG_URL);
             res.put(title, img);
         }
 
@@ -31,11 +36,10 @@ public class SQLQuery {
         List<Episode> res = new ArrayList<>();
 
         while (resultSet.next()) {
-            String title = resultSet.getString("title");
-            Date date = resultSet.getDate("date");
-            String podcast_name = resultSet.getString("podcast_name");
-            String podcast_img = resultSet.getString("podcast_img");
-            res.add(new Episode(title, date, podcast_img));
+            String title = resultSet.getString(TITLE);
+            Date date = resultSet.getDate(DATE);
+            String podcastImg = resultSet.getString(PODCAST_IMG);
+            res.add(new Episode(title, date, podcastImg));
         }
 
         return res;
@@ -48,8 +52,8 @@ public class SQLQuery {
         List<Podcast> res = new ArrayList<>();
 
         while (resultSet.next()) {
-            String title = resultSet.getString("title");
-            String img = resultSet.getString("image_url");
+            String title = resultSet.getString(TITLE);
+            String img = resultSet.getString(IMG_URL);
             int nb = 0;
             res.add(new Podcast(title, img, nb));
         }
