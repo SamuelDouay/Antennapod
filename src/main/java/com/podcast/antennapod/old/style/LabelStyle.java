@@ -7,7 +7,7 @@ import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
 
 public class LabelStyle {
-    private static final Sting FONT = "Inter";
+    private static final String FONT = "Inter";
 
     private LabelStyle() {
 
