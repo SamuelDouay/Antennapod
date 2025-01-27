@@ -6,7 +6,4 @@ module com.podcast.antennapod {
 
     exports com.podcast.antennapod;
     exports com.podcast.antennapod.view;
-    exports com.podcast.antennapod.old.navigation;
-    exports com.podcast.antennapod.old.controller;
-    exports com.podcast.antennapod.old;
 }
