@@ -14,18 +14,14 @@ public class Main {
         
         logger.info("=== Démarrage de l'application AntennaPod ===");
         logger.info("Heure de démarrage: {}", 
-            startTime.format(DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm:ss")));
+            DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm:ss").format(startTime));
         
         if (args.length > 0) {
             logger.info("Arguments de démarrage reçus: {}", String.join(", ", args));
         }
         
         try {
-
             MainView.main(args);
-            
-
-            
         } catch (Exception e) {
             logger.error("Erreur fatale lors de l'initialisation de l'application", e);
             logger.error("Détails de l'erreur: {}", e.getMessage());

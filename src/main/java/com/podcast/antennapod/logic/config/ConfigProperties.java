@@ -30,8 +30,7 @@ public class ConfigProperties {
             this.properties.load(getClass().getResourceAsStream("/properties/config.properties"));
             logger.info("Load config properties file");
         } catch (IOException e) {
-            logger.error("Error load properties : " + e.getMessage());
-            throw new RuntimeException(e);
+            logger.error("Error load properties : {}", e.getMessage());
         }
     }
 
