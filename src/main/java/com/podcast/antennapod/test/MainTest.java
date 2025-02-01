@@ -1,4 +1,4 @@
-package com.podcast.antennapod;
+package com.podcast.antennapod.test;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;

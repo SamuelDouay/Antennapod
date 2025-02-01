@@ -21,10 +21,10 @@ public class Main {
         }
         
         try {
-            logger.info("Initialisation de l'interface utilisateur principale (MainView)");
+
             MainView.main(args);
             
-            logger.info("Interface utilisateur initialisée avec succès");
+
             
         } catch (Exception e) {
             logger.error("Erreur fatale lors de l'initialisation de l'application", e);
