@@ -14,7 +14,6 @@
     <junit.version>5.10.0</junit.version>
     <sonar.core.codeCoveragePlugin>jacoco</sonar.core.codeCoveragePlugin>
     <sonar.dynamicAnalysis>reuseReports</sonar.dynamicAnalysis>
-    <sonar.jacoco.reportPath>${project.basedir}/../target/jacoco.exec</sonar.jacoco.reportPath>
   </properties>
 
   <dependencies>
@@ -111,9 +110,6 @@
             </goals>
           </execution>
         </executions>
-        <configuration>
-          <destFile>${sonar.jacoco.reportPath}</destFile>
-        </configuration>
       </plugin>
     </plugins>
   </build>
