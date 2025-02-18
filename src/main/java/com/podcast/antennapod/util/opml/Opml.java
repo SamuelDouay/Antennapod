@@ -1,4 +1,4 @@
-package com.podcast.antennapod.test;
+package com.podcast.antennapod.util.opml;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -25,13 +25,18 @@ public class Opml {
 
             for (Iterator<Node> iter = list.iterator(); iter.hasNext();) {
                 DefaultElement attribute = (DefaultElement) iter.next();
-                logger.info( attribute.attribute("text").getValue() +" | " +attribute.attribute("xmlUrl").getValue());
+                String title = attribute.attribute("text").getValue();
+                String type = attribute.attribute("type").getValue();
+                String xmlUrl = attribute.attribute("xmlUrl").getValue();
+                String htmlUrl = attribute.attribute("htmlUrl").getValue();
+                logger.info(new ItemOpml(title, type, xmlUrl, htmlUrl));
             }
 
         } catch (Exception e) {
             logger.error(e.getMessage());
         }
 
+        /*
         try {
             SAXReader saxReader = new SAXReader();
             saxReader.setFeature("http://apache.org/xml/features/disallow-doctype-decl", true);
@@ -63,6 +68,7 @@ public class Opml {
         } catch (Exception e) {
             logger.error(e.getMessage());
         }
+         */
     }
 
 }
