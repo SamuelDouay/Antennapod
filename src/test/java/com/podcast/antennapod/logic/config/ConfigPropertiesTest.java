@@ -16,8 +16,15 @@ public class ConfigPropertiesTest {
     }
 
     @Test
-    @DisplayName("Test Database Config")
-    void firstTest() {
+    @DisplayName("Properties")
+    void configProperties() {
         assertEquals("org.sqlite.JDBC", configProperties.getProperty("jdbc.pilote"), "Pilote jdbc");
+        assertEquals("#1A2B2C", configProperties.getProperty("light.theme.grey.200"), "Test style properties");
+    }
+
+    @Test
+    @DisplayName("Properties null")
+    void firstTest() {
+        assertEquals(null, configProperties.getProperty("light"), "Null properties");
     }
 }
