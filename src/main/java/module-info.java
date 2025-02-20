@@ -4,6 +4,7 @@ module com.podcast.antennapod {
     requires java.net.http;
     requires org.dom4j;
     requires com.fasterxml.jackson.databind;
+    requires java.xml;
 
     exports com.podcast.antennapod;
     exports com.podcast.antennapod.view;
