@@ -6,7 +6,7 @@ import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 @DisplayName("Item Opml Test")
-public class ItemOpmlTest {
+class ItemOpmlTest {
     final String text = "TEXT";
     final String title = "TITLE";
     final String type = "RSS";
@@ -15,7 +15,7 @@ public class ItemOpmlTest {
 
     @DisplayName("Test Constructor")
     @Test
-    public void testConstructor() {
+    void testConstructor() {
 
         ItemOpml test = new ItemOpml(text, title, type, xmlUrl, htmlUrl);
 
@@ -28,7 +28,7 @@ public class ItemOpmlTest {
 
     @DisplayName("Test string")
     @Test
-    public void testString() {
+    void testString() {
         ItemOpml test = new ItemOpml(text, title, type, xmlUrl, htmlUrl);
 
         assertEquals(test.toString(), "ItemOpml{" +

@@ -7,11 +7,11 @@ import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 @DisplayName("Class Config Properties")
-public class ConfigPropertiesTest {
+class ConfigPropertiesTest {
     private static ConfigProperties configProperties;
 
     @BeforeAll
-    public static void init() {
+    static void init() {
         configProperties = ConfigProperties.getInstance();
     }
 
