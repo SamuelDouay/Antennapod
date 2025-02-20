@@ -8,7 +8,6 @@ import org.dom4j.io.SAXReader;
 import org.dom4j.tree.DefaultElement;
 
 import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.List;
 
 public class OpmlReader {
@@ -16,8 +15,8 @@ public class OpmlReader {
     private static final String OUTLINE = "//body/outline";
 
     public static List<ItemOpml> read() {
+        List<ItemOpml> itemOpmls = new ArrayList<>();
         try {
-            List<ItemOpml> itemOpmls = new ArrayList<>();
 
             SAXReader saxReader = new SAXReader();
             saxReader.setFeature("http://apache.org/xml/features/disallow-doctype-decl", true);
@@ -26,30 +25,27 @@ public class OpmlReader {
             List<Node> list = document.selectNodes(OUTLINE);
 
             for (Node node : list) {
-                logger.debug(node);
+
                 DefaultElement attribute = (DefaultElement) node;
                 String text = attribute.attribute("text").getValue();
                 String title = attribute.attribute("title").getValue();
                 String type = attribute.attribute("type").getValue();
                 String xmlUrl = attribute.attribute("xmlUrl").getValue();
                 String htmlUrl = attribute.attribute("htmlUrl").getValue();
-
-                logger.debug(title + " " + type);
-
-
                 itemOpmls.add(new ItemOpml(text, title, type, xmlUrl, htmlUrl));
             }
-
-            return itemOpmls;
 
         } catch (Exception e) {
             logger.error(e.getMessage());
         }
-        return null;
+        return itemOpmls;
     }
 
     public static void main(String[] args) {
-        logger.info(OpmlReader.read());
+        List<ItemOpml> list = OpmlReader.read();
+        for(ItemOpml e : list) {
+            logger.info(e);
+        }
     }
 
 }
