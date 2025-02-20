@@ -1,26 +1,31 @@
 package com.podcast.antennapod.test.gppoder;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+
 import java.util.List;
 import java.util.Map;
 import java.util.Scanner;
 
 public class TEST {
+    private static final Logger logger = LogManager.getLogger(TEST.class);
+
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
 
         // Configuration du client
-        System.out.println("Configuration de la synchronisation Nextcloud GPodder");
-        System.out.print("URL de votre Nextcloud (ex: https://cloud.example.com): ");
+        logger.info("Configuration de la synchronisation Nextcloud GPodder");
+        logger.info("URL de votre Nextcloud (ex: https://cloud.example.com): ");
         String nextcloudUrl = scanner.nextLine();
 
-        System.out.print("Nom d'utilisateur: ");
+        logger.info("Nom d'utilisateur: ");
         String username = scanner.nextLine();
 
-        System.out.print("Mot de passe: ");
+        logger.info("Mot de passe: ");
         String password = scanner.nextLine();
 
         String deviceId = "JavaPodcastApp_" + System.currentTimeMillis();
-        System.out.println("Identifiant de l'appareil: " + deviceId);
+        logger.info("Identifiant de l'appareil: " + deviceId);
 
         try {
             NextcloudGPodderClient client = new NextcloudGPodderClient(username, password, nextcloudUrl);
@@ -28,14 +33,14 @@ public class TEST {
             // Menu principal
             boolean running = true;
             while (running) {
-                System.out.println("\n=== Menu GPodder Nextcloud Sync ===");
-                System.out.println("1. Afficher mes abonnements");
-                System.out.println("2. Ajouter un podcast");
-                System.out.println("3. Supprimer un podcast");
-                System.out.println("4. Marquer un épisode comme écouté");
-                System.out.println("5. Synchroniser les épisodes écoutés");
-                System.out.println("0. Quitter");
-                System.out.print("> ");
+                logger.info("\n=== Menu GPodder Nextcloud Sync ===");
+                logger.info("1. Afficher mes abonnements");
+                logger.info("2. Ajouter un podcast");
+                logger.info("3. Supprimer un podcast");
+                logger.info("4. Marquer un épisode comme écouté");
+                logger.info("5. Synchroniser les épisodes écoutés");
+                logger.info("0. Quitter");
+                logger.info("> ");
 
                 int choice = scanner.nextInt();
                 scanner.nextLine(); // consommer le newline
@@ -58,15 +63,15 @@ public class TEST {
                         break;
                     case 0:
                         running = false;
-                        System.out.println("Au revoir!");
+                        logger.info("Au revoir!");
                         break;
                     default:
-                        System.out.println("Option invalide. Veuillez réessayer.");
+                        logger.info("Option invalide. Veuillez réessayer.");
                 }
             }
 
         } catch (Exception e) {
-            System.err.println("Erreur: " + e.getMessage());
+            logger.error("Erreur: " + e.getMessage());
             e.printStackTrace();
         } finally {
             scanner.close();
@@ -76,28 +81,28 @@ public class TEST {
     private static void listSubscriptions(NextcloudGPodderClient client) {
         try {
             List<String> subscriptions = client.getSubscriptions();
-            System.out.println("\nVos abonnements podcast (" + subscriptions.size() + "):");
+            logger.info("\nVos abonnements podcast (" + subscriptions.size() + "):");
             if (subscriptions.isEmpty()) {
-                System.out.println("Aucun abonnement trouvé.");
+                logger.info("Aucun abonnement trouvé.");
             } else {
                 for (int i = 0; i < subscriptions.size(); i++) {
-                    System.out.println((i + 1) + ". " + subscriptions.get(i));
+                    logger.info((i + 1) + ". " + subscriptions.get(i));
                 }
             }
         } catch (Exception e) {
-            System.err.println("Impossible de récupérer les abonnements: " + e.getMessage());
+            logger.error("Impossible de récupérer les abonnements: " + e.getMessage());
         }
     }
 
     private static void addPodcast(NextcloudGPodderClient client, Scanner scanner) {
         try {
-            System.out.print("URL du flux RSS du podcast à ajouter: ");
+            logger.info("URL du flux RSS du podcast à ajouter: ");
             String podcastUrl = scanner.nextLine();
 
             String updateId = client.updateSubscriptions(List.of(podcastUrl), List.of());
-            System.out.println("Podcast ajouté avec succès! ID de mise à jour: " + updateId);
+            logger.info("Podcast ajouté avec succès! ID de mise à jour: " + updateId);
         } catch (Exception e) {
-            System.err.println("Erreur lors de l'ajout du podcast: " + e.getMessage());
+            logger.error("Erreur lors de l'ajout du podcast: " + e.getMessage());
         }
     }
 
@@ -105,36 +110,36 @@ public class TEST {
         try {
             List<String> subscriptions = client.getSubscriptions();
             if (subscriptions.isEmpty()) {
-                System.out.println("Vous n'avez aucun podcast à supprimer.");
+                logger.info("Vous n'avez aucun podcast à supprimer.");
                 return;
             }
 
-            System.out.println("\nChoisissez le podcast à supprimer:");
+            logger.info("\nChoisissez le podcast à supprimer:");
             for (int i = 0; i < subscriptions.size(); i++) {
-                System.out.println((i + 1) + ". " + subscriptions.get(i));
+                logger.info((i + 1) + ". " + subscriptions.get(i));
             }
-            System.out.print("Numéro du podcast: ");
+            logger.info("Numéro du podcast: ");
             int index = scanner.nextInt() - 1;
             scanner.nextLine(); // consommer le newline
 
             if (index >= 0 && index < subscriptions.size()) {
                 String podcastToRemove = subscriptions.get(index);
                 String updateId = client.updateSubscriptions(List.of(), List.of(podcastToRemove));
-                System.out.println("Podcast supprimé avec succès! ID de mise à jour: " + updateId);
+                logger.info("Podcast supprimé avec succès! ID de mise à jour: " + updateId);
             } else {
-                System.out.println("Numéro de podcast invalide.");
+                logger.info("Numéro de podcast invalide.");
             }
         } catch (Exception e) {
-            System.err.println("Erreur lors de la suppression du podcast: " + e.getMessage());
+            logger.error("Erreur lors de la suppression du podcast: " + e.getMessage());
         }
     }
 
     private static void markEpisodeAsListened(NextcloudGPodderClient client, String deviceId, Scanner scanner) {
         try {
-            System.out.print("URL du flux du podcast: ");
+            logger.info("URL du flux du podcast: ");
             String podcastUrl = scanner.nextLine();
 
-            System.out.print("URL de l'épisode: ");
+            logger.info("URL de l'épisode: ");
             String episodeUrl = scanner.nextLine();
 
             List<Map<String, Object>> actions = List.of(
@@ -148,9 +153,9 @@ public class TEST {
             );
 
             Map<String, Object> result = client.uploadEpisodeActions(deviceId, actions);
-            System.out.println("Épisode marqué comme écouté! Résultat: " + result);
+            logger.info("Épisode marqué comme écouté! Résultat: " + result);
         } catch (Exception e) {
-            System.err.println("Erreur lors du marquage de l'épisode: " + e.getMessage());
+            logger.error("Erreur lors du marquage de l'épisode: " + e.getMessage());
         }
     }
 
@@ -161,17 +166,16 @@ public class TEST {
             Map<String, Object> episodeActions = client.getEpisodeActions(deviceId, sinceTimestamp);
 
             List<Map<String, Object>> actions = (List<Map<String, Object>>) episodeActions.get("actions");
-            System.out.println("\nÉpisodes récemment synchronisés: " + actions.size());
+            logger.info("\nÉpisodes récemment synchronisés: " + actions.size());
 
             for (Map<String, Object> action : actions) {
-                System.out.println("- Podcast: " + action.get("podcast"));
-                System.out.println("  Épisode: " + action.get("episode"));
-                System.out.println("  Action: " + action.get("action"));
-                System.out.println("  Timestamp: " + action.get("timestamp"));
-                System.out.println();
+                logger.info("- Podcast: " + action.get("podcast"));
+                logger.info("  Épisode: " + action.get("episode"));
+                logger.info("  Action: " + action.get("action"));
+                logger.info("  Timestamp: " + action.get("timestamp"));
             }
         } catch (Exception e) {
-            System.err.println("Erreur lors de la synchronisation des épisodes: " + e.getMessage());
+            logger.error("Erreur lors de la synchronisation des épisodes: " + e.getMessage());
         }
     }
 }
