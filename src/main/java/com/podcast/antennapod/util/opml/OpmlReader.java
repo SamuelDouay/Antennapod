@@ -13,8 +13,6 @@ import java.util.List;
 
 public class OpmlReader {
     private static final Logger logger = LogManager.getLogger(OpmlReader.class);
-    private static final String FEATURE = "http://apache.org/xml/features/disallow-doctype-decl";
-    private static final boolean FEATURE_BOOL = true;
     private static final String OUTLINE = "//body/outline";
 
     public static List<ItemOpml> read() {
@@ -22,20 +20,24 @@ public class OpmlReader {
             List<ItemOpml> itemOpmls = new ArrayList<>();
 
             SAXReader saxReader = new SAXReader();
-            saxReader.setFeature(FEATURE, FEATURE_BOOL);
+            saxReader.setFeature("http://apache.org/xml/features/disallow-doctype-decl", true);
             Document document = saxReader.read(OpmlReader.class.getResourceAsStream("/tmp/antennapod-feeds-2024-06-29.opml"));
 
             List<Node> list = document.selectNodes(OUTLINE);
 
             for (Node node : list) {
+                logger.debug(node);
                 DefaultElement attribute = (DefaultElement) node;
-                String title = attribute.attribute("text").getValue();
+                String text = attribute.attribute("text").getValue();
+                String title = attribute.attribute("title").getValue();
                 String type = attribute.attribute("type").getValue();
                 String xmlUrl = attribute.attribute("xmlUrl").getValue();
                 String htmlUrl = attribute.attribute("htmlUrl").getValue();
 
+                logger.debug(title + " " + type);
 
-                itemOpmls.add(new ItemOpml(title, type, xmlUrl, htmlUrl));
+
+                itemOpmls.add(new ItemOpml(text, title, type, xmlUrl, htmlUrl));
             }
 
             return itemOpmls;
