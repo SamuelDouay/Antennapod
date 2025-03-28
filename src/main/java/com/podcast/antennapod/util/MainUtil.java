@@ -1,16 +1,11 @@
 package com.podcast.antennapod.util;
 
-import com.apptasticsoftware.rssreader.Item;
-import com.apptasticsoftware.rssreader.RssReader;
-import com.apptasticsoftware.rssreader.module.itunes.ItunesItem;
-import com.apptasticsoftware.rssreader.module.itunes.ItunesRssReader;
 import com.podcast.antennapod.util.opml.ItemOpml;
 import com.podcast.antennapod.util.opml.OpmlReader;
 import com.podcast.antennapod.util.opml.OpmlWriter;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
-import java.io.InputStream;
 import java.util.List;
 
 public class MainUtil {

@@ -5,13 +5,8 @@ import com.apptasticsoftware.rssreader.module.itunes.ItunesRssReader;
 import com.podcast.antennapod.util.MainUtil;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-import org.dom4j.Document;
-import org.dom4j.Node;
-import org.dom4j.io.SAXReader;
-import org.dom4j.tree.DefaultElement;
 
 import java.io.InputStream;
-import java.util.Iterator;
 import java.util.List;
 
 public class RssReader {
@@ -29,7 +24,7 @@ public class RssReader {
                 List<ItunesItem> list1 = itunesRssReader.read(inputStream).toList();
 
                 for(ItunesItem item : list1) {
-                    logger.info(item.getTitle() + "|" + item.getItunesDuration() + "|" + item.getPubDate() + "|" + item.getDescription() + "|");
+                    logger.info("{}|{}|{}|{}|", item.getTitle(), item.getItunesDuration(), item.getPubDate(), item.getDescription());
                 }
             }
         } catch (Exception e) {
