@@ -1,10 +1,10 @@
 module com.podcast.antennapod {
     requires javafx.controls;
     requires org.apache.logging.log4j;
-    requires java.net.http;
     requires org.dom4j;
     requires com.fasterxml.jackson.databind;
-    requires java.xml;
+    requires com.apptasticsoftware.rssreader;
+    requires java.net.http;
 
     exports com.podcast.antennapod;
     exports com.podcast.antennapod.view;

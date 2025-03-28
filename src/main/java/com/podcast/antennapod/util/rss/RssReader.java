@@ -14,6 +14,8 @@ public class RssReader {
     private static final Logger logger = LogManager.getLogger(RssReader.class);
 
     public static void main(String[] args) {
+
+
         Document document;
 
 
