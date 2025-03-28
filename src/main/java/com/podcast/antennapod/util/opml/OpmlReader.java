@@ -3,17 +3,11 @@ package com.podcast.antennapod.util.opml;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.dom4j.Document;
-import org.dom4j.DocumentHelper;
-import org.dom4j.Element;
 import org.dom4j.Node;
-import org.dom4j.io.OutputFormat;
 import org.dom4j.io.SAXReader;
-import org.dom4j.io.XMLWriter;
 import org.dom4j.tree.DefaultElement;
 
-import java.io.IOException;
 import java.io.InputStream;
-import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -79,59 +73,5 @@ public class OpmlReader {
             logger.error("Error extracting element attributes: {}", e.getMessage());
             return null;
         }
-    }
-
-    private static void writeOpml(List<ItemOpml> list) {
-        Document xml = DocumentHelper.createDocument();
-        xml.setXMLEncoding("UTF-8");
-        Element opml = xml.addElement("opml");
-        Element header = opml.addElement("head");
-        Element body = opml.addElement("body");
-
-        opml.addAttribute("version", "2.0");
-        addHeader(header);
-
-        for(ItemOpml itemOpml : list) {
-            addOutline(body, itemOpml);
-        }
-
-        logger.info(xml.asXML());
-
-
-        OutputFormat format = OutputFormat.createPrettyPrint();
-        XMLWriter writer = null;
-        try {
-            writer = new XMLWriter(System.out, format);
-            writer.write( xml );
-            writer.close();
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
-
-    }
-
-    private static void addHeader(Element head) {
-        head.addElement("title").addText("AntennaPod Subscriptions");
-        head.addElement("dateCreated").addText("29 Jun 24 14:45:48 +0200");
-    }
-
-    private static void addOutline(Element body, ItemOpml itemOpml) {
-        body.addElement("outline")
-                .addAttribute("text", itemOpml.getText())
-                .addAttribute("title", itemOpml.getText())
-                .addAttribute("type", itemOpml.getType())
-                .addAttribute("xmlUrl", itemOpml.getXmlUrl())
-                .addAttribute("htmlUrl", itemOpml.getHtmlUrl());
-    }
-
-    public static void main(String[] args) {
-        String filePath = "/tmp/antennapod-feeds-2024-06-29.opml";
-        List<ItemOpml> list = OpmlReader.read(filePath);
-        logger.info("Found {} OPML items", list.size());
-        for (ItemOpml e : list) {
-            logger.info(e);
-        }
-
-        writeOpml(list);
     }
 }
