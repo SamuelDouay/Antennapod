@@ -24,11 +24,20 @@ public class RssReader {
                 List<ItunesItem> list1 = itunesRssReader.read(inputStream).toList();
 
                 for(ItunesItem item : list1) {
-                    logger.info("{}|{}|{}|{}|", item.getTitle(), item.getItunesDuration(), item.getPubDate(), item.getDescription());
+                    FeedItem feedItem = getFeedItem(item);
+                    logger.info(feedItem);
                 }
             }
         } catch (Exception e) {
             logger.error("Error reading OPML file: {}", e.getMessage());
         }
+    }
+
+    private static FeedItem getFeedItem(ItunesItem item) {
+        String title = (item.getTitle().isPresent() ? item.getTitle().get() :"");
+        String duration = (item.getItunesDuration().isPresent() ? item.getItunesDuration().get() :"");
+        String pubDate = (item.getPubDate().isPresent() ? item.getPubDate().get() :"");
+        String description = (item.getDescription().isPresent() ? item.getDescription().get() :"");
+        return new FeedItem(title, duration, pubDate, description);
     }
 }
