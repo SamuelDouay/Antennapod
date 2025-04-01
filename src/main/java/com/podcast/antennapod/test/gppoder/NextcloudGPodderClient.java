@@ -70,7 +70,7 @@ public class NextcloudGPodderClient {
 
         String jsonBody = objectMapper.writeValueAsString(requestData);
 
-        HttpRequest request = createAuthenticatedRequest(nextcloudUrl + "/apps/gpodder/subscriptions")
+        HttpRequest request = createAuthenticatedRequest(nextcloudUrl + "/apps/gpoddersync/personal_settings/metrics")
                 .header("Content-Type", "application/json")
                 .PUT(BodyPublishers.ofString(jsonBody))
                 .build();

@@ -12,7 +12,7 @@ public class FeedItemTest {
     private static FeedItem feedItemNullFields;
 
     @BeforeAll
-    public static void setUp() {
+    static void setUp() {
         // Initialisation d'un FeedItem avec toutes les valeurs
         feedItemAllFields = new FeedItem(
                 "Test Title",
@@ -26,7 +26,7 @@ public class FeedItemTest {
     }
 
     @Test
-    public void testConstructorAndGetters() {
+    void testConstructorAndGetters() {
         assertEquals("Test Title", feedItemAllFields.getTitle());
         assertEquals("01:30:00", feedItemAllFields.getDuration());
         assertEquals("2025-03-31T10:00:00Z", feedItemAllFields.getPubDate());
@@ -39,7 +39,7 @@ public class FeedItemTest {
     }
 
     @Test
-    public void testSetters() {
+    void testSetters() {
         // Test des setters avec des valeurs non-null
         FeedItem item = new FeedItem(null, null, null, null);
 
@@ -70,7 +70,7 @@ public class FeedItemTest {
     }
 
     @Test
-    public void testToString() {
+    void testToString() {
         // Test de toString avec des valeurs non-null
         String expected = "FeedItem{" +
                 "title='Test Title'" +
@@ -91,7 +91,7 @@ public class FeedItemTest {
     }
 
     @Test
-    public void testToStringWithMixedNullValues() {
+    void testToStringWithMixedNullValues() {
         // Test avec certaines valeurs null et d'autres non
         FeedItem mixedItem = new FeedItem(
                 "Mixed Title",

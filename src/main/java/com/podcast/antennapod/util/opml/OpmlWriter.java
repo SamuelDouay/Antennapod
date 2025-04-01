@@ -14,6 +14,10 @@ import java.util.List;
 public class OpmlWriter {
     private static final Logger logger = LogManager.getLogger(OpmlWriter.class);
 
+    private OpmlWriter(){
+
+    }
+
     public static void writeOpml(List<ItemOpml> list) {
         Document xml = DocumentHelper.createDocument();
         xml.setXMLEncoding("UTF-8");

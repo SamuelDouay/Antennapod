@@ -12,32 +12,47 @@ import java.util.List;
 public class RssReader {
     private static final Logger logger = LogManager.getLogger(RssReader.class);
 
+    private RssReader() {
+
+    }
+
     public static void main(String[] args) {
         String fileFeed = "/tmp/ex_01022025_feed.xml";
 
-        try (InputStream inputStream = MainUtil.class.getResourceAsStream(fileFeed)) {
+        List<FeedItem> feedItems =  RssReader.readRssFeed(fileFeed);
+
+        for(FeedItem feedItem : feedItems) {
+            logger.info(feedItem);
+        }
+
+
+    }
+
+    public static List<FeedItem> readRssFeed(String filePath) {
+        try (InputStream inputStream = MainUtil.class.getResourceAsStream(filePath)) {
             if (inputStream == null) {
-                logger.error("Could not find resource: {}", fileFeed);
+                logger.error("Could not find resource: {}", filePath);
+                return List.of();
             } else {
                 ItunesRssReader itunesRssReader = new ItunesRssReader();
 
-                List<ItunesItem> list1 = itunesRssReader.read(inputStream).toList();
+                List<ItunesItem> items = itunesRssReader.read(inputStream).toList();
 
-                for(ItunesItem item : list1) {
-                    FeedItem feedItem = getFeedItem(item);
-                    logger.info(feedItem);
-                }
+                return items.stream()
+                        .map(RssReader::getFeedItem)
+                        .toList();
             }
         } catch (Exception e) {
-            logger.error("Error reading OPML file: {}", e.getMessage());
+            logger.error("Error reading RSS file: {}", e.getMessage());
+            return List.of();
         }
     }
 
     private static FeedItem getFeedItem(ItunesItem item) {
-        String title = (item.getTitle().isPresent() ? item.getTitle().get() :"");
-        String duration = (item.getItunesDuration().isPresent() ? item.getItunesDuration().get() :"");
-        String pubDate = (item.getPubDate().isPresent() ? item.getPubDate().get() :"");
-        String description = (item.getDescription().isPresent() ? item.getDescription().get() :"");
+        String title = item.getTitle().orElse("");
+        String duration = item.getItunesDuration().orElse("");
+        String pubDate = item.getPubDate().orElse("");
+        String description = item.getDescription().orElse("");
         return new FeedItem(title, duration, pubDate, description);
     }
 }

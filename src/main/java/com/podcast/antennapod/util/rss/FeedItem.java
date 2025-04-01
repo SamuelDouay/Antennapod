@@ -1,7 +1,5 @@
 package com.podcast.antennapod.util.rss;
 
-import java.util.Optional;
-
 public class FeedItem {
     private String title;
     private String duration;

@@ -15,6 +15,10 @@ public class OpmlReader {
     private static final Logger logger = LogManager.getLogger(OpmlReader.class);
     private static final String OUTLINE = "//body/outline";
 
+    private OpmlReader() {
+
+    }
+
     public static List<ItemOpml> read(String filePath) {
         List<ItemOpml> itemOpmls = new ArrayList<>();
 

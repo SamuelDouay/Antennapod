@@ -11,7 +11,7 @@ public class ConfigProperties {
     private final Properties properties;
     private static final Logger logger = LogManager.getLogger();
 
-    private ConfigProperties(){
+    ConfigProperties(){
         this.properties = new Properties();
         loadFile();
     }
