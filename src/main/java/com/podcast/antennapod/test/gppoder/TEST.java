@@ -3,6 +3,7 @@ package com.podcast.antennapod.test.gppoder;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
+import java.io.IOException;
 import java.util.List;
 import java.util.Map;
 import java.util.Scanner;
