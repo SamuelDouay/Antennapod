@@ -1,5 +1,7 @@
 package com.podcast.antennapod.view;
 
+import com.podcast.antennapod.view.component.ButtonComponent;
+import com.podcast.antennapod.view.component.TypeButton;
 import javafx.application.Application;
 import javafx.scene.Scene;
 import javafx.scene.control.Label;
@@ -12,7 +14,14 @@ public class MainView extends Application {
     public static final Logger logger = LogManager.getLogger(MainView.class);
     @Override
     public void start(Stage stage) {
-        stage.setScene(new Scene(new VBox(new Label("Test")), 320, 240));
+        VBox box = new VBox();
+
+        box.getChildren().add(ButtonComponent.createButton("TEST", TypeButton.PRIMARY));
+        box.getChildren().add(ButtonComponent.createButton("TEST", TypeButton.SECONDARY));
+        box.getChildren().add(ButtonComponent.createButton("TEST", TypeButton.TERTIARY));
+
+        stage.setScene(new Scene(box, 320, 240));
+
         stage.setTitle("AntennaPod");
         stage.setMaximized(true);
         stage.show();
