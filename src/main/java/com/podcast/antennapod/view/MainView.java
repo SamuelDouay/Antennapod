@@ -1,10 +1,10 @@
 package com.podcast.antennapod.view;
 
 import com.podcast.antennapod.view.component.ButtonComponent;
+import com.podcast.antennapod.view.component.PodcastComponent;
 import com.podcast.antennapod.view.component.TypeButton;
 import javafx.application.Application;
 import javafx.scene.Scene;
-import javafx.scene.control.Label;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 import org.apache.logging.log4j.LogManager;
@@ -16,9 +16,11 @@ public class MainView extends Application {
     public void start(Stage stage) {
         VBox box = new VBox();
 
-        box.getChildren().add(ButtonComponent.createButton("TEST", TypeButton.PRIMARY));
-        box.getChildren().add(ButtonComponent.createButton("TEST", TypeButton.SECONDARY));
-        box.getChildren().add(ButtonComponent.createButton("TEST", TypeButton.TERTIARY));
+        box.getChildren().add(ButtonComponent.createButton(TypeButton.PRIMARY.name(), TypeButton.PRIMARY));
+        box.getChildren().add(ButtonComponent.createButton(TypeButton.SECONDARY.name(), TypeButton.SECONDARY));
+        box.getChildren().add(ButtonComponent.createButton(TypeButton.TERTIARY.name(), TypeButton.TERTIARY));
+
+        box.getChildren().add(PodcastComponent.createPodcastImage("Ex...", String.valueOf(getClass().getResource("/images/others/ex.jpeg"))));
 
         stage.setScene(new Scene(box, 320, 240));
 
