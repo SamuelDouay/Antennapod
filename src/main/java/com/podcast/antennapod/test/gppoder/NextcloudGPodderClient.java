@@ -42,7 +42,7 @@ public class NextcloudGPodderClient {
      * @return Liste des URLs de podcast
      */
     public List<String> getSubscriptions() throws IOException, InterruptedException {
-        HttpRequest request = createAuthenticatedRequest(nextcloudUrl + "/apps/gpodder/subscriptions")
+        HttpRequest request = createAuthenticatedRequest(nextcloudUrl + "/apps/gpoddersync/subscriptions")
                 .GET()
                 .build();
 

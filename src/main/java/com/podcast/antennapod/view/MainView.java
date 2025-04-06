@@ -21,6 +21,8 @@ public class MainView extends Application {
         box.getChildren().add(ButtonComponent.createButton(TypeButton.TERTIARY.name(), TypeButton.TERTIARY));
 
         box.getChildren().add(PodcastComponent.createPodcastImage("Ex...", String.valueOf(getClass().getResource("/images/others/ex.jpeg"))));
+        box.getChildren().add(PodcastComponent.test("Ex...", String.valueOf(getClass().getResource("/images/others/ex.jpeg"))));
+        box.getChildren().add(PodcastComponent.testA("Ex...", String.valueOf(getClass().getResource("/images/others/ex.jpeg"))));
 
         stage.setScene(new Scene(box, 320, 240));
 
