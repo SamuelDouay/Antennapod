@@ -1,5 +1,6 @@
 package com.podcast.antennapod.view.component;
 
+import com.podcast.antennapod.view.util.TypeButton;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.control.Button;

@@ -1,10 +1,14 @@
 package com.podcast.antennapod.view;
 
+import com.podcast.antennapod.view.component.BadgeComponent;
 import com.podcast.antennapod.view.component.ButtonComponent;
 import com.podcast.antennapod.view.component.PodcastComponent;
-import com.podcast.antennapod.view.component.TypeButton;
+import com.podcast.antennapod.view.util.TypeButton;
 import javafx.application.Application;
+import javafx.geometry.Insets;
 import javafx.scene.Scene;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
@@ -15,7 +19,10 @@ public class MainView extends Application {
     public static final Logger logger = LogManager.getLogger(MainView.class);
     @Override
     public void start(Stage stage) {
-        VBox box = new VBox();
+        VBox box = new VBox(25.0);
+
+
+        box.setPadding(new Insets(4.0,16.0,4.0,16.0));
 
         box.getChildren().add(ButtonComponent.createButton(TypeButton.PRIMARY.name(), TypeButton.PRIMARY));
         box.getChildren().add(ButtonComponent.createButton(TypeButton.SECONDARY.name(), TypeButton.SECONDARY));
@@ -31,6 +38,11 @@ public class MainView extends Application {
         hBox.getChildren().add(PodcastComponent.getImage(String.valueOf(getClass().getResource("/images/others/zerl.jpg"))));
 
         box.getChildren().add(hBox);
+
+
+        box.getChildren().add(BadgeComponent.getBadgeGreen("Download"));
+        box.getChildren().add(BadgeComponent.getBadgeRed("Sans media"));
+        box.getChildren().add(BadgeComponent.getBadgePurple("Téléchargé"));
 
         stage.setScene(new Scene(box, 320, 240));
 

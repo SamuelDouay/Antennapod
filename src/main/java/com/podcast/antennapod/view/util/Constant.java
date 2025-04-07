@@ -28,4 +28,8 @@ public class Constant {
     public static final Insets SECONDARY_PADDING = new Insets(6.0, 14.0, 6.0, 14.0);
     public static final BorderWidths BORDER_WIDTH = new BorderWidths(2);
     public static final CornerRadii CORNER_RADII = new CornerRadii(CORNER_RADIUS);
+
+    // Constantes de dimensions
+    public static final double BADGE_DEFAULT_WIDTH = 100.0;
+    public static final Insets BADGE_DEFAULT_PADDING = new Insets(4.0, 16.0, 4.0, 16.0);
 }
