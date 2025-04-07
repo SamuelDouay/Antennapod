@@ -128,6 +128,5 @@ public class MainTest {
         } catch (Exception e) {
             throw new RuntimeException("Erreur inattendue lors de la requête HTTP", e);
         }
-        // Suppression du bloc finally inutile car HttpClient ne nécessite pas de fermeture
     }
 }

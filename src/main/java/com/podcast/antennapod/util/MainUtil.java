@@ -9,14 +9,14 @@ import org.apache.logging.log4j.Logger;
 import java.util.List;
 
 public class MainUtil {
-    private static final Logger logger = LogManager.getLogger(MainUtil.class);
+    private static final Logger LOGGER = LogManager.getLogger(MainUtil.class);
+    private static final String FILE = "/tmp/antennapod-feeds-2024-06-29.opml"; 
 
     public static void main(String[] args) {
-        String filePath = "/tmp/antennapod-feeds-2024-06-29.opml";
-        List<ItemOpml> list = OpmlReader.read(filePath);
-        logger.info("Found {} OPML items", list.size());
+        List<ItemOpml> list = OpmlReader.read(FILE);
+        LOGGER.info("Found {} OPML items", list.size());
         for (ItemOpml e : list) {
-            logger.info(e);
+            LOGGER.info(e);
         }
 
         OpmlWriter.writeOpml(list);

@@ -85,7 +85,9 @@ public class TEST {
         } else {
             LOGGER.info("Vos abonnements podcast ({})", subscriptions.size());
             for (int i = 0; i < subscriptions.size(); i++) {
-                LOGGER.info("{}. {}", (i + 1), subscriptions.get(i));
+                if (LOGGER.isInfoEnabled()) {
+                    LOGGER.info("{}. {}", (i + 1), subscriptions.get(i));
+                }
             }
         }
     }
@@ -108,7 +110,9 @@ public class TEST {
 
         LOGGER.info("Choisissez le podcast à supprimer:");
         for (int i = 0; i < subscriptions.size(); i++) {
-            LOGGER.info("{}. {}", (i + 1), subscriptions.get(i));
+            if (LOGGER.isInfoEnabled()) {
+                LOGGER.info("{}. {}", (i + 1), subscriptions.get(i));
+            }
         }
         LOGGER.info("Numéro du podcast: ");
         int index = scanner.nextInt() - 1;
