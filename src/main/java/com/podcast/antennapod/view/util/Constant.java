@@ -32,4 +32,7 @@ public class Constant {
     // Constantes de dimensions
     public static final double BADGE_DEFAULT_WIDTH = 100.0;
     public static final Insets BADGE_DEFAULT_PADDING = new Insets(4.0, 16.0, 4.0, 16.0);
+    public static final Insets BADGE_ICON_PADDING = new Insets(4.0);
+    public static final int BADGE_ICON_SIZE = 15;
+    public static final double BADGE_ICON_WIDTH = 23.0;
 }

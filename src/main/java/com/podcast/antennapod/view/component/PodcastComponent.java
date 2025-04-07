@@ -43,7 +43,7 @@ public class PodcastComponent {
         blurredBackground.setTranslateY((expandedSize - size) / -2);
 
         // Appliquer un flou plus intense
-        blurredBackground.setEffect(new BoxBlur(45, 45, 3));
+        blurredBackground.setEffect(new BoxBlur(60, 60, 5));
 
         // Créer le contenu (image principale)
         ImageView contentImage = new ImageView(image);
@@ -58,7 +58,7 @@ public class PodcastComponent {
 
         // Superposition d'une couleur semi-transparente (filtre coloré plus intense)
         Rectangle colorOverlay = new Rectangle(size, size);
-        colorOverlay.setFill(Color.hsb(120.0, 0.5, 0.4, 0.0196)); // Augmenter l'opacité à 0.25
+        colorOverlay.setFill(Color.hsb(120.0, 0.5, 0.4, 0.10)); // Augmenter l'opacité à 0.25
 
         // Ajouter les éléments à la StackPane dans l'ordre
         stackPane.getChildren().add(blurredBackground);
