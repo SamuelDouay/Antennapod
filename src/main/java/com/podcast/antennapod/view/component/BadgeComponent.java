@@ -43,6 +43,9 @@ public class BadgeComponent {
         box.getChildren().add(fontIcon);
         box.setPadding(BADGE_ICON_PADDING);
 
+        box.setAlignment(Pos.CENTER);
+        box.setMaxSize(Region.USE_PREF_SIZE, Region.USE_PREF_SIZE);
+        box.setMinSize(Region.USE_PREF_SIZE, Region.USE_PREF_SIZE);
         return box;
     }
 
