@@ -3,7 +3,6 @@ package com.podcast.antennapod.view.component;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Node;
-import javafx.scene.control.Label;
 import javafx.scene.effect.BoxBlur;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
@@ -16,70 +15,7 @@ public class PodcastComponent {
 
     }
 
-    public static Node createPodcastImage(String name, String urlImage) {
-        Label label = new Label(name);
-        Image image = new Image(urlImage);
-        ImageView imageView = new ImageView(image);
-        VBox vBox = new VBox();
-
-        imageView.setFitWidth(140.0);
-        imageView.setFitHeight(140.0);
-
-        vBox.getChildren().add(imageView);
-        vBox.getChildren().add(label);
-
-        vBox.setBackground(new Background(new BackgroundFill(Color.hsb(120.0,0.5,0.4, 0.0196), CornerRadii.EMPTY, Insets.EMPTY)));
-
-        ImageView imageView1 = new ImageView(image);
-
-        imageView1.setFitHeight(165.0);
-        imageView1.setFitWidth(165.0);
-
-        Rectangle rectangle = new Rectangle();
-        rectangle.setX(0.0);
-        rectangle.setY(0.0);
-        rectangle.setHeight(165.0);
-        rectangle.setWidth(165.0);
-
-        imageView1.setClip(rectangle);
-        imageView1.setEffect(new BoxBlur(25,25,15));
-
-        vBox.getChildren().add(imageView1);
-
-        return vBox;
-    }
-
-    public static Node test(String name, String urlImage) {
-        StackPane stackPane = new StackPane();
-
-        // Créer l'arrière-plan flou
-        Image image = new Image(urlImage);
-        ImageView blurredBackground = new ImageView(image);
-        blurredBackground.setFitHeight(165.0);
-        blurredBackground.setFitWidth(165.0);
-        blurredBackground.setEffect(new BoxBlur(25, 25, 5));
-
-        Rectangle colorOverlay = new Rectangle(165.0, 165.0, Color.hsb(120.0, 0.5, 0.4, 0.0196));
-
-        // Créer le contenu
-        ImageView contentImage = new ImageView(image);
-        contentImage.setFitWidth(140.0);
-        contentImage.setFitHeight(140.0);
-
-        Label label = new Label(name);
-        VBox vBox = new VBox();
-        vBox.getChildren().addAll(contentImage, label);
-        vBox.setAlignment(Pos.CENTER);
-
-        // Ajouter les éléments à la StackPane dans l'ordre (fond en premier, puis contenu)
-        stackPane.getChildren().add(blurredBackground);
-        stackPane.getChildren().add(colorOverlay);
-        stackPane.getChildren().add(vBox);
-
-        return stackPane;
-    }
-
-    public static Node testA(String name, String urlImage) {
+    public static Node getImage(String urlImage) {
         StackPane stackPane = new StackPane();
 
         // Dimensionnement carré pour tout l'élément
@@ -88,27 +24,41 @@ public class PodcastComponent {
         stackPane.setMinSize(size, size);
         stackPane.setMaxSize(size, size);
 
+        // Créer un clip pour contenir les effets dans les limites du stackPane
+        Rectangle clip = new Rectangle(size, size);
+        stackPane.setClip(clip);
+
         // Créer l'arrière-plan flou
         Image image = new Image(urlImage);
         ImageView blurredBackground = new ImageView(image);
-        blurredBackground.setFitHeight(size);
-        blurredBackground.setFitWidth(size);
-        blurredBackground.setEffect(new BoxBlur(25, 25, 5));
 
-        // Créer le contenu
+        // Redimensionnement avec une marge pour éviter les bords blancs après le blur
+        double scaleFactor = 1.2; // Agrandir légèrement l'image d'arrière-plan
+        double expandedSize = size * scaleFactor;
+        blurredBackground.setFitHeight(expandedSize);
+        blurredBackground.setFitWidth(expandedSize);
+
+        // Centrer l'image agrandie
+        blurredBackground.setTranslateX((expandedSize - size) / -2);
+        blurredBackground.setTranslateY((expandedSize - size) / -2);
+
+        // Appliquer un flou plus intense
+        blurredBackground.setEffect(new BoxBlur(45, 45, 3));
+
+        // Créer le contenu (image principale)
         ImageView contentImage = new ImageView(image);
-        contentImage.setFitWidth(140.0); // 75% de la taille totale
+        contentImage.setFitWidth(140.0);
         contentImage.setFitHeight(140.0);
+        contentImage.setPreserveRatio(true);
 
-        // Conteneur pour le logo et le titre
+        // Conteneur pour l'image
         VBox vBox = new VBox();
         vBox.getChildren().addAll(contentImage);
         vBox.setAlignment(Pos.CENTER);
 
-        // Superposition d'une couleur semi-transparente (filtre coloré)
+        // Superposition d'une couleur semi-transparente (filtre coloré plus intense)
         Rectangle colorOverlay = new Rectangle(size, size);
-        //colorOverlay.setFill(Color.hsb(120.0, 0.5, 0.4, 0.0196));
-        colorOverlay.setFill(Color.hsb(120.0, 0.5, 0.2, 0.1));
+        colorOverlay.setFill(Color.hsb(120.0, 0.5, 0.4, 0.0196)); // Augmenter l'opacité à 0.25
 
         // Ajouter les éléments à la StackPane dans l'ordre
         stackPane.getChildren().add(blurredBackground);

@@ -5,6 +5,7 @@ import com.podcast.antennapod.view.component.PodcastComponent;
 import com.podcast.antennapod.view.component.TypeButton;
 import javafx.application.Application;
 import javafx.scene.Scene;
+import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 import org.apache.logging.log4j.LogManager;
@@ -20,9 +21,16 @@ public class MainView extends Application {
         box.getChildren().add(ButtonComponent.createButton(TypeButton.SECONDARY.name(), TypeButton.SECONDARY));
         box.getChildren().add(ButtonComponent.createButton(TypeButton.TERTIARY.name(), TypeButton.TERTIARY));
 
-        box.getChildren().add(PodcastComponent.createPodcastImage("Ex...", String.valueOf(getClass().getResource("/images/others/ex.jpeg"))));
-        box.getChildren().add(PodcastComponent.test("Ex...", String.valueOf(getClass().getResource("/images/others/ex.jpeg"))));
-        box.getChildren().add(PodcastComponent.testA("Ex...", String.valueOf(getClass().getResource("/images/others/ex.jpeg"))));
+        HBox hBox = new HBox(15.0);
+
+
+        hBox.getChildren().add(PodcastComponent.getImage(String.valueOf(getClass().getResource("/images/others/ex.jpeg"))));
+        hBox.getChildren().add(PodcastComponent.getImage(String.valueOf(getClass().getResource("/images/others/heure_du_monde.png"))));
+        hBox.getChildren().add(PodcastComponent.getImage(String.valueOf(getClass().getResource("/images/others/small_talk.jpg"))));
+        hBox.getChildren().add(PodcastComponent.getImage(String.valueOf(getClass().getResource("/images/others/underscore.jpeg"))));
+        hBox.getChildren().add(PodcastComponent.getImage(String.valueOf(getClass().getResource("/images/others/zerl.jpg"))));
+
+        box.getChildren().add(hBox);
 
         stage.setScene(new Scene(box, 320, 240));
 
