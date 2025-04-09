@@ -2,6 +2,7 @@ package com.podcast.antennapod.view;
 
 import com.podcast.antennapod.view.component.BadgeComponent;
 import com.podcast.antennapod.view.component.ButtonComponent;
+import com.podcast.antennapod.view.component.NavigationComponent;
 import com.podcast.antennapod.view.component.PodcastComponent;
 import com.podcast.antennapod.view.util.TypeButton;
 import javafx.application.Application;
@@ -20,7 +21,7 @@ public class MainView extends Application {
     public static final Logger logger = LogManager.getLogger(MainView.class);
     @Override
     public void start(Stage stage) {
-        VBox box = new VBox(25.0);
+        VBox box = new VBox(5.0);
 
 
         box.setPadding(new Insets(4.0,16.0,4.0,16.0));
@@ -50,6 +51,9 @@ public class MainView extends Application {
         box.getChildren().add(BadgeComponent.getBadgeIconBlue(new FontIcon(Material2AL.INBOX)));
         box.getChildren().add(BadgeComponent.getBadgeIconGreen(new FontIcon(Material2AL.INBOX)));
         box.getChildren().add(BadgeComponent.getBadgeIconPurple(new FontIcon(Material2MZ.PLAYLIST_PLAY)));
+
+        box.getChildren().add(NavigationComponent.createNavigation(new FontIcon(Material2MZ.PLAYLIST_PLAY), "Test", 12));
+        box.getChildren().add(NavigationComponent.createNavigation(new FontIcon(Material2MZ.PLAYLIST_PLAY), "Zack en Roue Libre by Zack Nani", 12));
 
         stage.setScene(new Scene(box, 320, 240));
 
