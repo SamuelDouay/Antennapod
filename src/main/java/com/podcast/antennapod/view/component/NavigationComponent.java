@@ -9,85 +9,90 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.*;
 import org.kordamp.ikonli.javafx.FontIcon;
 
-public class NavigationComponent {
+public final class NavigationComponent {
+    // Constants
+    private static final double ICON_SIZE = 25.0;
+    private static final double TITLE_MAX_WIDTH = 140.0;
+    private static final double MAX_WIDTH = 224.0;
+    private static final double SPACING = 14.0;
+    private static final Insets PADDING = new Insets(6.0, 12.0, 6.0, 12.0);
+    private static final CornerRadii CORNER_RADII = new CornerRadii(2.0);
+
     private NavigationComponent() {
-
+        // Prevents instantiation
     }
 
-    public static Node createNavigation(FontIcon icon, String title, int number) {
-        Label titleLabel = new Label(title);
-        Label numberLabel = new Label(String.valueOf(number));
-
-
-        icon.setIconSize(25);
-        icon.setIconColor(ColorThemeConstants.getLightAc08());
-        titleLabel.setMaxWidth(140.0);
-
-        HBox hBox = new HBox();
-        hBox.getChildren().add(icon);
-        hBox.getChildren().add(titleLabel);
-        hBox.setMaxSize(Region.USE_PREF_SIZE, Region.USE_PREF_SIZE);
-        hBox.setMinSize(Region.USE_PREF_SIZE, Region.USE_PREF_SIZE);
-        hBox.setSpacing(14.0);
-        hBox.setAlignment(Pos.CENTER);
-
-
-        Region region = new Region();
-        HBox.setHgrow(region, Priority.ALWAYS);
-
-
-        HBox box = new HBox();
-
-        box.setPadding(new Insets(6.0,12.0,6.0,12.0));
-        box.setMaxWidth(224.0);
-        box.setAlignment(Pos.CENTER);
-
-        box.getChildren().add(hBox);
-        box.getChildren().add(region);
-        box.getChildren().add(numberLabel);
-
-        box.setBackground(new Background(new BackgroundFill(ColorThemeConstants.getLightBg06(), new CornerRadii(2.0), Insets.EMPTY)));
-
-        return box;
+    public static HBox createNavigation(FontIcon icon, String title, int number) {
+        icon.setIconSize((int)ICON_SIZE);
+        icon.setIconColor(ColorThemeConstants.getLightAc02());
+        return createNavigationBase(icon, title, number);
     }
 
-    public static Node createNavigation(String urlImage, String title, int number) {
-        Label titleLabel = new Label(title);
-        Label numberLabel = new Label(String.valueOf(number));
+    public static HBox createNavigation(String urlImage, String title, int number) {
         ImageView imageView = new ImageView(urlImage);
+        imageView.setFitWidth(ICON_SIZE);
+        imageView.setFitHeight(ICON_SIZE);
 
-        imageView.setFitWidth(25.0);
-        imageView.setFitHeight(25.0);
+        return createNavigationBase(imageView, title, number);
+    }
 
+    private static HBox createNavigationBase(Node graphic, String title, int number) {
+        // Create and configure title label
+        Label titleLabel = new Label(title);
+        titleLabel.setMaxWidth(TITLE_MAX_WIDTH);
+        titleLabel.setTextFill(ColorThemeConstants.getLightAc02());
 
+        // Create number label
+        Label numberLabel = new Label(String.valueOf(number));
+        numberLabel.setTextFill(ColorThemeConstants.getLightAc08());
 
-        titleLabel.setMaxWidth(140.0);
+        // Create icon and title container
+        HBox iconTitleBox = new HBox(SPACING, graphic, titleLabel);
+        iconTitleBox.setMaxSize(Region.USE_PREF_SIZE, Region.USE_PREF_SIZE);
+        iconTitleBox.setMinSize(Region.USE_PREF_SIZE, Region.USE_PREF_SIZE);
+        iconTitleBox.setAlignment(Pos.CENTER);
 
-        HBox hBox = new HBox();
-        hBox.getChildren().add(imageView);
-        hBox.getChildren().add(titleLabel);
-        hBox.setMaxSize(Region.USE_PREF_SIZE, Region.USE_PREF_SIZE);
-        hBox.setMinSize(Region.USE_PREF_SIZE, Region.USE_PREF_SIZE);
-        hBox.setSpacing(14.0);
-        hBox.setAlignment(Pos.CENTER);
+        // Create spacer
+        Region spacer = new Region();
+        HBox.setHgrow(spacer, Priority.ALWAYS);
 
+        // Create main container
+        HBox mainBox = new HBox();
+        mainBox.setPadding(PADDING);
+        mainBox.setMaxWidth(MAX_WIDTH);
+        mainBox.setAlignment(Pos.CENTER);
+        mainBox.getChildren().addAll(iconTitleBox, spacer, numberLabel);
 
-        Region region = new Region();
-        HBox.setHgrow(region, Priority.ALWAYS);
+        // Set background
+        mainBox.setBackground(null);
 
+        mainBox.setOnMouseEntered(e -> {
+            mainBox.setBackground(new Background(new BackgroundFill(ColorThemeConstants.getLightIc07(), CORNER_RADII, Insets.EMPTY)));
+            titleLabel.setTextFill(ColorThemeConstants.getLightAc08());
+            if (!(graphic instanceof FontIcon)) {
+                return;
+            }
+            ((FontIcon) graphic).setIconColor(ColorThemeConstants.getLightAc08());
 
-        HBox box = new HBox();
+        });
+        mainBox.setOnMouseExited(e -> {
+            mainBox.setBackground(null);
+            titleLabel.setTextFill(ColorThemeConstants.getLightAc02());
+            if (!(graphic instanceof FontIcon)) {
+                return;
+            }
+            ((FontIcon) graphic).setIconColor(ColorThemeConstants.getLightAc02());
 
-        box.setPadding(new Insets(6.0,12.0,6.0,12.0));
-        box.setMaxWidth(224.0);
-        box.setAlignment(Pos.CENTER);
+        });
+        mainBox.setOnMousePressed(e -> mainBox.setBackground(new Background(new BackgroundFill(ColorThemeConstants.getLightIc12(), CORNER_RADII, Insets.EMPTY))));
+        mainBox.setOnMouseReleased(e -> {
+            if (mainBox.isHover()) {
+                mainBox.setBackground(new Background(new BackgroundFill(ColorThemeConstants.getLightIc07(), CORNER_RADII, Insets.EMPTY)));
+            } else {
+                mainBox.setBackground(null);
+            }
+        });
 
-        box.getChildren().add(hBox);
-        box.getChildren().add(region);
-        box.getChildren().add(numberLabel);
-
-        box.setBackground(new Background(new BackgroundFill(ColorThemeConstants.getLightIc07(), new CornerRadii(2.0), Insets.EMPTY)));
-
-        return box;
+        return mainBox;
     }
 }
