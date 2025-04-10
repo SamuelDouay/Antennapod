@@ -53,7 +53,7 @@ public class MainView extends Application {
         box.getChildren().add(BadgeComponent.getBadgeIconPurple(new FontIcon(Material2MZ.PLAYLIST_PLAY)));
 
         box.getChildren().add(NavigationComponent.createNavigation(new FontIcon(Material2MZ.PLAYLIST_PLAY), "Test", 12));
-        box.getChildren().add(NavigationComponent.createNavigation(new FontIcon(Material2MZ.PLAYLIST_PLAY), "Zack en Roue Libre by Zack Nani", 12));
+        box.getChildren().add(NavigationComponent.createNavigation(String.valueOf(getClass().getResource("/images/others/zerl.jpg")), "Zack en Roue Libre by Zack Nani", 12));
 
         stage.setScene(new Scene(box, 320, 240));
 

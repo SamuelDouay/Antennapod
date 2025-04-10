@@ -1,5 +1,6 @@
 package com.podcast.antennapod.view.component;
 
+import com.podcast.antennapod.view.util.ColorThemeConstants;
 import com.podcast.antennapod.view.util.TypeButton;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
@@ -48,38 +49,38 @@ public class ButtonComponent {
 
     private static void createPrimaryButton(Button button) {
         // Configuration initiale
-        button.textFillProperty().set(WHITE);
-        button.setBackground(createBackground(PRIMARY_COLOR));
+        button.textFillProperty().set(ColorThemeConstants.getLightIc06());
+        button.setBackground(createBackground(ColorThemeConstants.getLightCs08()));
         button.setBorder(null);
         button.setPadding(PRIMARY_TERTIARY_PADDING);
 
         // Événements de souris
-        button.setOnMouseEntered(e -> button.setBackground(createBackground(PRIMARY_HOVER_COLOR)));
-        button.setOnMouseExited(e -> button.setBackground(createBackground(PRIMARY_COLOR)));
-        button.setOnMousePressed(e -> button.setBackground(createBackground(PRIMARY_PRESSED_COLOR)));
+        button.setOnMouseEntered(e -> button.setBackground(createBackground(ColorThemeConstants.getLightCs07())));
+        button.setOnMouseExited(e -> button.setBackground(createBackground(ColorThemeConstants.getLightCs08())));
+        button.setOnMousePressed(e -> button.setBackground(createBackground(ColorThemeConstants.getLightCs06())));
         button.setOnMouseReleased(e -> {
             if (button.isHover()) {
-                button.setBackground(createBackground(PRIMARY_HOVER_COLOR));
+                button.setBackground(createBackground(ColorThemeConstants.getLightCs07()));
             } else {
-                button.setBackground(createBackground(PRIMARY_COLOR));
+                button.setBackground(createBackground(ColorThemeConstants.getLightCs08()));
             }
         });
     }
 
     private static void createSecondaryButton(Button button) {
         // Configuration initiale
-        button.textFillProperty().set(SECONDARY_TEXT_COLOR);
+        button.textFillProperty().set(ColorThemeConstants.getLightCs07());
         button.setBackground(null);
         button.setPadding(SECONDARY_PADDING);
         button.setBorder(createBorderSecondaryButton());
 
         // Événements de souris
-        button.setOnMouseEntered(e -> button.setBackground(createBackground(SECONDARY_HOVER_COLOR)));
+        button.setOnMouseEntered(e -> button.setBackground(createBackground(ColorThemeConstants.getLightIc10())));
         button.setOnMouseExited(e -> button.setBackground(null));
-        button.setOnMousePressed(e -> button.setBackground(createBackground(SECONDARY_PRESSED_COLOR)));
+        button.setOnMousePressed(e -> button.setBackground(createBackground(ColorThemeConstants.getLightIc11())));
         button.setOnMouseReleased(e -> {
             if (button.isHover()) {
-                button.setBackground(createBackground(SECONDARY_HOVER_COLOR));
+                button.setBackground(createBackground(ColorThemeConstants.getLightIc10()));
             } else {
                 button.setBackground(null);
             }
@@ -88,18 +89,18 @@ public class ButtonComponent {
 
     private static void createTertiaryButton(Button button) {
         // Configuration initiale
-        button.textFillProperty().set(SECONDARY_TEXT_COLOR);
+        button.textFillProperty().set(ColorThemeConstants.getLightAc08());
         button.setBackground(null);
         button.setBorder(null);
         button.setPadding(PRIMARY_TERTIARY_PADDING);
 
         // Événements de souris
-        button.setOnMouseEntered(e -> button.setBackground(createBackground(SECONDARY_HOVER_COLOR)));
+        button.setOnMouseEntered(e -> button.setBackground(createBackground(ColorThemeConstants.getLightIc10())));
         button.setOnMouseExited(e -> button.setBackground(null));
-        button.setOnMousePressed(e -> button.setBackground(createBackground(SECONDARY_PRESSED_COLOR)));
+        button.setOnMousePressed(e -> button.setBackground(createBackground(ColorThemeConstants.getLightIc11())));
         button.setOnMouseReleased(e -> {
             if (button.isHover()) {
-                button.setBackground(createBackground(SECONDARY_HOVER_COLOR));
+                button.setBackground(createBackground(ColorThemeConstants.getLightIc10()));
             } else {
                 button.setBackground(null);
             }
@@ -112,7 +113,7 @@ public class ButtonComponent {
 
     private static Border createBorderSecondaryButton() {
         return new Border(new BorderStroke(
-                SECONDARY_TEXT_COLOR,
+                ColorThemeConstants.getLightCs07(),
                 BorderStrokeStyle.SOLID,
                 CORNER_RADII,
                 BORDER_WIDTH

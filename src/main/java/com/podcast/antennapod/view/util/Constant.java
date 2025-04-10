@@ -3,24 +3,12 @@ package com.podcast.antennapod.view.util;
 import javafx.geometry.Insets;
 import javafx.scene.layout.BorderWidths;
 import javafx.scene.layout.CornerRadii;
-import javafx.scene.paint.Color;
 
 public class Constant {
 
     private Constant(){
 
     }
-
-    // Constantes pour les couleurs (facilite la maintenance et la cohérence)
-    public static final Color PRIMARY_COLOR = Color.web("#285E61");
-    public static final Color PRIMARY_HOVER_COLOR = Color.web("#164F52");
-    public static final Color PRIMARY_PRESSED_COLOR = Color.web("#004044");
-
-    public static final Color SECONDARY_TEXT_COLOR = Color.web("#164F52");
-    public static final Color SECONDARY_HOVER_COLOR = Color.web("#C5E6E8");
-    public static final Color SECONDARY_PRESSED_COLOR = Color.web("#D3EDEF");
-
-    public static final Color WHITE = Color.WHITE;
 
     // Constantes pour la mise en page
     public static final double CORNER_RADIUS = 2.0;
@@ -34,5 +22,4 @@ public class Constant {
     public static final Insets BADGE_DEFAULT_PADDING = new Insets(4.0, 16.0, 4.0, 16.0);
     public static final Insets BADGE_ICON_PADDING = new Insets(4.0);
     public static final int BADGE_ICON_SIZE = 15;
-    public static final double BADGE_ICON_WIDTH = 23.0;
 }
