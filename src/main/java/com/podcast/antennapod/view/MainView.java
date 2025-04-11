@@ -4,6 +4,7 @@ import com.podcast.antennapod.view.component.BadgeComponent;
 import com.podcast.antennapod.view.component.ButtonComponent;
 import com.podcast.antennapod.view.component.NavigationComponent;
 import com.podcast.antennapod.view.component.PodcastComponent;
+import com.podcast.antennapod.view.container.NavigationContainer;
 import com.podcast.antennapod.view.util.TypeButton;
 import javafx.application.Application;
 import javafx.geometry.Insets;
@@ -26,9 +27,18 @@ public class MainView extends Application {
 
         box.setPadding(new Insets(4.0,16.0,4.0,16.0));
 
-        box.getChildren().add(ButtonComponent.createButton(TypeButton.PRIMARY.name(), TypeButton.PRIMARY));
-        box.getChildren().add(ButtonComponent.createButton(TypeButton.SECONDARY.name(), TypeButton.SECONDARY));
-        box.getChildren().add(ButtonComponent.createButton(TypeButton.TERTIARY.name(), TypeButton.TERTIARY));
+        HBox hBox1 = new HBox(15.0);
+
+        hBox1.getChildren().add(ButtonComponent.createButton(TypeButton.PRIMARY.name(), TypeButton.PRIMARY));
+        hBox1.getChildren().add(ButtonComponent.createButton(TypeButton.SECONDARY.name(), TypeButton.SECONDARY));
+        hBox1.getChildren().add(ButtonComponent.createButton(TypeButton.TERTIARY.name(), TypeButton.TERTIARY));
+
+        hBox1.getChildren().add(BadgeComponent.getBadgeIconRed(new FontIcon(Material2AL.ADD)));
+        hBox1.getChildren().add(BadgeComponent.getBadgeIconBlue(new FontIcon(Material2AL.INBOX)));
+        hBox1.getChildren().add(BadgeComponent.getBadgeIconGreen(new FontIcon(Material2AL.INBOX)));
+        hBox1.getChildren().add(BadgeComponent.getBadgeIconPurple(new FontIcon(Material2MZ.PLAYLIST_PLAY)));
+
+        hBox1.getChildren().add(NavigationComponent.createNavigation(String.valueOf(getClass().getResource("/images/others/zerl.jpg")), "Zack en Roue Libre by Zack Nani", 12));
 
         HBox hBox = new HBox(15.0);
 
@@ -39,21 +49,16 @@ public class MainView extends Application {
         hBox.getChildren().add(PodcastComponent.getImage(String.valueOf(getClass().getResource("/images/others/underscore.jpeg"))));
         hBox.getChildren().add(PodcastComponent.getImage(String.valueOf(getClass().getResource("/images/others/zerl.jpg"))));
 
+
+        hBox.getChildren().add(BadgeComponent.getBadgeGreen("Download"));
+        hBox.getChildren().add(BadgeComponent.getBadgeRed("Sans media"));
+        hBox.getChildren().add(BadgeComponent.getBadgeBlue("Téléchargé"));
+        hBox.getChildren().add(BadgeComponent.getBadgePurple("Téléchargé"));
+
         box.getChildren().add(hBox);
+        box.getChildren().add(hBox1);
+        box.getChildren().add(NavigationContainer.createMenu());
 
-
-        box.getChildren().add(BadgeComponent.getBadgeGreen("Download"));
-        box.getChildren().add(BadgeComponent.getBadgeRed("Sans media"));
-        box.getChildren().add(BadgeComponent.getBadgeBlue("Téléchargé"));
-        box.getChildren().add(BadgeComponent.getBadgePurple("Téléchargé"));
-
-        box.getChildren().add(BadgeComponent.getBadgeIconRed(new FontIcon(Material2AL.ADD)));
-        box.getChildren().add(BadgeComponent.getBadgeIconBlue(new FontIcon(Material2AL.INBOX)));
-        box.getChildren().add(BadgeComponent.getBadgeIconGreen(new FontIcon(Material2AL.INBOX)));
-        box.getChildren().add(BadgeComponent.getBadgeIconPurple(new FontIcon(Material2MZ.PLAYLIST_PLAY)));
-
-        box.getChildren().add(NavigationComponent.createNavigation(new FontIcon(Material2MZ.PLAYLIST_PLAY), "Test", 12));
-        box.getChildren().add(NavigationComponent.createNavigation(String.valueOf(getClass().getResource("/images/others/zerl.jpg")), "Zack en Roue Libre by Zack Nani", 12));
 
         stage.setScene(new Scene(box, 320, 240));
 

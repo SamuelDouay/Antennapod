@@ -1,5 +1,6 @@
 package com.podcast.antennapod.view.component;
 
+import com.podcast.antennapod.view.item.NavigationItem;
 import com.podcast.antennapod.view.util.ColorThemeConstants;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
@@ -20,6 +21,20 @@ public final class NavigationComponent {
 
     private NavigationComponent() {
         // Prevents instantiation
+    }
+
+    public static HBox createNavigation(NavigationItem item) {
+        if (item.getImageUrl() != null) {
+            ImageView imageView = new ImageView(item.getImageUrl());
+            imageView.setFitWidth(ICON_SIZE);
+            imageView.setFitHeight(ICON_SIZE);
+            return createNavigationBase(imageView, item.getTitle(), item.getNumber());
+
+        } else {
+            item.getIcon().setIconSize((int)ICON_SIZE);
+            item.getIcon().setIconColor(ColorThemeConstants.getAt02());
+            return createNavigationBase(item.getIcon(), item.getTitle(), item.getNumber());
+        }
     }
 
     public static HBox createNavigation(FontIcon icon, String title, int number) {
