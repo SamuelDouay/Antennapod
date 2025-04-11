@@ -3,7 +3,7 @@ package com.podcast.antennapod.view.util;
 import javafx.scene.paint.Color;
 
 public enum BadgeType {
-    GREEN("Green", ColorThemeConstants.getLightIc07(), ColorThemeConstants.getLightAc06()),
+    GREEN("Green", ColorThemeConstants.getIc07(), ColorThemeConstants.getAt06()),
     RED("Red", Color.hsb(1.0, 0.24, 1, 1), Color.hsb(2.0, 1, 0.62, 0.7294)),
     BLUE("Blue", Color.hsb(233.0, 0.16, 1, 1), Color.hsb(251.0, 0.787, 0.98, 1)),
     PURPLE("Purple", Color.hsb(251.0, 0.16, 1, 1), Color.hsb(255.0, 0.48, 0.64, 1));

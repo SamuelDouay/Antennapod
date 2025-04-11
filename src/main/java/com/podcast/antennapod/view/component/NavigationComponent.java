@@ -24,7 +24,7 @@ public final class NavigationComponent {
 
     public static HBox createNavigation(FontIcon icon, String title, int number) {
         icon.setIconSize((int)ICON_SIZE);
-        icon.setIconColor(ColorThemeConstants.getLightAc02());
+        icon.setIconColor(ColorThemeConstants.getAt02());
         return createNavigationBase(icon, title, number);
     }
 
@@ -40,11 +40,11 @@ public final class NavigationComponent {
         // Create and configure title label
         Label titleLabel = new Label(title);
         titleLabel.setMaxWidth(TITLE_MAX_WIDTH);
-        titleLabel.setTextFill(ColorThemeConstants.getLightAc02());
+        titleLabel.setTextFill(ColorThemeConstants.getAt02());
 
         // Create number label
         Label numberLabel = new Label(String.valueOf(number));
-        numberLabel.setTextFill(ColorThemeConstants.getLightAc08());
+        numberLabel.setTextFill(ColorThemeConstants.getAt08());
 
         // Create icon and title container
         HBox iconTitleBox = new HBox(SPACING, graphic, titleLabel);
@@ -67,27 +67,27 @@ public final class NavigationComponent {
         mainBox.setBackground(null);
 
         mainBox.setOnMouseEntered(e -> {
-            mainBox.setBackground(new Background(new BackgroundFill(ColorThemeConstants.getLightIc07(), CORNER_RADII, Insets.EMPTY)));
-            titleLabel.setTextFill(ColorThemeConstants.getLightAc08());
+            mainBox.setBackground(new Background(new BackgroundFill(ColorThemeConstants.getIc07(), CORNER_RADII, Insets.EMPTY)));
+            titleLabel.setTextFill(ColorThemeConstants.getAt08());
             if (!(graphic instanceof FontIcon)) {
                 return;
             }
-            ((FontIcon) graphic).setIconColor(ColorThemeConstants.getLightAc08());
+            ((FontIcon) graphic).setIconColor(ColorThemeConstants.getAt08());
 
         });
         mainBox.setOnMouseExited(e -> {
             mainBox.setBackground(null);
-            titleLabel.setTextFill(ColorThemeConstants.getLightAc02());
+            titleLabel.setTextFill(ColorThemeConstants.getAt02());
             if (!(graphic instanceof FontIcon)) {
                 return;
             }
-            ((FontIcon) graphic).setIconColor(ColorThemeConstants.getLightAc02());
+            ((FontIcon) graphic).setIconColor(ColorThemeConstants.getAt02());
 
         });
-        mainBox.setOnMousePressed(e -> mainBox.setBackground(new Background(new BackgroundFill(ColorThemeConstants.getLightIc12(), CORNER_RADII, Insets.EMPTY))));
+        mainBox.setOnMousePressed(e -> mainBox.setBackground(new Background(new BackgroundFill(ColorThemeConstants.getIc12(), CORNER_RADII, Insets.EMPTY))));
         mainBox.setOnMouseReleased(e -> {
             if (mainBox.isHover()) {
-                mainBox.setBackground(new Background(new BackgroundFill(ColorThemeConstants.getLightIc07(), CORNER_RADII, Insets.EMPTY)));
+                mainBox.setBackground(new Background(new BackgroundFill(ColorThemeConstants.getIc07(), CORNER_RADII, Insets.EMPTY)));
             } else {
                 mainBox.setBackground(null);
             }

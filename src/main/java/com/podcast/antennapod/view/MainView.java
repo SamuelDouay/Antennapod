@@ -4,6 +4,8 @@ import com.podcast.antennapod.view.component.BadgeComponent;
 import com.podcast.antennapod.view.component.ButtonComponent;
 import com.podcast.antennapod.view.component.NavigationComponent;
 import com.podcast.antennapod.view.component.PodcastComponent;
+import com.podcast.antennapod.view.util.ColorThemeConstants;
+import com.podcast.antennapod.view.util.ThemeType;
 import com.podcast.antennapod.view.util.TypeButton;
 import javafx.application.Application;
 import javafx.geometry.Insets;
@@ -19,10 +21,10 @@ import org.kordamp.ikonli.material2.Material2MZ;
 
 public class MainView extends Application {
     public static final Logger logger = LogManager.getLogger(MainView.class);
+
     @Override
     public void start(Stage stage) {
         VBox box = new VBox(5.0);
-
 
         box.setPadding(new Insets(4.0,16.0,4.0,16.0));
 
