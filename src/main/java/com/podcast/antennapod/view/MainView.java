@@ -4,8 +4,6 @@ import com.podcast.antennapod.view.component.BadgeComponent;
 import com.podcast.antennapod.view.component.ButtonComponent;
 import com.podcast.antennapod.view.component.NavigationComponent;
 import com.podcast.antennapod.view.component.PodcastComponent;
-import com.podcast.antennapod.view.util.ColorThemeConstants;
-import com.podcast.antennapod.view.util.ThemeType;
 import com.podcast.antennapod.view.util.TypeButton;
 import javafx.application.Application;
 import javafx.geometry.Insets;
