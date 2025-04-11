@@ -13,8 +13,8 @@ class BadgeTypeTest {
     void testGreenBadgeProperties() {
         BadgeType badge = BadgeType.GREEN;
         assertEquals("Green", badge.getTypeName());
-        assertEquals(ColorThemeConstants.getLightIc07(), badge.getBackgroundColor());
-        assertEquals(ColorThemeConstants.getLightAt06(), badge.getTextColor());
+        assertEquals(ColorThemeConstants.getIc07(), badge.getBackgroundColor());
+        assertEquals(ColorThemeConstants.getAt06(), badge.getTextColor());
     }
 
     @Test
