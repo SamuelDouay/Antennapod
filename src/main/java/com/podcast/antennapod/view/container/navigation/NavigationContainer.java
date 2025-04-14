@@ -1,16 +1,17 @@
-package com.podcast.antennapod.view.container;
+package com.podcast.antennapod.view.container.navigation;
 
-import com.podcast.antennapod.view.component.NavigationComponent;
 import com.podcast.antennapod.view.item.NavigationItem;
 import javafx.geometry.Insets;
-import javafx.scene.control.ListCell;
 import javafx.scene.control.ListView;
 import javafx.scene.layout.Region;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.kordamp.ikonli.javafx.FontIcon;
 import org.kordamp.ikonli.material2.Material2AL;
 import org.kordamp.ikonli.material2.Material2MZ;
 
 public class NavigationContainer {
+    private final static Logger LOGGER = LogManager.getLogger(NavigationItem.class);
     private NavigationContainer() {
 
     }
@@ -35,40 +36,32 @@ public class NavigationContainer {
         NavigationItem addPodcastItem = new NavigationItem(new FontIcon(Material2AL.ADD), "Ajouter un podcast",0);
 
 
+        NavigationItem sperator = new NavigationItem();
+
+        NavigationItem podcast1 = new NavigationItem(String.valueOf(NavigationContainer.class.getResource("/images/others/zerl.jpg")), "Zack en Roue Libre by Zack Nani", 12);
+        NavigationItem podcast2 = new NavigationItem(String.valueOf(NavigationContainer.class.getResource("/images/others/heure_du_monde.png")), "L'heure du monde", 12);
+        NavigationItem podcast3 = new NavigationItem(String.valueOf(NavigationContainer.class.getResource("/images/others/small_talk.jpg")), "Small Tallk - Kobini", 12);
+        NavigationItem podcast4 = new NavigationItem(String.valueOf(NavigationContainer.class.getResource("/images/others/underscore.jpeg")), "Underscore_", 12);
+        NavigationItem podcast5 = new NavigationItem(String.valueOf(NavigationContainer.class.getResource("/images/others/ex.jpeg")), "Ex...", 12);
+
         listView.getItems().addAll(
                 homeItem, playlistItem, inboxItem, episodesItem,
-                subscriptionsItem, downloadsItem, historyItem, addPodcastItem
+                subscriptionsItem, downloadsItem, historyItem, addPodcastItem,
+                sperator,
+                podcast1, podcast2, podcast3, podcast4, podcast5
         );
 
-        listView.setCellFactory(param -> new ListCell<NavigationItem>() {
-            @Override
-            protected void updateItem(NavigationItem item, boolean empty) {
-                super.updateItem(item, empty);
-
-                if (empty || item == null) {
-                    setText(null);
-                    setGraphic(null);
-                } else {
-                    setGraphic(NavigationComponent.createNavigation(item));
-
-                    setStyle(
-                            "-fx-background-color: transparent;" + "-fx-padding: 0px;"
-                    );
-
-                    if (isSelected()) {
-                        setStyle("-fx-background-color: #e0e0e0;");
-                    }
-                }
-            }
-        });
+        listView.setCellFactory(param -> new NavigationCellItem());
 
         listView.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> {
             if (newValue != null) {
-                System.out.println("Élément sélectionné: " + newValue.getTitle());
+                LOGGER.info("Élément sélectionné: " + newValue.getTitle());
                 // Ici, vous pouvez exécuter n'importe quelle action en fonction de l'élément sélectionné
                 // Par exemple, changer de vue ou charger du contenu
             }
         });
+
+        listView.getSelectionModel().selectFirst();
 
         return listView;
     }

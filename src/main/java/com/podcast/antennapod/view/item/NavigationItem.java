@@ -7,12 +7,14 @@ public class NavigationItem {
     private String title;
     private int number;
     private String imageUrl;
+    private final boolean separator;
 
     public NavigationItem(FontIcon icon, String title, int number) {
         this.icon = icon;
         this.title = title;
         this.number = number;
         this.imageUrl = null;
+        this.separator = false;
     }
 
     public NavigationItem(String imageUrl, String title, int number) {
@@ -20,6 +22,15 @@ public class NavigationItem {
         this.title = title;
         this.number = number;
         this.icon = null;
+        this.separator = false;
+    }
+
+    public NavigationItem() {
+        this.separator = true;
+        this.icon = null;
+        this.number = 0;
+        this.imageUrl = null;
+        this.title = null;
     }
 
     public FontIcon getIcon() {
@@ -52,5 +63,9 @@ public class NavigationItem {
 
     public void setImageUrl(String imageUrl) {
         this.imageUrl = imageUrl;
+    }
+
+    public boolean isSeparator() {
+        return separator;
     }
 }

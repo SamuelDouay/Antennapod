@@ -4,7 +4,7 @@ import com.podcast.antennapod.view.component.BadgeComponent;
 import com.podcast.antennapod.view.component.ButtonComponent;
 import com.podcast.antennapod.view.component.NavigationComponent;
 import com.podcast.antennapod.view.component.PodcastComponent;
-import com.podcast.antennapod.view.container.NavigationContainer;
+import com.podcast.antennapod.view.container.navigation.NavigationContainer;
 import com.podcast.antennapod.view.util.TypeButton;
 import javafx.application.Application;
 import javafx.geometry.Insets;
@@ -38,10 +38,7 @@ public class MainView extends Application {
         hBox1.getChildren().add(BadgeComponent.getBadgeIconGreen(new FontIcon(Material2AL.INBOX)));
         hBox1.getChildren().add(BadgeComponent.getBadgeIconPurple(new FontIcon(Material2MZ.PLAYLIST_PLAY)));
 
-        hBox1.getChildren().add(NavigationComponent.createNavigation(String.valueOf(getClass().getResource("/images/others/zerl.jpg")), "Zack en Roue Libre by Zack Nani", 12));
-
         HBox hBox = new HBox(15.0);
-
 
         hBox.getChildren().add(PodcastComponent.getImage(String.valueOf(getClass().getResource("/images/others/ex.jpeg"))));
         hBox.getChildren().add(PodcastComponent.getImage(String.valueOf(getClass().getResource("/images/others/heure_du_monde.png"))));
@@ -57,6 +54,7 @@ public class MainView extends Application {
 
         box.getChildren().add(hBox);
         box.getChildren().add(hBox1);
+
         box.getChildren().add(NavigationContainer.createMenu());
 
 
