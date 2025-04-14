@@ -7,7 +7,10 @@ import com.podcast.antennapod.view.container.navigation.NavigationContainer;
 import com.podcast.antennapod.view.util.TypeButton;
 import javafx.application.Application;
 import javafx.geometry.Insets;
+import javafx.scene.Node;
 import javafx.scene.Scene;
+import javafx.scene.control.Label;
+import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
@@ -22,6 +25,36 @@ public class MainView extends Application {
 
     @Override
     public void start(Stage stage) {
+        AnchorPane root = new AnchorPane();
+
+        VBox menu = new VBox();
+        menu.setPrefWidth(240.0);
+        menu.getChildren().add(NavigationContainer.createMenu());
+
+        AnchorPane.setLeftAnchor(menu, 0.0);
+        AnchorPane.setTopAnchor(menu, 0.0);
+
+        Node main = mainContent();
+        AnchorPane.setLeftAnchor(main, 240.0);
+        AnchorPane.setTopAnchor(main, 0.0);
+
+        root.getChildren().addAll(menu, main);
+
+        stage.setScene(new Scene(root, 320, 240));
+
+        stage.setTitle("AntennaPod");
+        stage.setMaximized(true);
+        stage.show();
+        logger.info("Interface utilisateur initialisée avec succès");
+    }
+
+    public static void main(String[] args) {
+        logger.info("Initialisation de l'interface utilisateur principale (MainView)");
+        launch(args);
+        logger.info("Fermeture de l'interface utilisateur principale (MainView)");
+    }
+
+    private static Node mainContent() {
         VBox box = new VBox(5.0);
 
         box.setPadding(new Insets(4.0,16.0,4.0,16.0));
@@ -39,35 +72,21 @@ public class MainView extends Application {
 
         HBox hBox = new HBox(15.0);
 
-        hBox.getChildren().add(PodcastComponent.getImage(String.valueOf(getClass().getResource("/images/others/ex.jpeg"))));
-        hBox.getChildren().add(PodcastComponent.getImage(String.valueOf(getClass().getResource("/images/others/heure_du_monde.png"))));
-        hBox.getChildren().add(PodcastComponent.getImage(String.valueOf(getClass().getResource("/images/others/small_talk.jpg"))));
-        hBox.getChildren().add(PodcastComponent.getImage(String.valueOf(getClass().getResource("/images/others/underscore.jpeg"))));
-        hBox.getChildren().add(PodcastComponent.getImage(String.valueOf(getClass().getResource("/images/others/zerl.jpg"))));
+        hBox.getChildren().add(PodcastComponent.getImage(String.valueOf(MainView.class.getResource("/images/others/ex.jpeg"))));
+        hBox.getChildren().add(PodcastComponent.getImage(String.valueOf(MainView.class.getResource("/images/others/heure_du_monde.png"))));
+        hBox.getChildren().add(PodcastComponent.getImage(String.valueOf(MainView.class.getResource("/images/others/small_talk.jpg"))));
+        hBox.getChildren().add(PodcastComponent.getImage(String.valueOf(MainView.class.getResource("/images/others/underscore.jpeg"))));
+        hBox.getChildren().add(PodcastComponent.getImage(String.valueOf(MainView.class.getResource("/images/others/zerl.jpg"))));
 
 
-        hBox.getChildren().add(BadgeComponent.getBadgeGreen("Download"));
-        hBox.getChildren().add(BadgeComponent.getBadgeRed("Sans media"));
-        hBox.getChildren().add(BadgeComponent.getBadgeBlue("Téléchargé"));
-        hBox.getChildren().add(BadgeComponent.getBadgePurple("Téléchargé"));
+        box.getChildren().add(BadgeComponent.getBadgeGreen("Download"));
+        box.getChildren().add(BadgeComponent.getBadgeRed("Sans media"));
+        box.getChildren().add(BadgeComponent.getBadgeBlue("Téléchargé"));
+        box.getChildren().add(BadgeComponent.getBadgePurple("Téléchargé"));
 
         box.getChildren().add(hBox);
         box.getChildren().add(hBox1);
 
-        box.getChildren().add(NavigationContainer.createMenu());
-
-
-        stage.setScene(new Scene(box, 320, 240));
-
-        stage.setTitle("AntennaPod");
-        stage.setMaximized(true);
-        stage.show();
-        logger.info("Interface utilisateur initialisée avec succès");
-    }
-
-    public static void main(String[] args) {
-        logger.info("Initialisation de l'interface utilisateur principale (MainView)");
-        launch(args);
-        logger.info("Fermeture de l'interface utilisateur principale (MainView)");
+        return box;
     }
 }

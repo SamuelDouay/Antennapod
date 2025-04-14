@@ -24,8 +24,7 @@ public class NavigationContainer {
         listView.setPadding(new Insets(8.0));
         listView.setBackground(null);
         listView.setBorder(null);
-        listView.setMaxSize(Region.USE_PREF_SIZE, Region.USE_PREF_SIZE);
-        listView.setMinSize(Region.USE_PREF_SIZE, Region.USE_PREF_SIZE);
+        listView.setMinWidth(Region.USE_PREF_SIZE);
 
         NavigationItem homeItem = new NavigationItem(new FontIcon(Material2AL.HOME), "Accueil",0);
         NavigationItem playlistItem = new NavigationItem(new FontIcon(Material2MZ.PLAYLIST_PLAY), "Liste de lecture",0);
