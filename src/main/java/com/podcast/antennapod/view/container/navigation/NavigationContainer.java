@@ -53,14 +53,6 @@ public class NavigationContainer {
 
         listView.setCellFactory(param -> new NavigationCellItem());
 
-        listView.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> {
-            if (newValue != null) {
-                LOGGER.info("Element sélectioné {}", newValue.getTitle());
-                // Ici, vous pouvez exécuter n'importe quelle action en fonction de l'élément sélectionné
-                // Par exemple, changer de vue ou charger du contenu
-            }
-        });
-
         listView.getSelectionModel().selectFirst();
 
         return listView;

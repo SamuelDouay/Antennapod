@@ -4,14 +4,18 @@ import com.podcast.antennapod.view.component.BadgeComponent;
 import com.podcast.antennapod.view.component.ButtonComponent;
 import com.podcast.antennapod.view.component.PodcastComponent;
 import com.podcast.antennapod.view.container.navigation.NavigationContainer;
+import com.podcast.antennapod.view.item.NavigationItem;
 import com.podcast.antennapod.view.util.TypeButton;
 import javafx.application.Application;
 import javafx.geometry.Insets;
 import javafx.scene.Node;
 import javafx.scene.Scene;
+import javafx.scene.control.Label;
+import javafx.scene.control.ListView;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
+import javafx.scene.text.Font;
 import javafx.stage.Stage;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -28,16 +32,36 @@ public class MainView extends Application {
 
         VBox menu = new VBox();
         menu.setPrefWidth(240.0);
-        menu.getChildren().add(NavigationContainer.createMenu());
+
+        ListView<NavigationItem> listView = NavigationContainer.createMenu();
+        menu.getChildren().add(listView);
+
+        Label currentSelectionLabel = new Label("Sélection actuelle : Accueil");
+        currentSelectionLabel.setFont(new Font(16));
+        currentSelectionLabel.setPadding(new Insets(10, 0, 10, 0));
+
+        // Ajouter un écouteur pour mettre à jour le label lors de la sélection
+        listView.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> {
+            if (newValue != null && newValue.getTitle() != null) {
+                currentSelectionLabel.setText("Sélection actuelle : " + newValue.getTitle());
+            }
+        });
 
         AnchorPane.setLeftAnchor(menu, 0.0);
         AnchorPane.setTopAnchor(menu, 0.0);
 
         Node main = mainContent();
-        AnchorPane.setLeftAnchor(main, 240.0);
-        AnchorPane.setTopAnchor(main, 0.0);
 
-        root.getChildren().addAll(menu, main);
+        // Positionner le label en haut du contenu principal
+        VBox mainContainer = new VBox(10);
+        mainContainer.getChildren().addAll(currentSelectionLabel, main);
+        mainContainer.setPadding(new Insets(10));
+
+        AnchorPane.setLeftAnchor(mainContainer, 240.0);
+        AnchorPane.setTopAnchor(mainContainer, 0.0);
+        AnchorPane.setRightAnchor(mainContainer, 0.0);
+
+        root.getChildren().addAll(menu, mainContainer);
 
         stage.setScene(new Scene(root, 320, 240));
 
