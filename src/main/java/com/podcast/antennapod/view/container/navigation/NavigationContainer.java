@@ -2,6 +2,7 @@ package com.podcast.antennapod.view.container.navigation;
 
 import com.podcast.antennapod.view.item.NavigationItem;
 import javafx.geometry.Insets;
+import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
 import javafx.scene.layout.Region;
 import org.apache.logging.log4j.LogManager;
@@ -11,7 +12,7 @@ import org.kordamp.ikonli.material2.Material2AL;
 import org.kordamp.ikonli.material2.Material2MZ;
 
 public class NavigationContainer {
-    private final static Logger LOGGER = LogManager.getLogger(NavigationItem.class);
+    private final static Logger LOGGER = LogManager.getLogger(NavigationContainer.class);
     private NavigationContainer() {
 
     }
@@ -55,7 +56,7 @@ public class NavigationContainer {
 
         listView.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> {
             if (newValue != null) {
-                LOGGER.info("Élément sélectionné: " + newValue.getTitle());
+                LOGGER.info("Element sélectioné {}", newValue.getTitle());
                 // Ici, vous pouvez exécuter n'importe quelle action en fonction de l'élément sélectionné
                 // Par exemple, changer de vue ou charger du contenu
             }

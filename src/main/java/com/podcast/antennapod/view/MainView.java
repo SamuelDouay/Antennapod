@@ -2,7 +2,6 @@ package com.podcast.antennapod.view;
 
 import com.podcast.antennapod.view.component.BadgeComponent;
 import com.podcast.antennapod.view.component.ButtonComponent;
-import com.podcast.antennapod.view.component.NavigationComponent;
 import com.podcast.antennapod.view.component.PodcastComponent;
 import com.podcast.antennapod.view.container.navigation.NavigationContainer;
 import com.podcast.antennapod.view.util.TypeButton;

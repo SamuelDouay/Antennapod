@@ -25,8 +25,7 @@ public class NavigationCellItem extends ListCell<NavigationItem> {
             setGraphic(null);
             cellContent = null;
             setStyle("-fx-background-color: transparent;");
-        }
-        else if (item.isSeparator()) {
+        } else if (item.isSeparator()) {
             // Afficher un séparateur
             Region separator = new Region();
             separator.setPrefHeight(1);
@@ -41,8 +40,7 @@ public class NavigationCellItem extends ListCell<NavigationItem> {
             setText(null);
             setStyle("-fx-background-color: transparent;");
             setDisable(true); // Empêcher la sélection du séparateur
-        }
-        else {
+        } else {
             cellContent = NavigationComponent.createNavigation(item);
             setGraphic(cellContent);
             setStyle("-fx-background-color: transparent; -fx-padding: 0px;");
@@ -92,12 +90,10 @@ public class NavigationCellItem extends ListCell<NavigationItem> {
             }
         });
 
-        cellContent.setOnMousePressed(e -> {
-            cellContent.setBackground(new Background(new BackgroundFill(
-                    ColorThemeConstants.getIc12(),
-                    CORNER_RADII,
-                    Insets.EMPTY)));
-        });
+        cellContent.setOnMousePressed(e -> cellContent.setBackground(new Background(new BackgroundFill(
+                ColorThemeConstants.getIc12(),
+                CORNER_RADII,
+                Insets.EMPTY))));
 
         cellContent.setOnMouseReleased(e -> {
             if (!isSelected()) {
