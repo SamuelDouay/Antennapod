@@ -2,7 +2,6 @@ package com.podcast.antennapod.view.container.navigation;
 
 import com.podcast.antennapod.view.item.NavigationItem;
 import javafx.geometry.Insets;
-import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
 import javafx.scene.layout.Region;
 import org.apache.logging.log4j.LogManager;
@@ -12,7 +11,8 @@ import org.kordamp.ikonli.material2.Material2AL;
 import org.kordamp.ikonli.material2.Material2MZ;
 
 public class NavigationContainer {
-    private final static Logger LOGGER = LogManager.getLogger(NavigationContainer.class);
+    private static final Logger LOGGER = LogManager.getLogger(NavigationContainer.class);
+
     private NavigationContainer() {
 
     }
