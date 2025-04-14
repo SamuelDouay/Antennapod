@@ -4,14 +4,11 @@ import com.podcast.antennapod.view.item.NavigationItem;
 import javafx.geometry.Insets;
 import javafx.scene.control.ListView;
 import javafx.scene.layout.Region;
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
 import org.kordamp.ikonli.javafx.FontIcon;
 import org.kordamp.ikonli.material2.Material2AL;
 import org.kordamp.ikonli.material2.Material2MZ;
 
 public class NavigationContainer {
-    private static final Logger LOGGER = LogManager.getLogger(NavigationContainer.class);
 
     private NavigationContainer() {
 
@@ -36,7 +33,7 @@ public class NavigationContainer {
         NavigationItem addPodcastItem = new NavigationItem(new FontIcon(Material2AL.ADD), "Ajouter un podcast",0);
 
 
-        NavigationItem sperator = new NavigationItem();
+        NavigationItem separator = new NavigationItem();
 
         NavigationItem podcast1 = new NavigationItem(String.valueOf(NavigationContainer.class.getResource("/images/others/zerl.jpg")), "Zack en Roue Libre by Zack Nani", 12);
         NavigationItem podcast2 = new NavigationItem(String.valueOf(NavigationContainer.class.getResource("/images/others/heure_du_monde.png")), "L'heure du monde", 12);
@@ -47,11 +44,11 @@ public class NavigationContainer {
         listView.getItems().addAll(
                 homeItem, playlistItem, inboxItem, episodesItem,
                 subscriptionsItem, downloadsItem, historyItem, addPodcastItem,
-                sperator,
+                separator,
                 podcast1, podcast2, podcast3, podcast4, podcast5
         );
 
-        listView.setCellFactory(param -> new NavigationCellItem());
+        listView.setCellFactory(_ -> new NavigationCellItem());
 
         listView.getSelectionModel().selectFirst();
 
