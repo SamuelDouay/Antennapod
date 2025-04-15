@@ -5,8 +5,8 @@ module com.podcast.antennapod {
     requires com.apptasticsoftware.rssreader;
     requires java.net.http;
     requires org.kordamp.ikonli.javafx;
-    requires org.kordamp.ikonli.material2;
     requires javafx.controls;
+    requires org.kordamp.ikonli.materialdesign2;
 
     exports com.podcast.antennapod;
     exports com.podcast.antennapod.view;

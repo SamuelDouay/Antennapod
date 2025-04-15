@@ -5,8 +5,7 @@ import javafx.geometry.Insets;
 import javafx.scene.control.ListView;
 import javafx.scene.layout.Region;
 import org.kordamp.ikonli.javafx.FontIcon;
-import org.kordamp.ikonli.material2.Material2AL;
-import org.kordamp.ikonli.material2.Material2MZ;
+import org.kordamp.ikonli.materialdesign2.*;
 
 public class NavigationContainer {
 
@@ -23,14 +22,14 @@ public class NavigationContainer {
         listView.setBorder(null);
         listView.setMinWidth(Region.USE_PREF_SIZE);
 
-        NavigationItem homeItem = new NavigationItem(new FontIcon(Material2AL.HOME), "Accueil",0);
-        NavigationItem playlistItem = new NavigationItem(new FontIcon(Material2MZ.PLAYLIST_PLAY), "Liste de lecture",0);
-        NavigationItem inboxItem = new NavigationItem(new FontIcon(Material2AL.INBOX), "Boîte de reception",0);
-        NavigationItem episodesItem = new NavigationItem(new FontIcon(Material2MZ.RSS_FEED), "Episodes",0);
-        NavigationItem subscriptionsItem = new NavigationItem(new FontIcon(Material2AL.APPS), "Abonnements",0);
-        NavigationItem downloadsItem = new NavigationItem(new FontIcon(Material2AL.CLOUD_DOWNLOAD), "Téléchargement",0);
-        NavigationItem historyItem = new NavigationItem(new FontIcon(Material2AL.HISTORY), "Journal de lecture",0);
-        NavigationItem addPodcastItem = new NavigationItem(new FontIcon(Material2AL.ADD), "Ajouter un podcast",0);
+        NavigationItem homeItem = new NavigationItem(new FontIcon(MaterialDesignH.HOME), "Accueil", 0);
+        NavigationItem playlistItem = new NavigationItem(new FontIcon(MaterialDesignP.PLAYLIST_PLAY), "Liste de lecture", 0);
+        NavigationItem inboxItem = new NavigationItem(new FontIcon(MaterialDesignI.INBOX), "Boîte de reception", 0);
+        NavigationItem episodesItem = new NavigationItem(new FontIcon(MaterialDesignR.RSS), "Episodes", 0);
+        NavigationItem subscriptionsItem = new NavigationItem(new FontIcon(MaterialDesignV.VIEW_GRID_OUTLINE), "Abonnements", 0);
+        NavigationItem downloadsItem = new NavigationItem(new FontIcon(MaterialDesignD.DOWNLOAD), "Téléchargement", 0);
+        NavigationItem historyItem = new NavigationItem(new FontIcon(MaterialDesignH.HISTORY), "Journal de lecture", 0);
+        NavigationItem addPodcastItem = new NavigationItem(new FontIcon(MaterialDesignP.PLUS), "Ajouter un podcast", 0);
 
 
         NavigationItem separator = new NavigationItem();
@@ -51,7 +50,6 @@ public class NavigationContainer {
         listView.setCellFactory(_ -> new NavigationCellItem());
 
         listView.getSelectionModel().selectFirst();
-
         return listView;
     }
 }

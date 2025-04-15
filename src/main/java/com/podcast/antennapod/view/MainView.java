@@ -20,8 +20,8 @@ import javafx.stage.Stage;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.kordamp.ikonli.javafx.FontIcon;
-import org.kordamp.ikonli.material2.Material2AL;
-import org.kordamp.ikonli.material2.Material2MZ;
+import org.kordamp.ikonli.materialdesign2.MaterialDesignI;
+import org.kordamp.ikonli.materialdesign2.MaterialDesignP;
 
 public class MainView extends Application {
     public static final Logger logger = LogManager.getLogger(MainView.class);
@@ -80,7 +80,7 @@ public class MainView extends Application {
     private static Node mainContent() {
         VBox box = new VBox(5.0);
 
-        box.setPadding(new Insets(4.0,16.0,4.0,16.0));
+        box.setPadding(new Insets(4.0, 16.0, 4.0, 16.0));
 
         HBox hBox1 = new HBox(15.0);
 
@@ -88,10 +88,10 @@ public class MainView extends Application {
         hBox1.getChildren().add(ButtonComponent.createButton(TypeButton.SECONDARY.name(), TypeButton.SECONDARY));
         hBox1.getChildren().add(ButtonComponent.createButton(TypeButton.TERTIARY.name(), TypeButton.TERTIARY));
 
-        hBox1.getChildren().add(BadgeComponent.getBadgeIconRed(new FontIcon(Material2AL.ADD)));
-        hBox1.getChildren().add(BadgeComponent.getBadgeIconBlue(new FontIcon(Material2AL.INBOX)));
-        hBox1.getChildren().add(BadgeComponent.getBadgeIconGreen(new FontIcon(Material2AL.INBOX)));
-        hBox1.getChildren().add(BadgeComponent.getBadgeIconPurple(new FontIcon(Material2MZ.PLAYLIST_PLAY)));
+        hBox1.getChildren().add(BadgeComponent.getBadgeIconRed(new FontIcon(MaterialDesignP.PLUS)));
+        hBox1.getChildren().add(BadgeComponent.getBadgeIconBlue(new FontIcon(MaterialDesignI.INBOX)));
+        hBox1.getChildren().add(BadgeComponent.getBadgeIconGreen(new FontIcon(MaterialDesignI.INBOX)));
+        hBox1.getChildren().add(BadgeComponent.getBadgeIconPurple(new FontIcon(MaterialDesignP.PLAYLIST_PLAY)));
 
         HBox hBox = new HBox(15.0);
 
