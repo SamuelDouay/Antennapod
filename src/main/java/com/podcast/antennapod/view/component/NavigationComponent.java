@@ -7,7 +7,9 @@ import javafx.geometry.Pos;
 import javafx.scene.Node;
 import javafx.scene.control.Label;
 import javafx.scene.image.ImageView;
-import javafx.scene.layout.*;
+import javafx.scene.layout.HBox;
+import javafx.scene.layout.Priority;
+import javafx.scene.layout.Region;
 
 public final class NavigationComponent {
     // Constants
@@ -29,7 +31,7 @@ public final class NavigationComponent {
             return createNavigationBase(imageView, item.getTitle(), item.getNumber());
 
         } else {
-            item.getIcon().setIconSize((int)ICON_SIZE);
+            item.getIcon().setIconSize((int) ICON_SIZE);
             item.getIcon().setIconColor(ColorThemeConstants.getAt02());
             return createNavigationBase(item.getIcon(), item.getTitle(), item.getNumber());
         }
@@ -40,10 +42,6 @@ public final class NavigationComponent {
         Label titleLabel = new Label(title);
         titleLabel.setMaxWidth(TITLE_MAX_WIDTH);
         titleLabel.setTextFill(ColorThemeConstants.getAt02());
-
-        // Create number label
-        Label numberLabel = new Label(String.valueOf(number));
-        numberLabel.setTextFill(ColorThemeConstants.getAt08());
 
         // Create icon and title container
         HBox iconTitleBox = new HBox(SPACING, graphic, titleLabel);
@@ -60,8 +58,14 @@ public final class NavigationComponent {
         mainBox.setPadding(PADDING);
         mainBox.setMaxWidth(MAX_WIDTH);
         mainBox.setAlignment(Pos.CENTER);
-        mainBox.getChildren().addAll(iconTitleBox, spacer, numberLabel);
 
+        if (number != 0) {
+            Label numberLabel = new Label(String.valueOf(number));
+            numberLabel.setTextFill(ColorThemeConstants.getAt08());
+            mainBox.getChildren().addAll(iconTitleBox, spacer, numberLabel);
+        } else {
+            mainBox.getChildren().addAll(iconTitleBox, spacer);
+        }
         mainBox.setUserData(graphic);
 
         return mainBox;

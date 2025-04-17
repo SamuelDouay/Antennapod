@@ -9,11 +9,27 @@ public class NavigationItem {
     private String imageUrl;
     private final boolean separator;
 
+    public NavigationItem(FontIcon icon, String title) {
+        this.icon = icon;
+        this.title = title;
+        this.number = 0;
+        this.imageUrl = null;
+        this.separator = false;
+    }
+
     public NavigationItem(FontIcon icon, String title, int number) {
         this.icon = icon;
         this.title = title;
         this.number = number;
         this.imageUrl = null;
+        this.separator = false;
+    }
+
+    public NavigationItem(String imageUrl, String title) {
+        this.imageUrl = imageUrl;
+        this.title = title;
+        this.number = 0;
+        this.icon = null;
         this.separator = false;
     }
 
