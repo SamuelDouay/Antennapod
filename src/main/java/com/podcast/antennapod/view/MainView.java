@@ -5,6 +5,8 @@ import com.podcast.antennapod.view.component.ButtonComponent;
 import com.podcast.antennapod.view.component.PodcastComponent;
 import com.podcast.antennapod.view.container.navigation.NavigationContainer;
 import com.podcast.antennapod.view.item.NavigationItem;
+import com.podcast.antennapod.view.util.BadgeType;
+import com.podcast.antennapod.view.util.ColorThemeConstants;
 import com.podcast.antennapod.view.util.TypeButton;
 import javafx.application.Application;
 import javafx.geometry.Insets;
@@ -37,7 +39,8 @@ public class MainView extends Application {
         menu.getChildren().add(listView);
 
         Label currentSelectionLabel = new Label("Sélection actuelle : Accueil");
-        currentSelectionLabel.setFont(new Font(16));
+        currentSelectionLabel.setFont(new Font(36));
+        currentSelectionLabel.setTextFill(ColorThemeConstants.getAt01());
         currentSelectionLabel.setPadding(new Insets(10, 0, 10, 0));
 
         // Ajouter un écouteur pour mettre à jour le label lors de la sélection
@@ -88,10 +91,27 @@ public class MainView extends Application {
         hBox1.getChildren().add(ButtonComponent.createButton(TypeButton.SECONDARY.name(), TypeButton.SECONDARY));
         hBox1.getChildren().add(ButtonComponent.createButton(TypeButton.TERTIARY.name(), TypeButton.TERTIARY));
 
-        hBox1.getChildren().add(BadgeComponent.getBadgeIconRed(new FontIcon(MaterialDesignP.PLUS)));
-        hBox1.getChildren().add(BadgeComponent.getBadgeIconBlue(new FontIcon(MaterialDesignI.INBOX)));
-        hBox1.getChildren().add(BadgeComponent.getBadgeIconGreen(new FontIcon(MaterialDesignI.INBOX)));
-        hBox1.getChildren().add(BadgeComponent.getBadgeIconPurple(new FontIcon(MaterialDesignP.PLAYLIST_PLAY)));
+        hBox1.getChildren().add(BadgeComponent.createBadge(new FontIcon(MaterialDesignP.PLUS), BadgeType.RED));
+        hBox1.getChildren().add(BadgeComponent.createBadge(new FontIcon(MaterialDesignI.INBOX), BadgeType.BLUE));
+        hBox1.getChildren().add(BadgeComponent.createBadge(new FontIcon(MaterialDesignI.INBOX), BadgeType.GREEN));
+        hBox1.getChildren().add(BadgeComponent.createBadge(new FontIcon(MaterialDesignP.PLAYLIST_PLAY), BadgeType.PURPLE));
+
+        hBox1.getChildren().add(BadgeComponent.createBadge("PLUS", new FontIcon(MaterialDesignP.PLUS), BadgeType.RED));
+        hBox1.getChildren().add(BadgeComponent.createBadge("MAIL", new FontIcon(MaterialDesignI.INBOX), BadgeType.BLUE));
+        hBox1.getChildren().add(BadgeComponent.createBadge("MAIL", new FontIcon(MaterialDesignI.INBOX), BadgeType.GREEN));
+        hBox1.getChildren().add(BadgeComponent.createBadge("PLAY", new FontIcon(MaterialDesignP.PLAYLIST_PLAY), BadgeType.PURPLE));
+
+        HBox hBox2 = new HBox(15.0);
+
+
+        hBox2.getChildren().add(ButtonComponent.createButton(new FontIcon(MaterialDesignP.PLAY), TypeButton.PRIMARY));
+        hBox2.getChildren().add(ButtonComponent.createButton(new FontIcon(MaterialDesignP.PLAY), TypeButton.SECONDARY));
+        hBox2.getChildren().add(ButtonComponent.createButton(new FontIcon(MaterialDesignP.PLAY), TypeButton.TERTIARY));
+
+        hBox2.getChildren().add(ButtonComponent.createButton("PLAY", new FontIcon(MaterialDesignP.PLAY), TypeButton.PRIMARY));
+        hBox2.getChildren().add(ButtonComponent.createButton("PLAY", new FontIcon(MaterialDesignP.PLAY), TypeButton.SECONDARY));
+        hBox2.getChildren().add(ButtonComponent.createButton("PLAY", new FontIcon(MaterialDesignP.PLAY), TypeButton.TERTIARY));
+
 
         HBox hBox = new HBox(15.0);
 
@@ -102,13 +122,14 @@ public class MainView extends Application {
         hBox.getChildren().add(PodcastComponent.getImage(String.valueOf(MainView.class.getResource("/images/others/zerl.jpg"))));
 
 
-        box.getChildren().add(BadgeComponent.getBadgeGreen("Download"));
-        box.getChildren().add(BadgeComponent.getBadgeRed("Sans media"));
-        box.getChildren().add(BadgeComponent.getBadgeBlue("Téléchargé"));
-        box.getChildren().add(BadgeComponent.getBadgePurple("Téléchargé"));
+        box.getChildren().add(BadgeComponent.createBadge("Download", BadgeType.GREEN));
+        box.getChildren().add(BadgeComponent.createBadge("Sans media", BadgeType.RED));
+        box.getChildren().add(BadgeComponent.createBadge("Téléchargé", BadgeType.BLUE));
+        box.getChildren().add(BadgeComponent.createBadge("Téléchargé", BadgeType.PURPLE));
 
         box.getChildren().add(hBox);
         box.getChildren().add(hBox1);
+        box.getChildren().add(hBox2);
 
         return box;
     }

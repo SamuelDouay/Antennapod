@@ -6,7 +6,7 @@ import javafx.scene.layout.CornerRadii;
 
 public class Constant {
 
-    private Constant(){
+    private Constant() {
 
     }
 
@@ -22,4 +22,12 @@ public class Constant {
     public static final Insets BADGE_DEFAULT_PADDING = new Insets(4.0, 16.0, 4.0, 16.0);
     public static final Insets BADGE_ICON_PADDING = new Insets(4.0);
     public static final int BADGE_ICON_SIZE = 15;
+
+    public static final int BUTTON_ICON_SIZE = 16;
+    public static final int ICON_SIZE = 20;
+    public static final int ICON_BUTTON_SIZE = 40;
+    public static final Insets ICON_BUTTON_PADDING = new Insets(8);
+    public static final CornerRadii CIRCLE_RADII = new CornerRadii(20);
+
+    public static final int BADGE_TEXT_ICON_SIZE = 12;
 }
