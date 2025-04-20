@@ -28,52 +28,6 @@ import org.kordamp.ikonli.materialdesign2.MaterialDesignP;
 public class MainView extends Application {
     public static final Logger logger = LogManager.getLogger(MainView.class);
 
-    @Override
-    public void start(Stage stage) {
-        AnchorPane root = new AnchorPane();
-
-        VBox menu = new VBox();
-        menu.setPrefWidth(240.0);
-
-        ListView<NavigationItem> listView = NavigationContainer.createMenu();
-        menu.getChildren().add(listView);
-
-        Label currentSelectionLabel = new Label("Sélection actuelle : Accueil");
-        currentSelectionLabel.setFont(new Font(36));
-        currentSelectionLabel.setTextFill(ColorThemeConstants.getAt01());
-        currentSelectionLabel.setPadding(new Insets(10, 0, 10, 0));
-
-        // Ajouter un écouteur pour mettre à jour le label lors de la sélection
-        listView.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> {
-            if (newValue != null && newValue.getTitle() != null) {
-                currentSelectionLabel.setText("Sélection actuelle : " + newValue.getTitle());
-            }
-        });
-
-        AnchorPane.setLeftAnchor(menu, 0.0);
-        AnchorPane.setTopAnchor(menu, 0.0);
-
-        Node main = mainContent();
-
-        // Positionner le label en haut du contenu principal
-        VBox mainContainer = new VBox(10);
-        mainContainer.getChildren().addAll(currentSelectionLabel, main);
-        mainContainer.setPadding(new Insets(10));
-
-        AnchorPane.setLeftAnchor(mainContainer, 240.0);
-        AnchorPane.setTopAnchor(mainContainer, 0.0);
-        AnchorPane.setRightAnchor(mainContainer, 0.0);
-
-        root.getChildren().addAll(menu, mainContainer);
-
-        stage.setScene(new Scene(root, 320, 240));
-
-        stage.setTitle("AntennaPod");
-        stage.setMaximized(true);
-        stage.show();
-        logger.info("Interface utilisateur initialisée avec succès");
-    }
-
     public static void main(String[] args) {
         logger.info("Initialisation de l'interface utilisateur principale (MainView)");
         launch(args);
@@ -121,6 +75,14 @@ public class MainView extends Application {
         hBox.getChildren().add(PodcastComponent.getImage(String.valueOf(MainView.class.getResource("/images/others/underscore.jpeg"))));
         hBox.getChildren().add(PodcastComponent.getImage(String.valueOf(MainView.class.getResource("/images/others/zerl.jpg"))));
 
+        HBox hBox3 = new HBox(15.0);
+
+        hBox3.getChildren().add(PodcastComponent.getPodcastTile(String.valueOf(MainView.class.getResource("/images/others/ex.jpeg")), "EX...", 10));
+        hBox3.getChildren().add(PodcastComponent.getPodcastTile(String.valueOf(MainView.class.getResource("/images/others/heure_du_monde.png")), "L'heure du monde", 0));
+        hBox3.getChildren().add(PodcastComponent.getPodcastTile(String.valueOf(MainView.class.getResource("/images/others/small_talk.jpg")), "Small Talk", 125));
+        hBox3.getChildren().add(PodcastComponent.getPodcastTile(String.valueOf(MainView.class.getResource("/images/others/underscore.jpeg")), "Undersore", 25));
+        hBox3.getChildren().add(PodcastComponent.getPodcastTile(String.valueOf(MainView.class.getResource("/images/others/zerl.jpg")), "Zack en roue libre", 5));
+
 
         box.getChildren().add(BadgeComponent.createBadge("Download", BadgeType.GREEN));
         box.getChildren().add(BadgeComponent.createBadge("Sans media", BadgeType.RED));
@@ -130,7 +92,54 @@ public class MainView extends Application {
         box.getChildren().add(hBox);
         box.getChildren().add(hBox1);
         box.getChildren().add(hBox2);
+        box.getChildren().add(hBox3);
 
         return box;
+    }
+
+    @Override
+    public void start(Stage stage) {
+        AnchorPane root = new AnchorPane();
+
+        VBox menu = new VBox();
+        menu.setPrefWidth(240.0);
+
+        ListView<NavigationItem> listView = NavigationContainer.createMenu();
+        menu.getChildren().add(listView);
+
+        Label currentSelectionLabel = new Label("Sélection actuelle : Accueil");
+        currentSelectionLabel.setFont(new Font(36));
+        currentSelectionLabel.setTextFill(ColorThemeConstants.getAt01());
+        currentSelectionLabel.setPadding(new Insets(10, 0, 10, 0));
+
+        // Ajouter un écouteur pour mettre à jour le label lors de la sélection
+        listView.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> {
+            if (newValue != null && newValue.getTitle() != null) {
+                currentSelectionLabel.setText("Sélection actuelle : " + newValue.getTitle());
+            }
+        });
+
+        AnchorPane.setLeftAnchor(menu, 0.0);
+        AnchorPane.setTopAnchor(menu, 0.0);
+
+        Node main = mainContent();
+
+        // Positionner le label en haut du contenu principal
+        VBox mainContainer = new VBox(10);
+        mainContainer.getChildren().addAll(currentSelectionLabel, main);
+        mainContainer.setPadding(new Insets(10));
+
+        AnchorPane.setLeftAnchor(mainContainer, 240.0);
+        AnchorPane.setTopAnchor(mainContainer, 0.0);
+        AnchorPane.setRightAnchor(mainContainer, 0.0);
+
+        root.getChildren().addAll(menu, mainContainer);
+
+        stage.setScene(new Scene(root, 320, 240));
+
+        stage.setTitle("AntennaPod");
+        stage.setMaximized(true);
+        stage.show();
+        logger.info("Interface utilisateur initialisée avec succès");
     }
 }

@@ -53,7 +53,7 @@ public class BadgeComponent {
         // Ajouter une icône si fournie
         if (icon != null) {
             icon.setIconColor(type.getTextColor());
-            icon.setIconSize(BADGE_TEXT_ICON_SIZE);
+            icon.setIconSize(BADGE_ICON_SIZE);
             label.setGraphic(icon);
             label.setGraphicTextGap(5);
         }
