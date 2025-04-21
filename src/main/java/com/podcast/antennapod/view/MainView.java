@@ -35,7 +35,7 @@ public class MainView extends Application {
     }
 
     private static Node mainContent() {
-        VBox box = new VBox(5.0);
+        VBox box = new VBox(10.0);
 
         box.setPadding(new Insets(4.0, 16.0, 4.0, 16.0));
 
@@ -84,15 +84,18 @@ public class MainView extends Application {
         hBox3.getChildren().add(PodcastComponent.createPodcastCard(String.valueOf(MainView.class.getResource("/images/others/zerl.jpg")), "Zack en roue libre", 5));
 
 
-        box.getChildren().add(BadgeComponent.createBadge("Download", BadgeType.GREEN));
-        box.getChildren().add(BadgeComponent.createBadge("Sans media", BadgeType.RED));
-        box.getChildren().add(BadgeComponent.createBadge("Téléchargé", BadgeType.BLUE));
-        box.getChildren().add(BadgeComponent.createBadge("Téléchargé", BadgeType.PURPLE));
+        HBox hBox4 = new HBox(15.0);
+
+        hBox4.getChildren().add(BadgeComponent.createBadge("Download", BadgeType.GREEN));
+        hBox4.getChildren().add(BadgeComponent.createBadge("Sans media", BadgeType.RED));
+        hBox4.getChildren().add(BadgeComponent.createBadge("Téléchargé", BadgeType.BLUE));
+        hBox4.getChildren().add(BadgeComponent.createBadge("Téléchargé", BadgeType.PURPLE));
 
         box.getChildren().add(hBox);
         box.getChildren().add(hBox1);
         box.getChildren().add(hBox2);
         box.getChildren().add(hBox3);
+        box.getChildren().add(hBox4);
 
         return box;
     }
