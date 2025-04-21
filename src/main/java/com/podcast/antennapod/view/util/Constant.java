@@ -22,6 +22,11 @@ public class Constant {
     public static final int ICON_BUTTON_SIZE = 40;
     public static final Insets ICON_BUTTON_PADDING = new Insets(8);
     public static final CornerRadii CIRCLE_RADII = new CornerRadii(20);
+
+
+    public static final double PODCAST_CARD_DEFAULT_IMAGE_WIDTH_HEIGHT = 140.0;
+    public static final double PODCAST_CARD_DEFAULT_PADDING = 12.0;
+
     private Constant() {
 
     }

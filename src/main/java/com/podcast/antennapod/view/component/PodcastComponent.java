@@ -1,6 +1,7 @@
 package com.podcast.antennapod.view.component;
 
 import com.podcast.antennapod.view.util.ColorThemeConstants;
+import com.podcast.antennapod.view.util.Constant;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Node;
@@ -28,50 +29,62 @@ public class PodcastComponent {
     }
 
     private static Node createCard(String imageUrl, int episodeCount, String title) {
-        double size = 165.0;
-        StackPane stackPane = createContainer(size);
+        // Créer le conteneur principal
+        StackPane stackPane = new StackPane();
 
-        // Créer l'arrière-plan flou
+        // Configurer le padding autour du contenu
+        stackPane.setPadding(new Insets(Constant.PODCAST_CARD_DEFAULT_PADDING));
+
+        // Charger l'image à l'avance pour obtenir ses dimensions
         Image image = new Image(imageUrl);
 
-        stackPane.setAlignment(Pos.CENTER);
-        stackPane.setPadding(new Insets(12.5));
+        // Créer le contenu de la carte (image + titre éventuel)
+        VBox contentBox = getContentCard(title, image);
 
-        stackPane.getChildren().add(getBlurredBackground(image, size));
-        stackPane.getChildren().add(getColorOverlay(size));
-        stackPane.getChildren().add(getContentCard(title, image));
+        // Déterminer les dimensions de la carte basées sur le contenu
+        double contentWidth = Constant.PODCAST_CARD_DEFAULT_IMAGE_WIDTH_HEIGHT;
+        double contentHeight = Constant.PODCAST_CARD_DEFAULT_IMAGE_WIDTH_HEIGHT + (title != null ? 25.0 : 0); // hauteur supplémentaire pour le titre
+
+        // Configurer les dimensions du conteneur basées sur le contenu
+        stackPane.setMinWidth(contentWidth + 2 * Constant.PODCAST_CARD_DEFAULT_PADDING);
+        stackPane.setMinHeight(contentHeight + 2 * Constant.PODCAST_CARD_DEFAULT_PADDING);
+        stackPane.setPrefWidth(contentWidth + 2 * Constant.PODCAST_CARD_DEFAULT_PADDING);
+        stackPane.setPrefHeight(contentHeight + 2 * Constant.PODCAST_CARD_DEFAULT_PADDING);
+
+        // Créer un clip rectangulaire pour le conteneur
+        Rectangle clip = new Rectangle(
+                contentWidth + 2 * Constant.PODCAST_CARD_DEFAULT_PADDING,
+                contentHeight + 2 * Constant.PODCAST_CARD_DEFAULT_PADDING
+        );
+        stackPane.setClip(clip);
+
+        // Ajouter les éléments dans l'ordre d'empilement correct
+        stackPane.getChildren().add(getBlurredBackground(image, contentWidth, contentHeight));
+        stackPane.getChildren().add(getColorOverlay(contentWidth, contentHeight));
+        stackPane.getChildren().add(contentBox);
 
         if (episodeCount > 0) {
             stackPane.getChildren().add(createEpisodeCountBadge(episodeCount));
         }
 
-        return stackPane;
-    }
-
-    private static StackPane createContainer(double size) {
-        StackPane stackPane = new StackPane();
-
-        stackPane.setPrefSize(size, size);
-        stackPane.setMinSize(size, size);
-        stackPane.setMaxSize(size, size);
-
-        // Créer un clip pour contenir les effets dans les limites du stackPane
-        Rectangle clip = new Rectangle(size, size);
-        stackPane.setClip(clip);
+        stackPane.setAlignment(Pos.CENTER);
 
         return stackPane;
     }
 
-    private static ImageView getBlurredBackground(Image image, double size) {
-         ImageView blurredBackground = new ImageView(image);
+    private static ImageView getBlurredBackground(Image image, double width, double height) {
+        ImageView blurredBackground = new ImageView(image);
+
+        double totalWidth = width + 2 * Constant.PODCAST_CARD_DEFAULT_PADDING;
+        double totalHeight = height + 2 * Constant.PODCAST_CARD_DEFAULT_PADDING;
 
         double scaleFactor = 1.2; // Agrandir légèrement l'image d'arrière-plan
-        double expandedSize = size * scaleFactor;
-        blurredBackground.setFitHeight(expandedSize);
-        blurredBackground.setFitWidth(expandedSize);
+        blurredBackground.setFitWidth(totalWidth * scaleFactor);
+        blurredBackground.setFitHeight(totalHeight * scaleFactor);
 
-        blurredBackground.setTranslateX((expandedSize - size) / -2);
-        blurredBackground.setTranslateY((expandedSize - size) / -2);
+        // Centrer l'image agrandie
+        blurredBackground.setTranslateX((totalWidth * scaleFactor - totalWidth) / -2);
+        blurredBackground.setTranslateY((totalHeight * scaleFactor - totalHeight) / -2);
 
         blurredBackground.setEffect(new BoxBlur(200, 200, 5));
 
@@ -79,39 +92,41 @@ public class PodcastComponent {
     }
 
     private static VBox getContentCard(String title, Image image) {
-        VBox vBox = new VBox();
+        VBox vBox = new VBox(5); // Espacement vertical entre l'image et le titre
 
         vBox.getChildren().add(getImageCard(image));
-        if (title != null){
+        if (title != null) {
             vBox.getChildren().add(getTitleCard(title));
         }
-        vBox.setAlignment(Pos.CENTER);
 
-
+        vBox.setAlignment(Pos.BASELINE_LEFT);
         return vBox;
     }
 
     private static ImageView getImageCard(Image image) {
         ImageView contentImage = new ImageView(image);
-        contentImage.setFitWidth(140.0);
-        contentImage.setFitHeight(140.0);
+        contentImage.setFitWidth(Constant.PODCAST_CARD_DEFAULT_IMAGE_WIDTH_HEIGHT);
+        contentImage.setFitHeight(Constant.PODCAST_CARD_DEFAULT_IMAGE_WIDTH_HEIGHT);
         contentImage.setPreserveRatio(true);
         return contentImage;
     }
 
     private static Label getTitleCard(String title) {
         Label titleLabel = new Label(title);
-            titleLabel.setTextFill(Color.WHITE);
-            titleLabel.setFont(Font.font("System", FontWeight.BOLD, 16));
-            titleLabel.setWrapText(true);
-            titleLabel.setMaxWidth(165.0);
-            titleLabel.setAlignment(Pos.BASELINE_LEFT);
-            return titleLabel;
+        titleLabel.setTextFill(Color.WHITE);
+        titleLabel.setFont(Font.font("System", FontWeight.BOLD, 14));
+        titleLabel.setWrapText(true);
+        titleLabel.setMaxWidth(Constant.PODCAST_CARD_DEFAULT_IMAGE_WIDTH_HEIGHT);
+        titleLabel.setAlignment(Pos.BASELINE_LEFT);
+        return titleLabel;
     }
 
-    private static Rectangle getColorOverlay(double size) {
-        Rectangle colorOverlay = new Rectangle(size, size);
-        colorOverlay.setFill(Color.hsb(120.0, 0.5, 0.4, 0.05)); // Augmenter l'opacité à 0.25
+    private static Rectangle getColorOverlay(double width, double height) {
+        Rectangle colorOverlay = new Rectangle(
+                width + 2 * Constant.PODCAST_CARD_DEFAULT_PADDING,
+                height + 2 * Constant.PODCAST_CARD_DEFAULT_PADDING
+        );
+        colorOverlay.setFill(Color.hsb(120.0, 0.5, 0.4, 0.05));
         return colorOverlay;
     }
 
@@ -131,7 +146,7 @@ public class PodcastComponent {
     private static HBox getEpisodeCountBox() {
         HBox box = new HBox();
         box.setBackground(new Background(new BackgroundFill(ColorThemeConstants.getIc12(), new CornerRadii(2.0), Insets.EMPTY)));
-        box.setPadding(new Insets(4.0,16.0,4.0,16.0));
+        box.setPadding(new Insets(4.0, 16.0, 4.0, 16.0));
         box.setAlignment(Pos.CENTER);
         box.setMaxSize(Region.USE_PREF_SIZE, Region.USE_PREF_SIZE);
         box.setMinSize(Region.USE_PREF_SIZE, Region.USE_PREF_SIZE);
