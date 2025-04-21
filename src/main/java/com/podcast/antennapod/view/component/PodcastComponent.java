@@ -65,72 +65,77 @@ public class PodcastComponent {
     private static ImageView getBlurredBackground(Image image, double size) {
          ImageView blurredBackground = new ImageView(image);
 
-        // Redimensionnement avec une marge pour éviter les bords blancs après le blur
         double scaleFactor = 1.2; // Agrandir légèrement l'image d'arrière-plan
         double expandedSize = size * scaleFactor;
         blurredBackground.setFitHeight(expandedSize);
         blurredBackground.setFitWidth(expandedSize);
 
-        // Centrer l'image agrandie
         blurredBackground.setTranslateX((expandedSize - size) / -2);
         blurredBackground.setTranslateY((expandedSize - size) / -2);
 
-        // Appliquer un flou plus intense
-        blurredBackground.setEffect(new BoxBlur(60, 60, 5));
+        blurredBackground.setEffect(new BoxBlur(200, 200, 5));
 
         return blurredBackground;
     }
 
     private static VBox getContentCard(String title, Image image) {
-        // Créer le contenu (image principale)
+        VBox vBox = new VBox();
+
+        vBox.getChildren().add(getImageCard(image));
+        if (title != null){
+            vBox.getChildren().add(getTitleCard(title));
+        }
+        vBox.setAlignment(Pos.CENTER);
+
+
+        return vBox;
+    }
+
+    private static ImageView getImageCard(Image image) {
         ImageView contentImage = new ImageView(image);
         contentImage.setFitWidth(140.0);
         contentImage.setFitHeight(140.0);
         contentImage.setPreserveRatio(true);
+        return contentImage;
+    }
 
-        // Conteneur pour l'image
-        VBox vBox = new VBox();
-        vBox.getChildren().add(contentImage);
-        vBox.setAlignment(Pos.CENTER);
-
-        if (title != null ) {
-            Label titleLabel = new Label(title);
+    private static Label getTitleCard(String title) {
+        Label titleLabel = new Label(title);
             titleLabel.setTextFill(Color.WHITE);
             titleLabel.setFont(Font.font("System", FontWeight.BOLD, 16));
             titleLabel.setWrapText(true);
             titleLabel.setMaxWidth(165.0);
             titleLabel.setAlignment(Pos.BASELINE_LEFT);
-            vBox.getChildren().add(titleLabel);
-        }
-        return vBox;
+            return titleLabel;
     }
 
     private static Rectangle getColorOverlay(double size) {
-        // Superposition d'une couleur semi-transparente (filtre coloré plus intense)
         Rectangle colorOverlay = new Rectangle(size, size);
-        colorOverlay.setFill(Color.hsb(120.0, 0.5, 0.4, 0.10)); // Augmenter l'opacité à 0.25
+        colorOverlay.setFill(Color.hsb(120.0, 0.5, 0.4, 0.05)); // Augmenter l'opacité à 0.25
         return colorOverlay;
     }
 
     private static Node createEpisodeCountBadge(int count) {
-
-        HBox box = new HBox();
-        box.setBackground(new Background(new BackgroundFill(ColorThemeConstants.getIc12(), new CornerRadii(2.0), Insets.EMPTY)));
-
-        // Create count label
         Label countLabel = new Label(String.valueOf(count));
         countLabel.setFont(Font.font("System", FontWeight.MEDIUM, 12));
         countLabel.setTextFill(ColorThemeConstants.getAt08());
 
+        HBox box = getEpisodeCountBox();
+        box.getChildren().add(countLabel);
+
+        StackPane.setAlignment(box, Pos.TOP_LEFT);
+        StackPane.setMargin(box, new Insets(10, 0, 0, 10));
+        return box;
+    }
+
+    private static HBox getEpisodeCountBox() {
+        HBox box = new HBox();
+        box.setBackground(new Background(new BackgroundFill(ColorThemeConstants.getIc12(), new CornerRadii(2.0), Insets.EMPTY)));
         box.setPadding(new Insets(4.0,16.0,4.0,16.0));
         box.setAlignment(Pos.CENTER);
         box.setMaxSize(Region.USE_PREF_SIZE, Region.USE_PREF_SIZE);
         box.setMinSize(Region.USE_PREF_SIZE, Region.USE_PREF_SIZE);
         box.setBorder(new Border(new BorderStroke(ColorThemeConstants.getAt08(), BorderStrokeStyle.SOLID, new CornerRadii(2.0), BorderStroke.DEFAULT_WIDTHS)));
-        box.getChildren().add(countLabel);
-
-        StackPane.setAlignment(box, Pos.TOP_LEFT);
-        StackPane.setMargin(box, new Insets(10, 0, 0, 10));
         return box;
     }
 }
