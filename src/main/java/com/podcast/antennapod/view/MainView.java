@@ -102,6 +102,7 @@ public class MainView extends Application {
 
     @Override
     public void start(Stage stage) {
+        //ColorThemeConstants.setTheme(ThemeType.DARK);
         AnchorPane root = new AnchorPane();
 
         VBox menu = new VBox();
@@ -112,7 +113,7 @@ public class MainView extends Application {
 
         Label currentSelectionLabel = new Label("Sélection actuelle : Accueil");
         currentSelectionLabel.setFont(new Font(36));
-        currentSelectionLabel.setTextFill(ColorThemeConstants.getAt01());
+        currentSelectionLabel.setTextFill(ColorThemeConstants.getMain950());
         currentSelectionLabel.setPadding(new Insets(10, 0, 10, 0));
 
         // Ajouter un écouteur pour mettre à jour le label lors de la sélection

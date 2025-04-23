@@ -16,7 +16,7 @@ import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
 
 public class PodcastComponent {
-    private PodcastComponent(){
+    private PodcastComponent() {
         // Private constructor to prevent instantiation
     }
 
@@ -133,7 +133,7 @@ public class PodcastComponent {
     private static Node createEpisodeCountBadge(int count) {
         Label countLabel = new Label(String.valueOf(count));
         countLabel.setFont(Font.font("System", FontWeight.MEDIUM, 12));
-        countLabel.setTextFill(ColorThemeConstants.getAt08());
+        countLabel.setTextFill(ColorThemeConstants.getMain900());
 
         HBox box = getEpisodeCountBox();
         box.getChildren().add(countLabel);
@@ -145,12 +145,12 @@ public class PodcastComponent {
 
     private static HBox getEpisodeCountBox() {
         HBox box = new HBox();
-        box.setBackground(new Background(new BackgroundFill(ColorThemeConstants.getIc12(), new CornerRadii(2.0), Insets.EMPTY)));
-        box.setPadding(new Insets(4.0, 16.0, 4.0, 16.0));
+        box.setBackground(new Background(new BackgroundFill(ColorThemeConstants.getMain100(), new CornerRadii(2.0), Insets.EMPTY)));
+        box.setPadding(new Insets(2.0, 7.0, 2.0, 7.0));
         box.setAlignment(Pos.CENTER);
         box.setMaxSize(Region.USE_PREF_SIZE, Region.USE_PREF_SIZE);
         box.setMinSize(Region.USE_PREF_SIZE, Region.USE_PREF_SIZE);
-        box.setBorder(new Border(new BorderStroke(ColorThemeConstants.getAt08(), BorderStrokeStyle.SOLID, new CornerRadii(2.0), BorderStroke.DEFAULT_WIDTHS)));
+        box.setBorder(null);
         return box;
     }
 }

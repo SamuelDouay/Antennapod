@@ -61,14 +61,14 @@ public class NavigationCellItem extends ListCell<NavigationItem> {
     private void updateCellAppearance(boolean selected) {
         if (selected) {
             cellContent.setBackground(new Background(new BackgroundFill(
-                    ColorThemeConstants.getIc07(),
+                    ColorThemeConstants.getMain500(),
                     CORNER_RADII,
                     Insets.EMPTY)));
-            updateComponentColors(ColorThemeConstants.getAt08());
+            updateComponentColors(ColorThemeConstants.getMain950());
         } else {
             cellContent.setBackground(null);
 
-            updateComponentColors(ColorThemeConstants.getAt02());
+            updateComponentColors(ColorThemeConstants.getGrey800());
         }
     }
 
@@ -76,22 +76,22 @@ public class NavigationCellItem extends ListCell<NavigationItem> {
         cellContent.setOnMouseEntered(e -> {
             if (!isSelected()) {
                 cellContent.setBackground(new Background(new BackgroundFill(
-                        ColorThemeConstants.getIc07(),
+                        ColorThemeConstants.getMain500(),
                         CORNER_RADII,
                         Insets.EMPTY)));
-                updateComponentColors(ColorThemeConstants.getAt08());
+                updateComponentColors(ColorThemeConstants.getMain950());
             }
         });
 
         cellContent.setOnMouseExited(e -> {
             if (!isSelected()) {
                 cellContent.setBackground(null);
-                updateComponentColors(ColorThemeConstants.getAt02());
+                updateComponentColors(ColorThemeConstants.getGrey800());
             }
         });
 
         cellContent.setOnMousePressed(e -> cellContent.setBackground(new Background(new BackgroundFill(
-                ColorThemeConstants.getIc12(),
+                ColorThemeConstants.getMain100(),
                 CORNER_RADII,
                 Insets.EMPTY))));
 
@@ -99,7 +99,7 @@ public class NavigationCellItem extends ListCell<NavigationItem> {
             if (!isSelected()) {
                 if (cellContent.isHover()) {
                     cellContent.setBackground(new Background(new BackgroundFill(
-                            ColorThemeConstants.getIc07(),
+                            ColorThemeConstants.getMain100(),
                             CORNER_RADII,
                             Insets.EMPTY)));
                 } else {

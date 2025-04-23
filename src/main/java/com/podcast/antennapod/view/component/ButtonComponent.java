@@ -70,19 +70,19 @@ public class ButtonComponent {
             case PRIMARY:
                 createPrimaryButton(button);
                 if (icon != null) {
-                    icon.setIconColor(ColorThemeConstants.getIc06());
+                    icon.setIconColor(ColorThemeConstants.getMain950());
                 }
                 break;
             case SECONDARY:
                 createSecondaryButton(button);
                 if (icon != null) {
-                    icon.setIconColor(ColorThemeConstants.getCs07());
+                    icon.setIconColor(ColorThemeConstants.getMain700());
                 }
                 break;
             case TERTIARY:
                 createTertiaryButton(button);
                 if (icon != null) {
-                    icon.setIconColor(ColorThemeConstants.getAt08());
+                    icon.setIconColor(ColorThemeConstants.getMain700());
                 }
                 break;
         }
@@ -104,38 +104,38 @@ public class ButtonComponent {
 
     private static void createPrimaryButton(Button button) {
         // Configuration initiale
-        button.textFillProperty().set(ColorThemeConstants.getIc06());
-        button.setBackground(createBackground(ColorThemeConstants.getCs08()));
+        button.textFillProperty().set(ColorThemeConstants.getMain950());
+        button.setBackground(createBackground(ColorThemeConstants.getMain500()));
         button.setBorder(null);
         button.setPadding(PRIMARY_TERTIARY_PADDING);
 
         // Événements de souris
-        button.setOnMouseEntered(e -> button.setBackground(createBackground(ColorThemeConstants.getCs07())));
-        button.setOnMouseExited(e -> button.setBackground(createBackground(ColorThemeConstants.getCs08())));
-        button.setOnMousePressed(e -> button.setBackground(createBackground(ColorThemeConstants.getCs06())));
+        button.setOnMouseEntered(e -> button.setBackground(createBackground(ColorThemeConstants.getMain400())));
+        button.setOnMouseExited(e -> button.setBackground(createBackground(ColorThemeConstants.getMain500())));
+        button.setOnMousePressed(e -> button.setBackground(createBackground(ColorThemeConstants.getMain600())));
         button.setOnMouseReleased(e -> {
             if (button.isHover()) {
-                button.setBackground(createBackground(ColorThemeConstants.getCs07()));
+                button.setBackground(createBackground(ColorThemeConstants.getMain400()));
             } else {
-                button.setBackground(createBackground(ColorThemeConstants.getCs08()));
+                button.setBackground(createBackground(ColorThemeConstants.getMain500()));
             }
         });
     }
 
     private static void createSecondaryButton(Button button) {
         // Configuration initiale
-        button.textFillProperty().set(ColorThemeConstants.getCs07());
+        button.textFillProperty().set(ColorThemeConstants.getMain700());
         button.setBackground(null);
         button.setPadding(SECONDARY_PADDING);
         button.setBorder(createBorderSecondaryButton());
 
         // Événements de souris
-        button.setOnMouseEntered(e -> button.setBackground(createBackground(ColorThemeConstants.getIc10())));
+        button.setOnMouseEntered(e -> button.setBackground(createBackground(ColorThemeConstants.getMain050())));
         button.setOnMouseExited(e -> button.setBackground(null));
-        button.setOnMousePressed(e -> button.setBackground(createBackground(ColorThemeConstants.getIc11())));
+        button.setOnMousePressed(e -> button.setBackground(createBackground(ColorThemeConstants.getMain100())));
         button.setOnMouseReleased(e -> {
             if (button.isHover()) {
-                button.setBackground(createBackground(ColorThemeConstants.getIc10()));
+                button.setBackground(createBackground(ColorThemeConstants.getMain050()));
             } else {
                 button.setBackground(null);
             }
@@ -144,18 +144,18 @@ public class ButtonComponent {
 
     private static void createTertiaryButton(Button button) {
         // Configuration initiale
-        button.textFillProperty().set(ColorThemeConstants.getAt08());
+        button.textFillProperty().set(ColorThemeConstants.getMain700());
         button.setBackground(null);
         button.setBorder(null);
         button.setPadding(PRIMARY_TERTIARY_PADDING);
 
         // Événements de souris
-        button.setOnMouseEntered(e -> button.setBackground(createBackground(ColorThemeConstants.getIc10())));
+        button.setOnMouseEntered(e -> button.setBackground(createBackground(ColorThemeConstants.getMain050())));
         button.setOnMouseExited(e -> button.setBackground(null));
-        button.setOnMousePressed(e -> button.setBackground(createBackground(ColorThemeConstants.getIc11())));
+        button.setOnMousePressed(e -> button.setBackground(createBackground(ColorThemeConstants.getMain100())));
         button.setOnMouseReleased(e -> {
             if (button.isHover()) {
-                button.setBackground(createBackground(ColorThemeConstants.getIc10()));
+                button.setBackground(createBackground(ColorThemeConstants.getMain050()));
             } else {
                 button.setBackground(null);
             }
@@ -164,29 +164,29 @@ public class ButtonComponent {
 
     private static void createPrimaryIconButton(Button button, FontIcon icon) {
         // Configuration pour bouton icône primaire (rond plein)
-        icon.setIconColor(ColorThemeConstants.getIc06());
+        icon.setIconColor(ColorThemeConstants.getMain950());
         icon.setIconSize(ICON_SIZE);
 
-        button.setBackground(createCircleBackground(ColorThemeConstants.getCs08()));
+        button.setBackground(createCircleBackground(ColorThemeConstants.getMain400()));
         button.setBorder(null);
         button.setPadding(ICON_BUTTON_PADDING);
 
         // Événements de souris
-        button.setOnMouseEntered(e -> button.setBackground(createCircleBackground(ColorThemeConstants.getCs07())));
-        button.setOnMouseExited(e -> button.setBackground(createCircleBackground(ColorThemeConstants.getCs08())));
-        button.setOnMousePressed(e -> button.setBackground(createCircleBackground(ColorThemeConstants.getCs06())));
+        button.setOnMouseEntered(e -> button.setBackground(createCircleBackground(ColorThemeConstants.getMain500())));
+        button.setOnMouseExited(e -> button.setBackground(createCircleBackground(ColorThemeConstants.getMain400())));
+        button.setOnMousePressed(e -> button.setBackground(createCircleBackground(ColorThemeConstants.getMain600())));
         button.setOnMouseReleased(e -> {
             if (button.isHover()) {
-                button.setBackground(createCircleBackground(ColorThemeConstants.getCs07()));
+                button.setBackground(createCircleBackground(ColorThemeConstants.getMain500()));
             } else {
-                button.setBackground(createCircleBackground(ColorThemeConstants.getCs08()));
+                button.setBackground(createCircleBackground(ColorThemeConstants.getMain400()));
             }
         });
     }
 
     private static void createSecondaryIconButton(Button button, FontIcon icon) {
         // Configuration pour bouton icône secondaire (rond avec contour)
-        icon.setIconColor(ColorThemeConstants.getCs07());
+        icon.setIconColor(ColorThemeConstants.getMain700());
         icon.setIconSize(ICON_SIZE);
 
         button.setBackground(null);
@@ -194,12 +194,12 @@ public class ButtonComponent {
         button.setPadding(ICON_BUTTON_PADDING);
 
         // Événements de souris
-        button.setOnMouseEntered(e -> button.setBackground(createCircleBackground(ColorThemeConstants.getIc10())));
+        button.setOnMouseEntered(e -> button.setBackground(createCircleBackground(ColorThemeConstants.getMain050())));
         button.setOnMouseExited(e -> button.setBackground(null));
-        button.setOnMousePressed(e -> button.setBackground(createCircleBackground(ColorThemeConstants.getIc11())));
+        button.setOnMousePressed(e -> button.setBackground(createCircleBackground(ColorThemeConstants.getMain100())));
         button.setOnMouseReleased(e -> {
             if (button.isHover()) {
-                button.setBackground(createCircleBackground(ColorThemeConstants.getIc10()));
+                button.setBackground(createCircleBackground(ColorThemeConstants.getMain050()));
             } else {
                 button.setBackground(null);
             }
@@ -208,29 +208,29 @@ public class ButtonComponent {
 
     private static void createTertiaryIconButton(Button button, FontIcon icon) {
         // Configuration pour bouton icône tertiaire (avec fond clair)
-        icon.setIconColor(ColorThemeConstants.getAt08());
+        icon.setIconColor(ColorThemeConstants.getMain700());
         icon.setIconSize(ICON_SIZE);
 
-        button.setBackground(createCircleBackground(ColorThemeConstants.getIc05()));
+        button.setBackground(null);
         button.setBorder(null);
         button.setPadding(ICON_BUTTON_PADDING);
 
         // Événements de souris
         button.setOnMouseEntered(e -> {
             button.setOpacity(0.8);
-            button.setBackground(createCircleBackground(ColorThemeConstants.getIc05().darker()));
+            button.setBackground(createCircleBackground(ColorThemeConstants.getMain050().darker()));
         });
         button.setOnMouseExited(e -> {
             button.setOpacity(1.0);
-            button.setBackground(createCircleBackground(ColorThemeConstants.getIc05()));
+            button.setBackground(null);
         });
-        button.setOnMousePressed(e -> button.setBackground(createCircleBackground(ColorThemeConstants.getIc04())));
+        button.setOnMousePressed(e -> button.setBackground(createCircleBackground(ColorThemeConstants.getMain100())));
         button.setOnMouseReleased(e -> {
             if (button.isHover()) {
-                button.setBackground(createCircleBackground(ColorThemeConstants.getIc05().darker()));
+                button.setBackground(createCircleBackground(ColorThemeConstants.getMain050().darker()));
                 button.setOpacity(0.8);
             } else {
-                button.setBackground(createCircleBackground(ColorThemeConstants.getIc05()));
+                button.setBackground(null);
                 button.setOpacity(1.0);
             }
         });
@@ -246,7 +246,7 @@ public class ButtonComponent {
 
     private static Border createBorderSecondaryButton() {
         return new Border(new BorderStroke(
-                ColorThemeConstants.getCs07(),
+                ColorThemeConstants.getMain700(),
                 BorderStrokeStyle.SOLID,
                 CORNER_RADII,
                 BORDER_WIDTH
@@ -255,7 +255,7 @@ public class ButtonComponent {
 
     private static Border createCircleBorderSecondaryButton() {
         return new Border(new BorderStroke(
-                ColorThemeConstants.getCs07(),
+                ColorThemeConstants.getMain700(),
                 BorderStrokeStyle.SOLID,
                 CIRCLE_RADII,
                 BORDER_WIDTH

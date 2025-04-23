@@ -1,20 +1,20 @@
 package com.podcast.antennapod.view.util;
 
+import javafx.scene.paint.Color;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
-import javafx.scene.paint.Color;
 
 import static org.junit.jupiter.api.Assertions.*;
 
- @DisplayName("Badge Type test")
+@DisplayName("Badge Type test")
 class BadgeTypeTest {
 
     @Test
     void testGreenBadgeProperties() {
         BadgeType badge = BadgeType.GREEN;
         assertEquals("Green", badge.getTypeName());
-        assertEquals(ColorThemeConstants.getIc07(), badge.getBackgroundColor());
-        assertEquals(ColorThemeConstants.getAt06(), badge.getTextColor());
+        assertEquals(ColorThemeConstants.getMain100(), badge.getBackgroundColor());
+        assertEquals(ColorThemeConstants.getMain900(), badge.getTextColor());
     }
 
     @Test
@@ -45,7 +45,7 @@ class BadgeTypeTest {
     void testEnumValues() {
         BadgeType[] values = BadgeType.values();
         assertEquals(4, values.length);
-        assertArrayEquals(new BadgeType[] {
+        assertArrayEquals(new BadgeType[]{
                 BadgeType.GREEN,
                 BadgeType.RED,
                 BadgeType.BLUE,

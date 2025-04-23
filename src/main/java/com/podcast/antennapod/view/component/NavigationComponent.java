@@ -32,7 +32,7 @@ public final class NavigationComponent {
 
         } else {
             item.getIcon().setIconSize((int) ICON_SIZE);
-            item.getIcon().setIconColor(ColorThemeConstants.getAt02());
+            item.getIcon().setIconColor(ColorThemeConstants.getGrey800());
             return createNavigationBase(item.getIcon(), item.getTitle(), item.getNumber());
         }
     }
@@ -41,7 +41,7 @@ public final class NavigationComponent {
         // Create and configure title label
         Label titleLabel = new Label(title);
         titleLabel.setMaxWidth(TITLE_MAX_WIDTH);
-        titleLabel.setTextFill(ColorThemeConstants.getAt02());
+        titleLabel.setTextFill(ColorThemeConstants.getGrey800());
 
         // Create icon and title container
         HBox iconTitleBox = new HBox(SPACING, graphic, titleLabel);
@@ -61,7 +61,7 @@ public final class NavigationComponent {
 
         if (number != 0) {
             Label numberLabel = new Label(String.valueOf(number));
-            numberLabel.setTextFill(ColorThemeConstants.getAt08());
+            numberLabel.setTextFill(ColorThemeConstants.getMain950());
             mainBox.getChildren().addAll(iconTitleBox, spacer, numberLabel);
         } else {
             mainBox.getChildren().addAll(iconTitleBox, spacer);
