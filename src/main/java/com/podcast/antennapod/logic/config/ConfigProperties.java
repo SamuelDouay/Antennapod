@@ -11,7 +11,7 @@ public class ConfigProperties {
     private final Properties properties;
     private static final Logger logger = LogManager.getLogger();
 
-    ConfigProperties(){
+    ConfigProperties() {
         this.properties = new Properties();
         loadFile();
     }
@@ -25,9 +25,9 @@ public class ConfigProperties {
 
     private void loadFile() {
         try {
-            this.properties.load(getClass().getResourceAsStream("/properties/style.properties"));
+            this.properties.load(getClass().getResourceAsStream("/config/style.properties"));
             logger.info("Load style properties file");
-            this.properties.load(getClass().getResourceAsStream("/properties/config.properties"));
+            this.properties.load(getClass().getResourceAsStream("/config/application.properties"));
             logger.info("Load config properties file");
         } catch (IOException e) {
             logger.error("Error load properties : {}", e.getMessage());

@@ -69,19 +69,19 @@ public class MainView extends Application {
 
         HBox hBox = new HBox(15.0);
 
-        hBox.getChildren().add(PodcastComponent.createPodcastCard(String.valueOf(MainView.class.getResource("/images/others/ex.jpeg"))));
-        hBox.getChildren().add(PodcastComponent.createPodcastCard(String.valueOf(MainView.class.getResource("/images/others/heure_du_monde.png"))));
-        hBox.getChildren().add(PodcastComponent.createPodcastCard(String.valueOf(MainView.class.getResource("/images/others/small_talk.jpg"))));
-        hBox.getChildren().add(PodcastComponent.createPodcastCard(String.valueOf(MainView.class.getResource("/images/others/underscore.jpeg"))));
-        hBox.getChildren().add(PodcastComponent.createPodcastCard(String.valueOf(MainView.class.getResource("/images/others/zerl.jpg"))));
+        hBox.getChildren().add(PodcastComponent.createPodcastCard(String.valueOf(MainView.class.getResource("/images/ex.jpeg"))));
+        hBox.getChildren().add(PodcastComponent.createPodcastCard(String.valueOf(MainView.class.getResource("/images/heure_du_monde.png"))));
+        hBox.getChildren().add(PodcastComponent.createPodcastCard(String.valueOf(MainView.class.getResource("/images/small_talk.jpg"))));
+        hBox.getChildren().add(PodcastComponent.createPodcastCard(String.valueOf(MainView.class.getResource("/images/underscore.jpeg"))));
+        hBox.getChildren().add(PodcastComponent.createPodcastCard(String.valueOf(MainView.class.getResource("/images/zerl.jpg"))));
 
         HBox hBox3 = new HBox(15.0);
 
-        hBox3.getChildren().add(PodcastComponent.createPodcastCard(String.valueOf(MainView.class.getResource("/images/others/ex.jpeg")), "EX...", 10));
-        hBox3.getChildren().add(PodcastComponent.createPodcastCard(String.valueOf(MainView.class.getResource("/images/others/heure_du_monde.png")), "L'heure du monde", 0));
-        hBox3.getChildren().add(PodcastComponent.createPodcastCard(String.valueOf(MainView.class.getResource("/images/others/small_talk.jpg")), "Small Talk", 125));
-        hBox3.getChildren().add(PodcastComponent.createPodcastCard(String.valueOf(MainView.class.getResource("/images/others/underscore.jpeg")), "Undersore", 25));
-        hBox3.getChildren().add(PodcastComponent.createPodcastCard(String.valueOf(MainView.class.getResource("/images/others/zerl.jpg")), "Zack en roue libre", 5));
+        hBox3.getChildren().add(PodcastComponent.createPodcastCard(String.valueOf(MainView.class.getResource("/images/ex.jpeg")), "EX...", 10));
+        hBox3.getChildren().add(PodcastComponent.createPodcastCard(String.valueOf(MainView.class.getResource("/images/heure_du_monde.png")), "L'heure du monde", 0));
+        hBox3.getChildren().add(PodcastComponent.createPodcastCard(String.valueOf(MainView.class.getResource("/images/small_talk.jpg")), "Small Talk", 125));
+        hBox3.getChildren().add(PodcastComponent.createPodcastCard(String.valueOf(MainView.class.getResource("/images/underscore.jpeg")), "Undersore", 25));
+        hBox3.getChildren().add(PodcastComponent.createPodcastCard(String.valueOf(MainView.class.getResource("/images/zerl.jpg")), "Zack en roue libre", 5));
 
 
         HBox hBox4 = new HBox(15.0);

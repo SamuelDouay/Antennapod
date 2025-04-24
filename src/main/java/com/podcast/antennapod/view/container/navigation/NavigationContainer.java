@@ -34,11 +34,11 @@ public class NavigationContainer {
 
         NavigationItem separator = new NavigationItem();
 
-        NavigationItem podcast1 = new NavigationItem(String.valueOf(NavigationContainer.class.getResource("/images/others/zerl.jpg")), "Zack en Roue Libre by Zack Nani", 12);
-        NavigationItem podcast2 = new NavigationItem(String.valueOf(NavigationContainer.class.getResource("/images/others/heure_du_monde.png")), "L'heure du monde");
-        NavigationItem podcast3 = new NavigationItem(String.valueOf(NavigationContainer.class.getResource("/images/others/small_talk.jpg")), "Small Tallk - Kobini", 12);
-        NavigationItem podcast4 = new NavigationItem(String.valueOf(NavigationContainer.class.getResource("/images/others/underscore.jpeg")), "Underscore_", 12);
-        NavigationItem podcast5 = new NavigationItem(String.valueOf(NavigationContainer.class.getResource("/images/others/ex.jpeg")), "Ex...", 12);
+        NavigationItem podcast1 = new NavigationItem(String.valueOf(NavigationContainer.class.getResource("/images/zerl.jpg")), "Zack en Roue Libre by Zack Nani", 12);
+        NavigationItem podcast2 = new NavigationItem(String.valueOf(NavigationContainer.class.getResource("/images/heure_du_monde.png")), "L'heure du monde");
+        NavigationItem podcast3 = new NavigationItem(String.valueOf(NavigationContainer.class.getResource("/images/small_talk.jpg")), "Small Tallk - Kobini", 12);
+        NavigationItem podcast4 = new NavigationItem(String.valueOf(NavigationContainer.class.getResource("/images/underscore.jpeg")), "Underscore_", 12);
+        NavigationItem podcast5 = new NavigationItem(String.valueOf(NavigationContainer.class.getResource("/images/ex.jpeg")), "Ex...", 12);
 
         listView.getItems().addAll(
                 homeItem, playlistItem, inboxItem, episodesItem,
