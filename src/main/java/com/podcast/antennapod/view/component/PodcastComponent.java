@@ -126,7 +126,7 @@ public class PodcastComponent {
                 width + 2 * Constant.PODCAST_CARD_DEFAULT_PADDING,
                 height + 2 * Constant.PODCAST_CARD_DEFAULT_PADDING
         );
-        colorOverlay.setFill(Color.hsb(120.0, 0.5, 0.4, 0.05));
+        colorOverlay.setFill(Color.hsb(230.0, 0.17, 0.14, 0.15));
         return colorOverlay;
     }
 
@@ -145,7 +145,7 @@ public class PodcastComponent {
 
     private static HBox getEpisodeCountBox() {
         HBox box = new HBox();
-        box.setBackground(new Background(new BackgroundFill(ColorThemeConstants.getMain100(), new CornerRadii(2.0), Insets.EMPTY)));
+        box.setBackground(new Background(new BackgroundFill(ColorThemeConstants.getMain100(), new CornerRadii(99.0), Insets.EMPTY)));
         box.setPadding(new Insets(2.0, 7.0, 2.0, 7.0));
         box.setAlignment(Pos.CENTER);
         box.setMaxSize(Region.USE_PREF_SIZE, Region.USE_PREF_SIZE);
