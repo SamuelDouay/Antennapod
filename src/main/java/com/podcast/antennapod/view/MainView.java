@@ -102,7 +102,6 @@ public class MainView extends Application {
 
     @Override
     public void start(Stage stage) {
-        //ColorThemeConstants.setTheme(ThemeType.DARK);
         AnchorPane root = new AnchorPane();
 
         VBox menu = new VBox();
