@@ -3,24 +3,77 @@ package com.podcast.antennapod.view.util;
 import com.podcast.antennapod.logic.config.ConfigProperties;
 import javafx.scene.paint.Color;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class ColorThemeConstants {
     private static final ConfigProperties configProperties = ConfigProperties.getInstance();
 
-    // Default theme
+    /**
+     * Interface pour les écouteurs de changement de thème
+     */
+    public interface ThemeChangeListener {
+        void onThemeChanged(ThemeType newTheme);
+    }
+
+    // Liste des écouteurs pour le changement de thème
+    private static final List<ThemeChangeListener> listeners = new ArrayList<>();
+
+    // Thème par défaut
     private static ThemeType currentTheme = ThemeType.LIGHT;
 
     private ColorThemeConstants() {
-        // Private constructor to prevent instantiation
+        // Constructeur privé pour empêcher l'instanciation
     }
 
+    /**
+     * Définit le thème actuel et notifie les écouteurs si le thème a changé
+     */
     public static void setTheme(ThemeType theme) {
+        ThemeType oldTheme = currentTheme;
         currentTheme = theme;
+
+        // Seulement notifier si le thème a changé
+        if (oldTheme != theme) {
+            notifyListeners();
+        }
     }
 
+    /**
+     * Ajoute un écouteur de changement de thème
+     */
+    public static void addThemeChangeListener(ThemeChangeListener listener) {
+        if (listener != null && !listeners.contains(listener)) {
+            listeners.add(listener);
+        }
+    }
+
+    /**
+     * Supprime un écouteur de changement de thème
+     */
+    public static void removeThemeChangeListener(ThemeChangeListener listener) {
+        listeners.remove(listener);
+    }
+
+    /**
+     * Notifie tous les écouteurs qu'un changement de thème s'est produit
+     */
+    private static void notifyListeners() {
+        for (ThemeChangeListener listener : listeners) {
+            listener.onThemeChanged(currentTheme);
+        }
+    }
+
+    /**
+     * Récupère le thème actuel
+     */
     public static ThemeType getCurrentTheme() {
         return currentTheme;
     }
 
+    /**
+     * Récupère une couleur à partir du fichier de configuration
+     */
     public static Color getColor(String key) {
         String colorValue = configProperties.getProperty(key);
         if (colorValue != null && !colorValue.isEmpty()) {
@@ -29,6 +82,7 @@ public class ColorThemeConstants {
         return null;
     }
 
+    // --- Couleurs principales ---
     public static Color getMain000() {
         return currentTheme == ThemeType.DARK ? getDarkMain000() : getLightMain000();
     }
@@ -77,7 +131,7 @@ public class ColorThemeConstants {
         return currentTheme == ThemeType.DARK ? getDarkMain950() : getLightMain950();
     }
 
-    // --- Grey Colors ---
+    // --- Couleurs grises ---
     public static Color getGrey000() {
         return currentTheme == ThemeType.DARK ? getDarkGrey000() : getLightGrey000();
     }
@@ -126,7 +180,7 @@ public class ColorThemeConstants {
         return currentTheme == ThemeType.DARK ? getDarkGrey950() : getLightGrey950();
     }
 
-
+    // --- Getters pour les couleurs du thème clair ---
     private static Color getLightMain000() {
         return getColor("light.main.000");
     }
@@ -175,7 +229,6 @@ public class ColorThemeConstants {
         return getColor("light.main.950");
     }
 
-    // --- Light Theme - Grey Colors ---
     private static Color getLightGrey000() {
         return getColor("light.grey.000");
     }
@@ -224,7 +277,7 @@ public class ColorThemeConstants {
         return getColor("light.grey.950");
     }
 
-    // --- Dark Theme - Main Colors ---
+    // --- Getters pour les couleurs du thème sombre ---
     private static Color getDarkMain000() {
         return getColor("dark.main.000");
     }
@@ -273,7 +326,6 @@ public class ColorThemeConstants {
         return getColor("dark.main.950");
     }
 
-    // --- Dark Theme - Grey Colors ---
     private static Color getDarkGrey000() {
         return getColor("dark.grey.000");
     }
