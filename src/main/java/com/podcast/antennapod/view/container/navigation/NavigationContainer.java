@@ -1,8 +1,11 @@
 package com.podcast.antennapod.view.container.navigation;
 
 import com.podcast.antennapod.view.item.NavigationItem;
+import com.podcast.antennapod.view.util.ColorThemeConstants;
 import javafx.geometry.Insets;
 import javafx.scene.control.ListView;
+import javafx.scene.layout.Background;
+import javafx.scene.layout.BackgroundFill;
 import javafx.scene.layout.Region;
 import org.kordamp.ikonli.javafx.FontIcon;
 import org.kordamp.ikonli.materialdesign2.*;
@@ -50,6 +53,9 @@ public class NavigationContainer {
         listView.setCellFactory(_ -> new NavigationCellItem());
 
         listView.getSelectionModel().selectFirst();
+
+        listView.setBackground(new Background(new BackgroundFill(ColorThemeConstants.getMain000(), null, null)));
+
         return listView;
     }
 }

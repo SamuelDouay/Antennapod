@@ -16,9 +16,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
-import javafx.scene.layout.AnchorPane;
-import javafx.scene.layout.HBox;
-import javafx.scene.layout.VBox;
+import javafx.scene.layout.*;
 import javafx.scene.text.Font;
 import javafx.stage.Stage;
 import org.apache.logging.log4j.LogManager;
@@ -86,6 +84,8 @@ public class MainView extends Application {
 
         // Ajouter les composants au root
         root.getChildren().addAll(menuContainer, mainContainer);
+
+        root.setBackground(new Background(new BackgroundFill(ColorThemeConstants.getGrey000(), null, null)));
 
         return root;
     }
