@@ -12,6 +12,7 @@ import javafx.scene.layout.*;
 import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
 import org.kordamp.ikonli.javafx.FontIcon;
+import org.kordamp.ikonli.materialdesign2.MaterialDesignD;
 import org.kordamp.ikonli.materialdesign2.MaterialDesignI;
 import org.kordamp.ikonli.materialdesign2.MaterialDesignS;
 
@@ -75,6 +76,8 @@ public class EpisodeComponent {
         HBox.setHgrow(region2, Priority.ALWAYS);
         Region region3 = new Region();
         HBox.setHgrow(region3, Priority.ALWAYS);
+        Region region4 = new Region();
+        HBox.setHgrow(region4, Priority.ALWAYS);
 
         box.getChildren().add(BadgeComponent.createBadge(new FontIcon(MaterialDesignI.INBOX), BadgeType.BLUE));
         box.getChildren().add(region);
@@ -85,6 +88,11 @@ public class EpisodeComponent {
         box.getChildren().add(getLabel(episodeItem.getDuration()));
         box.getChildren().add(region3);
         box.getChildren().add(ButtonComponent.createButton("Télécharger", TypeButton.PRIMARY));
+        box.getChildren().add(region4);
+        FontIcon icon = new FontIcon(MaterialDesignD.DOTS_VERTICAL);
+        icon.setIconSize(15);
+        icon.setIconColor(ColorThemeConstants.getGrey950());
+        box.getChildren().add(icon);
 
         box.setAlignment(Pos.CENTER);
         HBox.setHgrow(box, Priority.ALWAYS);
