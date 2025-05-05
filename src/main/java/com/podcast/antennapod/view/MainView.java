@@ -1,13 +1,10 @@
 package com.podcast.antennapod.view;
 
-import com.podcast.antennapod.view.component.BadgeComponent;
 import com.podcast.antennapod.view.component.ButtonComponent;
 import com.podcast.antennapod.view.component.EpisodeComponent;
-import com.podcast.antennapod.view.component.PodcastComponent;
 import com.podcast.antennapod.view.container.navigation.NavigationContainer;
 import com.podcast.antennapod.view.item.EpisodeItem;
 import com.podcast.antennapod.view.item.NavigationItem;
-import com.podcast.antennapod.view.util.BadgeType;
 import com.podcast.antennapod.view.util.ColorThemeConstants;
 import com.podcast.antennapod.view.util.ThemeType;
 import com.podcast.antennapod.view.util.TypeButton;
@@ -18,14 +15,14 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
-import javafx.scene.layout.*;
+import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.Background;
+import javafx.scene.layout.BackgroundFill;
+import javafx.scene.layout.VBox;
 import javafx.scene.text.Font;
 import javafx.stage.Stage;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-import org.kordamp.ikonli.javafx.FontIcon;
-import org.kordamp.ikonli.materialdesign2.MaterialDesignI;
-import org.kordamp.ikonli.materialdesign2.MaterialDesignP;
 
 public class MainView extends Application {
     public static final Logger logger = LogManager.getLogger(MainView.class);
@@ -103,20 +100,20 @@ public class MainView extends Application {
         // Configurer les écouteurs
         navigationListView.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> {
             if (newValue != null && newValue.getTitle() != null) {
-                currentSelectionLabel.setText("Sélection actuelle : " + newValue.getTitle());
+                currentSelectionLabel.setText(newValue.getTitle());
             }
         });
 
         // Configurer le positionnement
-        AnchorPane.setLeftAnchor(menu, Double.valueOf(0.0));
-        AnchorPane.setTopAnchor(menu, Double.valueOf(0.0));
+        AnchorPane.setLeftAnchor(menu, 0.0);
+        AnchorPane.setTopAnchor(menu, 0.0);
 
         return menu;
     }
 
     private VBox createMainContainer() {
         // Créer le label de sélection
-        currentSelectionLabel = new Label("Sélection actuelle : Accueil");
+        currentSelectionLabel = new Label("Accueil");
         currentSelectionLabel.setFont(new Font(36));
         currentSelectionLabel.setTextFill(ColorThemeConstants.getMain950());
         currentSelectionLabel.setPadding(new Insets(10, 0, 10, 0));
@@ -150,9 +147,9 @@ public class MainView extends Application {
         mainContainer.getChildren().addAll(EpisodeComponent.createNewEpisode(episodeItem), EpisodeComponent.createNewEpisode(episodeItem1));
 
         // Configurer le positionnement
-        AnchorPane.setLeftAnchor(mainContainer, Double.valueOf(240.0));
-        AnchorPane.setTopAnchor(mainContainer, Double.valueOf(0.0));
-        AnchorPane.setRightAnchor(mainContainer, Double.valueOf(0.0));
+        AnchorPane.setLeftAnchor(mainContainer, 240.0);
+        AnchorPane.setTopAnchor(mainContainer, 0.0);
+        AnchorPane.setRightAnchor(mainContainer, 0.0);
 
         return mainContainer;
     }
@@ -175,101 +172,6 @@ public class MainView extends Application {
         VBox box = new VBox(10.0);
         box.setPadding(new Insets(4.0, 16.0, 4.0, 16.0));
 
-        // Ligne de boutons et badges
-        HBox buttonRow = createButtonRow();
-
-        // Ligne de boutons avec icônes
-        HBox iconButtonRow = createIconButtonRow();
-
-        // Ligne de cartes de podcast simples
-        HBox podcastRow = createPodcastRow();
-
-        // Ligne de cartes de podcast avec descriptions
-        HBox podcastWithInfoRow = createPodcastWithInfoRow();
-
-        // Ligne de badges texte
-        HBox textBadgeRow = createTextBadgeRow();
-
-        // Ajouter toutes les lignes au conteneur principal
-        box.getChildren().addAll(podcastRow, buttonRow, iconButtonRow, podcastWithInfoRow, textBadgeRow);
-
         return box;
-    }
-
-    private HBox createButtonRow() {
-        HBox hBox = new HBox(15.0);
-
-        // Ajouter les boutons
-        hBox.getChildren().add(ButtonComponent.createButton(TypeButton.PRIMARY.name(), TypeButton.PRIMARY));
-        hBox.getChildren().add(ButtonComponent.createButton(TypeButton.SECONDARY.name(), TypeButton.SECONDARY));
-        hBox.getChildren().add(ButtonComponent.createButton(TypeButton.TERTIARY.name(), TypeButton.TERTIARY));
-
-        // Ajouter les badges avec icônes
-        hBox.getChildren().add(BadgeComponent.createBadge(new FontIcon(MaterialDesignP.PLUS), BadgeType.RED));
-        hBox.getChildren().add(BadgeComponent.createBadge(new FontIcon(MaterialDesignI.INBOX), BadgeType.BLUE));
-        hBox.getChildren().add(BadgeComponent.createBadge(new FontIcon(MaterialDesignI.INBOX), BadgeType.GREEN));
-        hBox.getChildren().add(BadgeComponent.createBadge(new FontIcon(MaterialDesignP.PLAYLIST_PLAY), BadgeType.PURPLE));
-
-        // Ajouter les badges avec texte et icônes
-        hBox.getChildren().add(BadgeComponent.createBadge("PLUS", new FontIcon(MaterialDesignP.PLUS), BadgeType.RED));
-        hBox.getChildren().add(BadgeComponent.createBadge("MAIL", new FontIcon(MaterialDesignI.INBOX), BadgeType.BLUE));
-        hBox.getChildren().add(BadgeComponent.createBadge("MAIL", new FontIcon(MaterialDesignI.INBOX), BadgeType.GREEN));
-        hBox.getChildren().add(BadgeComponent.createBadge("PLAY", new FontIcon(MaterialDesignP.PLAYLIST_PLAY), BadgeType.PURPLE));
-
-        return hBox;
-    }
-
-    private HBox createIconButtonRow() {
-        HBox hBox = new HBox(15.0);
-
-        // Ajouter les boutons avec icônes
-        hBox.getChildren().add(ButtonComponent.createButton(new FontIcon(MaterialDesignP.PLAY), TypeButton.PRIMARY));
-        hBox.getChildren().add(ButtonComponent.createButton(new FontIcon(MaterialDesignP.PLAY), TypeButton.SECONDARY));
-        hBox.getChildren().add(ButtonComponent.createButton(new FontIcon(MaterialDesignP.PLAY), TypeButton.TERTIARY));
-
-        // Ajouter les boutons avec texte et icônes
-        hBox.getChildren().add(ButtonComponent.createButton("PLAY", new FontIcon(MaterialDesignP.PLAY), TypeButton.PRIMARY));
-        hBox.getChildren().add(ButtonComponent.createButton("PLAY", new FontIcon(MaterialDesignP.PLAY), TypeButton.SECONDARY));
-        hBox.getChildren().add(ButtonComponent.createButton("PLAY", new FontIcon(MaterialDesignP.PLAY), TypeButton.TERTIARY));
-
-        return hBox;
-    }
-
-    private HBox createPodcastRow() {
-        HBox hBox = new HBox(15.0);
-
-        // Ajouter les cartes de podcast
-        hBox.getChildren().add(PodcastComponent.createPodcastCard(String.valueOf(MainView.class.getResource("/images/ex.jpeg"))));
-        hBox.getChildren().add(PodcastComponent.createPodcastCard(String.valueOf(MainView.class.getResource("/images/heure_du_monde.png"))));
-        hBox.getChildren().add(PodcastComponent.createPodcastCard(String.valueOf(MainView.class.getResource("/images/small_talk.jpg"))));
-        hBox.getChildren().add(PodcastComponent.createPodcastCard(String.valueOf(MainView.class.getResource("/images/underscore.jpeg"))));
-        hBox.getChildren().add(PodcastComponent.createPodcastCard(String.valueOf(MainView.class.getResource("/images/zerl.jpg"))));
-
-        return hBox;
-    }
-
-    private HBox createPodcastWithInfoRow() {
-        HBox hBox = new HBox(15.0);
-
-        // Ajouter les cartes de podcast avec titre et nombre d'épisodes
-        hBox.getChildren().add(PodcastComponent.createPodcastCard(String.valueOf(MainView.class.getResource("/images/ex.jpeg")), "EX...", 10));
-        hBox.getChildren().add(PodcastComponent.createPodcastCard(String.valueOf(MainView.class.getResource("/images/heure_du_monde.png")), "L'heure du monde", 0));
-        hBox.getChildren().add(PodcastComponent.createPodcastCard(String.valueOf(MainView.class.getResource("/images/small_talk.jpg")), "Small Talk", 125));
-        hBox.getChildren().add(PodcastComponent.createPodcastCard(String.valueOf(MainView.class.getResource("/images/underscore.jpeg")), "Undersore", 25));
-        hBox.getChildren().add(PodcastComponent.createPodcastCard(String.valueOf(MainView.class.getResource("/images/zerl.jpg")), "Zack en roue libre", 5));
-
-        return hBox;
-    }
-
-    private HBox createTextBadgeRow() {
-        HBox hBox = new HBox(15.0);
-
-        // Ajouter les badges texte
-        hBox.getChildren().add(BadgeComponent.createBadge("Download", BadgeType.GREEN));
-        hBox.getChildren().add(BadgeComponent.createBadge("Sans media", BadgeType.RED));
-        hBox.getChildren().add(BadgeComponent.createBadge("Téléchargé", BadgeType.BLUE));
-        hBox.getChildren().add(BadgeComponent.createBadge("Téléchargé", BadgeType.PURPLE));
-
-        return hBox;
     }
 }
