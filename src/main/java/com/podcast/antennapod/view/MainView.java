@@ -2,8 +2,10 @@ package com.podcast.antennapod.view;
 
 import com.podcast.antennapod.view.component.BadgeComponent;
 import com.podcast.antennapod.view.component.ButtonComponent;
+import com.podcast.antennapod.view.component.EpisodeComponent;
 import com.podcast.antennapod.view.component.PodcastComponent;
 import com.podcast.antennapod.view.container.navigation.NavigationContainer;
+import com.podcast.antennapod.view.item.EpisodeItem;
 import com.podcast.antennapod.view.item.NavigationItem;
 import com.podcast.antennapod.view.util.BadgeType;
 import com.podcast.antennapod.view.util.ColorThemeConstants;
@@ -106,8 +108,8 @@ public class MainView extends Application {
         });
 
         // Configurer le positionnement
-        AnchorPane.setLeftAnchor(menu, 0.0);
-        AnchorPane.setTopAnchor(menu, 0.0);
+        AnchorPane.setLeftAnchor(menu, Double.valueOf(0.0));
+        AnchorPane.setTopAnchor(menu, Double.valueOf(0.0));
 
         return menu;
     }
@@ -130,10 +132,27 @@ public class MainView extends Application {
         mainContainer.getChildren().addAll(currentSelectionLabel, themeToggleBtn, mainContent);
         mainContainer.setPadding(new Insets(10));
 
+
+        EpisodeItem episodeItem = new EpisodeItem(String.valueOf(MainView.class.getResource("/images/heure_du_monde.png")),
+                false,
+                "Lil Nas X, une icône noire, et gay et flamboyante [REDIF]",
+                "00:20:40",
+                "28/10/2024",
+                "18 Mo");
+
+        EpisodeItem episodeItem1 = new EpisodeItem(String.valueOf(MainView.class.getResource("/images/heure_du_monde.png")),
+                true,
+                "Lil Nas X, une icône noire, et gay et flamboyante [REDIF]",
+                "00:20:40",
+                "28/10/2024",
+                "18 Mo");
+
+        mainContainer.getChildren().addAll(EpisodeComponent.createNewEpisode(episodeItem), EpisodeComponent.createNewEpisode(episodeItem1));
+
         // Configurer le positionnement
-        AnchorPane.setLeftAnchor(mainContainer, 240.0);
-        AnchorPane.setTopAnchor(mainContainer, 0.0);
-        AnchorPane.setRightAnchor(mainContainer, 0.0);
+        AnchorPane.setLeftAnchor(mainContainer, Double.valueOf(240.0));
+        AnchorPane.setTopAnchor(mainContainer, Double.valueOf(0.0));
+        AnchorPane.setRightAnchor(mainContainer, Double.valueOf(0.0));
 
         return mainContainer;
     }
