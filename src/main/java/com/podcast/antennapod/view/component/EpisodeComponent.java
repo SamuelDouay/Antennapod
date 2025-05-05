@@ -24,20 +24,13 @@ public class EpisodeComponent {
         HBox box = new HBox(8.0);
         Region region = new Region();
         HBox.setHgrow(region, Priority.ALWAYS);
-
         box.getChildren().add(firstPart(episodeItem));
         box.getChildren().add(region);
         box.getChildren().add(secondPart(episodeItem));
-
-
         box.setBackground(new Background(new BackgroundFill(ColorThemeConstants.getMain050(), null, null)));
-
         HBox.setHgrow(box, Priority.ALWAYS);
-
         box.setPadding(new Insets(8.0, 16.0, 8.0, 16.0));
-
         box.setAlignment(Pos.CENTER);
-
         return box;
     }
 

@@ -1,18 +1,13 @@
 package com.podcast.antennapod.view;
 
-import com.podcast.antennapod.view.component.ButtonComponent;
 import com.podcast.antennapod.view.component.EpisodeComponent;
 import com.podcast.antennapod.view.container.navigation.NavigationContainer;
 import com.podcast.antennapod.view.item.EpisodeItem;
 import com.podcast.antennapod.view.item.NavigationItem;
 import com.podcast.antennapod.view.util.ColorThemeConstants;
-import com.podcast.antennapod.view.util.ThemeType;
-import com.podcast.antennapod.view.util.TypeButton;
 import javafx.application.Application;
 import javafx.geometry.Insets;
-import javafx.scene.Node;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
 import javafx.scene.layout.AnchorPane;
@@ -118,33 +113,35 @@ public class MainView extends Application {
         currentSelectionLabel.setTextFill(ColorThemeConstants.getMain950());
         currentSelectionLabel.setPadding(new Insets(10, 0, 10, 0));
 
-        // Créer le bouton de mode
-        Button themeToggleBtn = createThemeToggleButton();
-
-        // Créer le contenu principal
-        Node mainContent = createMainContent();
-
         // Assembler dans un conteneur
         VBox mainContainer = new VBox(10);
-        mainContainer.getChildren().addAll(currentSelectionLabel, themeToggleBtn, mainContent);
+        mainContainer.getChildren().addAll(currentSelectionLabel);
         mainContainer.setPadding(new Insets(10));
 
+        VBox vBox = new VBox();
 
-        EpisodeItem episodeItem = new EpisodeItem(String.valueOf(MainView.class.getResource("/images/heure_du_monde.png")),
-                false,
-                "Lil Nas X, une icône noire, et gay et flamboyante [REDIF]",
-                "00:20:40",
-                "28/10/2024",
-                "18 Mo");
+        for (int i = 0; i < 5; i++) {
+            EpisodeItem episodeItem = new EpisodeItem(String.valueOf(MainView.class.getResource("/images/heure_du_monde.png")),
+                    false,
+                    "Lil Nas X, une icône noire, et gay et flamboyante [REDIF]",
+                    "00:20:40",
+                    "28/10/2024",
+                    "18 Mo");
 
-        EpisodeItem episodeItem1 = new EpisodeItem(String.valueOf(MainView.class.getResource("/images/heure_du_monde.png")),
-                true,
-                "Lil Nas X, une icône noire, et gay et flamboyante [REDIF]",
-                "00:20:40",
-                "28/10/2024",
-                "18 Mo");
+            EpisodeItem episodeItem1 = new EpisodeItem(String.valueOf(MainView.class.getResource("/images/small_talk.jpg")),
+                    true,
+                    "Lil Nas X, une icône noire, et gay et flamboyante [REDIF]",
+                    "00:20:40",
+                    "28/10/2024",
+                    "18 Mo");
 
-        mainContainer.getChildren().addAll(EpisodeComponent.createNewEpisode(episodeItem), EpisodeComponent.createNewEpisode(episodeItem1));
+            vBox.getChildren().addAll(EpisodeComponent.createNewEpisode(episodeItem), EpisodeComponent.createNewEpisode(episodeItem1));
+
+
+        }
+
+        mainContainer.getChildren().add(vBox);
+
 
         // Configurer le positionnement
         AnchorPane.setLeftAnchor(mainContainer, 240.0);
@@ -152,26 +149,5 @@ public class MainView extends Application {
         AnchorPane.setRightAnchor(mainContainer, 0.0);
 
         return mainContainer;
-    }
-
-    private Button createThemeToggleButton() {
-        Button btn = ButtonComponent.createButton("MODE", TypeButton.PRIMARY);
-
-        btn.setOnAction(_ -> {
-            if (ColorThemeConstants.getCurrentTheme().equals(ThemeType.LIGHT)) {
-                ColorThemeConstants.setTheme(ThemeType.DARK);
-            } else {
-                ColorThemeConstants.setTheme(ThemeType.LIGHT);
-            }
-        });
-
-        return btn;
-    }
-
-    private Node createMainContent() {
-        VBox box = new VBox(10.0);
-        box.setPadding(new Insets(4.0, 16.0, 4.0, 16.0));
-
-        return box;
     }
 }
