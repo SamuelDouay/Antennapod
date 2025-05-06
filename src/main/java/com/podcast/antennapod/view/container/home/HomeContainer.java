@@ -42,9 +42,15 @@ public class HomeContainer {
 
         TableColumn<EpisodeItem, String> name = new TableColumn<>("name");
         name.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getName()));
+        TableColumn<EpisodeItem, String> duration = new TableColumn<>("duration");
+        duration.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getDuration()));
+        TableColumn<EpisodeItem, String> date = new TableColumn<>("date");
+        date.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getDate()));
+        TableColumn<EpisodeItem, String> size = new TableColumn<>("size");
+        size.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getSize()));
 
 
-        table.getColumns().add(name);
+        table.getColumns().addAll(name, duration, date, size);
 
 
         List<EpisodeItem> list = new ArrayList<>();
