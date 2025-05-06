@@ -1,8 +1,7 @@
 package com.podcast.antennapod.view;
 
-import com.podcast.antennapod.view.component.EpisodeComponent;
+import com.podcast.antennapod.view.container.home.HomeContainer;
 import com.podcast.antennapod.view.container.navigation.NavigationContainer;
-import com.podcast.antennapod.view.item.EpisodeItem;
 import com.podcast.antennapod.view.item.NavigationItem;
 import com.podcast.antennapod.view.util.ColorThemeConstants;
 import javafx.application.Application;
@@ -118,30 +117,7 @@ public class MainView extends Application {
         mainContainer.getChildren().addAll(currentSelectionLabel);
         mainContainer.setPadding(new Insets(10));
 
-        VBox vBox = new VBox();
-
-        for (int i = 0; i < 5; i++) {
-            EpisodeItem episodeItem = new EpisodeItem(String.valueOf(MainView.class.getResource("/images/heure_du_monde.png")),
-                    false,
-                    "Lil Nas X, une icône noire, et gay et flamboyante [REDIF]",
-                    "00:20:40",
-                    "28/10/2024",
-                    "18 Mo");
-
-            EpisodeItem episodeItem1 = new EpisodeItem(String.valueOf(MainView.class.getResource("/images/small_talk.jpg")),
-                    true,
-                    "Lil Nas X, une icône noire, et gay et flamboyante [REDIF]",
-                    "00:20:40",
-                    "28/10/2024",
-                    "18 Mo");
-
-            vBox.getChildren().addAll(EpisodeComponent.createNewEpisode(episodeItem), EpisodeComponent.createNewEpisode(episodeItem1));
-
-
-        }
-
-        mainContainer.getChildren().add(vBox);
-
+        mainContainer.getChildren().add(HomeContainer.getHomeContainer());
 
         // Configurer le positionnement
         AnchorPane.setLeftAnchor(mainContainer, 240.0);
