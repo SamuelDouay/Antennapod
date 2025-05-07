@@ -1,21 +1,19 @@
 package com.podcast.antennapod.view.container.home;
 
+import com.podcast.antennapod.view.MainTest;
 import com.podcast.antennapod.view.MainView;
+import com.podcast.antennapod.view.component.EpisodeComponent;
+import com.podcast.antennapod.view.component.PodcastComponent;
 import com.podcast.antennapod.view.item.EpisodeItem;
 import com.podcast.antennapod.view.util.ColorThemeConstants;
-import javafx.beans.property.SimpleStringProperty;
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
+import javafx.geometry.Insets;
 import javafx.scene.Node;
 import javafx.scene.control.Label;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
+import javafx.scene.layout.HBox;
+import javafx.scene.layout.Priority;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
-
-import java.util.ArrayList;
-import java.util.List;
 
 public class HomeContainer {
     private HomeContainer() {
@@ -25,36 +23,36 @@ public class HomeContainer {
     public static Node getHomeContainer() {
         VBox box = new VBox();
 
+        box.getChildren().add(getTitle());
         box.getChildren().add(getNews());
+        box.getChildren().add(getClassicsSection());
+
+        box.setPadding(new Insets(32.0, 64.0, 32.0, 64.0));
+        box.setSpacing(35.0);
+
+        HBox.setHgrow(box, Priority.ALWAYS);
         return box;
+    }
+
+    private static Label getTitle() {
+        Label label = new Label("Accueil");
+        label.setFont(Font.font("Inter", FontWeight.BOLD, 36));
+        label.setTextFill(ColorThemeConstants.getMain950());
+        return label;
     }
 
     private static VBox getNews() {
         VBox box = new VBox(12);
-
-        box.getChildren().add(getTitleSection("Nouvautés"));
+        HBox.setHgrow(box, Priority.ALWAYS);
+        box.getChildren().add(getTitleSection("Nouveautés"));
         box.getChildren().add(getNewsTable());
         return box;
     }
 
     private static Node getNewsTable() {
-        TableView<EpisodeItem> table = new TableView<>();
+        VBox box = new VBox();
 
-        TableColumn<EpisodeItem, String> name = new TableColumn<>("name");
-        name.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getName()));
-        TableColumn<EpisodeItem, String> duration = new TableColumn<>("duration");
-        duration.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getDuration()));
-        TableColumn<EpisodeItem, String> date = new TableColumn<>("date");
-        date.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getDate()));
-        TableColumn<EpisodeItem, String> size = new TableColumn<>("size");
-        size.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getSize()));
-
-
-        table.getColumns().addAll(name, duration, date, size);
-
-
-        List<EpisodeItem> list = new ArrayList<>();
-        for (int i = 0; i < 5; i++) {
+        for (int i = 0; i < 4; i++) {
             EpisodeItem episodeItem = new EpisodeItem(String.valueOf(MainView.class.getResource("/images/heure_du_monde.png")),
                     false,
                     "Lil Nas X, une icône noire, et gay et flamboyante [REDIF]",
@@ -62,26 +60,48 @@ public class HomeContainer {
                     "28/10/2024",
                     "18 Mo");
 
-            EpisodeItem episodeItem1 = new EpisodeItem(String.valueOf(MainView.class.getResource("/images/small_talk.jpg")),
+            EpisodeItem episodeItem1 = new EpisodeItem(String.valueOf(MainView.class.getResource("/images/ex.jpeg")),
                     true,
                     "Lil Nas X, une icône noire, et gay et flamboyante [REDIF]",
                     "00:20:40",
                     "28/10/2024",
                     "18 Mo");
 
-            list.add(episodeItem);
-            list.add(episodeItem1);
+            box.getChildren().add(EpisodeComponent.createNewEpisode(episodeItem));
+            box.getChildren().add(EpisodeComponent.createNewEpisode(episodeItem1));
         }
-        ObservableList<EpisodeItem> episodeItems = FXCollections.observableList(list);
-        table.setItems(episodeItems);
 
-        return table;
+        return box;
     }
 
     private static Label getTitleSection(String title) {
         Label label = new Label(title);
-        label.setFont(Font.font("Inter", FontWeight.BOLD, 14));
+        label.setFont(Font.font("Inter", FontWeight.BOLD, 20));
         label.setTextFill(ColorThemeConstants.getMain950());
         return label;
+    }
+
+    private static VBox getClassicsSection() {
+        VBox box = new VBox(12);
+        box.getChildren().add(getTitleSection("Vos classiques"));
+        box.getChildren().add(getClassic());
+        return box;
+    }
+
+    private static HBox getClassic() {
+        HBox box = new HBox(15);
+        box.setPadding(new Insets(0.0, 1.0, 0.0, 1.0));
+        HBox.setHgrow(box, Priority.ALWAYS);
+
+        box.getChildren().add(PodcastComponent.createPodcastCard(String.valueOf(MainTest.class.getResource("/images/ex.jpeg"))));
+        box.getChildren().add(PodcastComponent.createPodcastCard(String.valueOf(MainTest.class.getResource("/images/heure_du_monde.png"))));
+        box.getChildren().add(PodcastComponent.createPodcastCard(String.valueOf(MainTest.class.getResource("/images/small_talk.jpg"))));
+        box.getChildren().add(PodcastComponent.createPodcastCard(String.valueOf(MainTest.class.getResource("/images/underscore.jpeg"))));
+        box.getChildren().add(PodcastComponent.createPodcastCard(String.valueOf(MainTest.class.getResource("/images/zerl.jpg"))));
+        box.getChildren().add(PodcastComponent.createPodcastCard(String.valueOf(MainTest.class.getResource("/images/underscore.jpeg"))));
+        box.getChildren().add(PodcastComponent.createPodcastCard(String.valueOf(MainTest.class.getResource("/images/zerl.jpg"))));
+        box.getChildren().add(PodcastComponent.createPodcastCard(String.valueOf(MainTest.class.getResource("/images/small_talk.jpg"))));
+
+        return box;
     }
 }
