@@ -65,7 +65,8 @@ public class MainView extends Application {
         menu.setPrefWidth(240.0);
 
         menu.getChildren().add(NavigationContainer.createMenu());
-        menu.setBorder(new Border(new BorderStroke(ColorThemeConstants.getMain950(), BorderStrokeStyle.SOLID, new CornerRadii(0), new BorderWidths(0,1,0,0), null)));
+        menu.setBorder(new Border(new BorderStroke(ColorThemeConstants.getMain950(), BorderStrokeStyle.SOLID, null, new BorderWidths(0,1,0,0), null)));
+        menu.setBackground(new Background(new BackgroundFill(ColorThemeConstants.getMain500(), null, null)));
 
         AnchorPane.setLeftAnchor(menu, 0.0);
         AnchorPane.setTopAnchor(menu, 0.0);

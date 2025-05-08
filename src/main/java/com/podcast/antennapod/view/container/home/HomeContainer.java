@@ -10,10 +10,7 @@ import javafx.geometry.Insets;
 import javafx.scene.Node;
 import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
-import javafx.scene.layout.Background;
-import javafx.scene.layout.HBox;
-import javafx.scene.layout.Priority;
-import javafx.scene.layout.VBox;
+import javafx.scene.layout.*;
 import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
 
@@ -31,7 +28,7 @@ public class HomeContainer {
 
         box.setPadding(new Insets(32.0, 64.0, 32.0, 64.0));
         box.setSpacing(35.0);
-
+        box.setBackground(new Background(new BackgroundFill(ColorThemeConstants.getGrey000(), null, null)));
         HBox.setHgrow(box, Priority.ALWAYS);
         return box;
     }
@@ -95,12 +92,13 @@ public class HomeContainer {
 
         scrollPane.setVbarPolicy(ScrollPane.ScrollBarPolicy.NEVER);
         scrollPane.setHbarPolicy(ScrollPane.ScrollBarPolicy.NEVER);
-        scrollPane.setBackground(Background.EMPTY);
+        scrollPane.setBackground(new Background(new BackgroundFill(ColorThemeConstants.getGrey000(), null, null)));
         HBox.setHgrow(scrollPane, Priority.ALWAYS);
 
 
         HBox box = new HBox(15);
         box.setPadding(new Insets(0.0, 1.0, 0.0, 1.0));
+        box.setBackground(new Background(new BackgroundFill(ColorThemeConstants.getGrey000(), null, null)));
         HBox.setHgrow(box, Priority.ALWAYS);
 
         box.getChildren().add(PodcastComponent.createPodcastCard(String.valueOf(MainTest.class.getResource("/images/ex.jpeg"))));

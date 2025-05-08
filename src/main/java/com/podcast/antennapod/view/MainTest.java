@@ -4,7 +4,6 @@ import com.podcast.antennapod.view.component.BadgeComponent;
 import com.podcast.antennapod.view.component.ButtonComponent;
 import com.podcast.antennapod.view.component.EpisodeComponent;
 import com.podcast.antennapod.view.component.PodcastComponent;
-import com.podcast.antennapod.view.container.navigation.NavigationContainer;
 import com.podcast.antennapod.view.item.EpisodeItem;
 import com.podcast.antennapod.view.item.NavigationItem;
 import com.podcast.antennapod.view.util.BadgeType;
@@ -97,7 +96,7 @@ public class MainTest extends Application {
         menu.setPrefWidth(240.0);
 
         // Créer la liste de navigation
-        navigationListView = NavigationContainer.createMenu();
+        //navigationListView = NavigationContainer.createMenu();
         menu.getChildren().add(navigationListView);
 
         // Configurer les écouteurs
