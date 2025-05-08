@@ -9,6 +9,8 @@ import com.podcast.antennapod.view.util.ColorThemeConstants;
 import javafx.geometry.Insets;
 import javafx.scene.Node;
 import javafx.scene.control.Label;
+import javafx.scene.control.ScrollPane;
+import javafx.scene.layout.Background;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Priority;
 import javafx.scene.layout.VBox;
@@ -88,7 +90,15 @@ public class HomeContainer {
         return box;
     }
 
-    private static HBox getClassic() {
+    private static ScrollPane getClassic() {
+        ScrollPane scrollPane = new ScrollPane();
+
+        scrollPane.setVbarPolicy(ScrollPane.ScrollBarPolicy.NEVER);
+        scrollPane.setHbarPolicy(ScrollPane.ScrollBarPolicy.NEVER);
+        scrollPane.setBackground(Background.EMPTY);
+        HBox.setHgrow(scrollPane, Priority.ALWAYS);
+
+
         HBox box = new HBox(15);
         box.setPadding(new Insets(0.0, 1.0, 0.0, 1.0));
         HBox.setHgrow(box, Priority.ALWAYS);
@@ -102,6 +112,7 @@ public class HomeContainer {
         box.getChildren().add(PodcastComponent.createPodcastCard(String.valueOf(MainTest.class.getResource("/images/zerl.jpg"))));
         box.getChildren().add(PodcastComponent.createPodcastCard(String.valueOf(MainTest.class.getResource("/images/small_talk.jpg"))));
 
-        return box;
+        scrollPane.setContent(box);
+        return scrollPane;
     }
 }

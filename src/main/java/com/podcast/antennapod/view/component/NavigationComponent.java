@@ -11,7 +11,7 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.Priority;
 import javafx.scene.layout.Region;
 
-public final class NavigationComponent {
+public class NavigationComponent {
     // Constants
     private static final double ICON_SIZE = 25.0;
     private static final double TITLE_MAX_WIDTH = 140.0;
