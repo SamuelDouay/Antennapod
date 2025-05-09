@@ -13,6 +13,8 @@ import org.kordamp.ikonli.materialdesign2.*;
 import java.util.ArrayList;
 import java.util.List;
 
+import static com.podcast.antennapod.view.component.NavigationComponent.updateAppearance;
+
 public class NavigationContainer {
     private static final ItemManager manager = new ItemManager();
     private static final List<HBox> listNav = new ArrayList<>();
@@ -109,9 +111,14 @@ public class NavigationContainer {
         box.setOnMouseClicked(_ -> {
             manager.setItemState(true, item.getUuid());
             for (HBox hBox : listNav) {
-                NavigationComponent.updateAppearance(hBox, hBox.equals(box));
+                updateAppearance(hBox, hBox.equals(box));
             }
         });
+        box.setOnMouseEntered(_ -> updateAppearance(box, true));
+        box.setOnMouseExited(_ -> updateAppearance(box, item.isSelected()));
+        box.setOnMousePressed(e -> box.setBackground(new Background(new BackgroundFill(ColorThemeConstants.getMain050(), null, null))));
+        box.setOnMouseReleased(_ -> updateAppearance(box, item.isSelected()));
+
         return box;
     }
 }

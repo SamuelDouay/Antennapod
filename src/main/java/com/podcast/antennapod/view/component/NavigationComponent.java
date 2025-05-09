@@ -82,7 +82,7 @@ public class NavigationComponent {
         if (isSelected) {
             titleLabel.setTextFill(ColorThemeConstants.getMain950());
             titleLabel.setFont(Font.font("Inter", FontWeight.BOLD, 12));
-            mainBox.setBackground(new Background(new BackgroundFill(ColorThemeConstants.getMain100(), null, null)));
+            mainBox.setBackground(new Background(new BackgroundFill(ColorThemeConstants.getMain100(), new CornerRadii(2.0), null)));
             if (!(icon instanceof FontIcon)) {
                 return;
             }
