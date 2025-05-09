@@ -2,51 +2,42 @@ package com.podcast.antennapod.view.item;
 
 import org.kordamp.ikonli.javafx.FontIcon;
 
-public class NavigationItem {
+public class NavigationItem extends Item {
     private FontIcon icon;
     private String title;
     private int number;
     private String imageUrl;
-    private final boolean separator;
 
     public NavigationItem(FontIcon icon, String title) {
+        super();
         this.icon = icon;
         this.title = title;
         this.number = 0;
         this.imageUrl = null;
-        this.separator = false;
     }
 
     public NavigationItem(FontIcon icon, String title, int number) {
+        super();
         this.icon = icon;
         this.title = title;
         this.number = number;
         this.imageUrl = null;
-        this.separator = false;
     }
 
     public NavigationItem(String imageUrl, String title) {
+        super();
         this.imageUrl = imageUrl;
         this.title = title;
         this.number = 0;
         this.icon = null;
-        this.separator = false;
     }
 
     public NavigationItem(String imageUrl, String title, int number) {
+        super();
         this.imageUrl = imageUrl;
         this.title = title;
         this.number = number;
         this.icon = null;
-        this.separator = false;
-    }
-
-    public NavigationItem() {
-        this.separator = true;
-        this.icon = null;
-        this.number = 0;
-        this.imageUrl = null;
-        this.title = null;
     }
 
     public FontIcon getIcon() {
@@ -79,9 +70,5 @@ public class NavigationItem {
 
     public void setImageUrl(String imageUrl) {
         this.imageUrl = imageUrl;
-    }
-
-    public boolean isSeparator() {
-        return separator;
     }
 }

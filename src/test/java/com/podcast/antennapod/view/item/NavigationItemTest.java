@@ -20,7 +20,6 @@ class NavigationItemTest {
         assertEquals(title, item.getTitle());
         assertEquals(0, item.getNumber());
         assertNull(item.getImageUrl());
-        assertFalse(item.isSeparator());
     }
 
     @Test
@@ -36,7 +35,6 @@ class NavigationItemTest {
         assertEquals(title, item.getTitle());
         assertEquals(number, item.getNumber());
         assertNull(item.getImageUrl());
-        assertFalse(item.isSeparator());
     }
 
     @Test
@@ -51,7 +49,6 @@ class NavigationItemTest {
         assertEquals(title, item.getTitle());
         assertEquals(0, item.getNumber());
         assertNull(item.getIcon());
-        assertFalse(item.isSeparator());
     }
 
     @Test
@@ -67,25 +64,12 @@ class NavigationItemTest {
         assertEquals(title, item.getTitle());
         assertEquals(number, item.getNumber());
         assertNull(item.getIcon());
-        assertFalse(item.isSeparator());
-    }
-
-    @Test
-    @DisplayName("Test constructeur par défaut (séparateur)")
-    void testDefaultConstructor() {
-        NavigationItem item = new NavigationItem();
-
-        assertTrue(item.isSeparator());
-        assertNull(item.getIcon());
-        assertNull(item.getTitle());
-        assertNull(item.getImageUrl());
-        assertEquals(0, item.getNumber());
     }
 
     @Test
     @DisplayName("Test setters et getters")
     void testSettersAndGetters() {
-        NavigationItem item = new NavigationItem();
+        NavigationItem item = new NavigationItem(new FontIcon(), "test");
 
         FontIcon icon = new FontIcon();
         item.setIcon(icon);
@@ -102,24 +86,5 @@ class NavigationItemTest {
         String imageUrl = "https://example.com/new-image.jpg";
         item.setImageUrl(imageUrl);
         assertEquals(imageUrl, item.getImageUrl());
-
-        // Le séparateur est final et ne peut pas être modifié
-        assertTrue(item.isSeparator());
-    }
-
-    @Test
-    @DisplayName("Test immutabilité de la propriété séparateur")
-    void testSeparatorImmutability() {
-        NavigationItem separator = new NavigationItem();
-        NavigationItem nonSeparator = new NavigationItem(new FontIcon(), "Test");
-
-        assertTrue(separator.isSeparator());
-        assertFalse(nonSeparator.isSeparator());
-
-        // Même après avoir modifié d'autres propriétés, isSeparator ne change pas
-        separator.setTitle("Titre");
-        separator.setNumber(5);
-
-        assertTrue(separator.isSeparator());
     }
 }

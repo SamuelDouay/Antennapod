@@ -1,14 +1,15 @@
 package com.podcast.antennapod.view.item;
 
-public class EpisodeItem {
-    private String urlImage;
-    private boolean favorite;
-    private String name;
-    private String duration;
-    private String date;
-    private String size;
+public class EpisodeItem extends Item {
+    private final String urlImage;
+    private final boolean favorite;
+    private final String name;
+    private final String duration;
+    private final String date;
+    private final String size;
 
     public EpisodeItem(String urlImage, boolean favorite, String name, String duration, String date, String size) {
+        super();
         this.urlImage = urlImage;
         this.favorite = favorite;
         this.name = name;

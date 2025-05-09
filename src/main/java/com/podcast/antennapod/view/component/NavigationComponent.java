@@ -7,12 +7,14 @@ import javafx.geometry.Pos;
 import javafx.scene.Node;
 import javafx.scene.control.Label;
 import javafx.scene.image.ImageView;
-import javafx.scene.layout.HBox;
-import javafx.scene.layout.Priority;
-import javafx.scene.layout.Region;
+import javafx.scene.layout.*;
+import javafx.scene.paint.Color;
+import javafx.scene.text.Font;
+import javafx.scene.text.FontPosture;
+import javafx.scene.text.FontWeight;
+import org.kordamp.ikonli.javafx.FontIcon;
 
 public class NavigationComponent {
-    // Constants
     private static final double ICON_SIZE = 25.0;
     private static final double TITLE_MAX_WIDTH = 140.0;
     private static final double MAX_WIDTH = 224.0;
@@ -28,19 +30,21 @@ public class NavigationComponent {
             ImageView imageView = new ImageView(item.getImageUrl());
             imageView.setFitWidth(ICON_SIZE);
             imageView.setFitHeight(ICON_SIZE);
-            return createNavigationBase(imageView, item.getTitle(), item.getNumber());
+            return createNavigationBase(imageView, item);
 
         } else {
             item.getIcon().setIconSize((int) ICON_SIZE);
             item.getIcon().setIconColor(ColorThemeConstants.getGrey800());
-            return createNavigationBase(item.getIcon(), item.getTitle(), item.getNumber());
+            return createNavigationBase(item.getIcon(), item);
         }
     }
 
-    private static HBox createNavigationBase(Node graphic, String title, int number) {
+    private static HBox createNavigationBase(Node graphic, NavigationItem item) {
+
         // Create and configure title label
-        Label titleLabel = new Label(title);
+        Label titleLabel = new Label(item.getTitle());
         titleLabel.setMaxWidth(TITLE_MAX_WIDTH);
+        titleLabel.setFont(Font.font("Inter", FontPosture.REGULAR, 12));
         titleLabel.setTextFill(ColorThemeConstants.getGrey800());
 
         // Create icon and title container
@@ -59,15 +63,38 @@ public class NavigationComponent {
         mainBox.setMaxWidth(MAX_WIDTH);
         mainBox.setAlignment(Pos.CENTER);
 
-        if (number != 0) {
-            Label numberLabel = new Label(String.valueOf(number));
+        if (item.getNumber() != 0) {
+            Label numberLabel = new Label(String.valueOf(item.getNumber()));
             numberLabel.setTextFill(ColorThemeConstants.getMain950());
+            numberLabel.setFont(Font.font("Inter", FontWeight.BOLD, 10));
             mainBox.getChildren().addAll(iconTitleBox, spacer, numberLabel);
         } else {
             mainBox.getChildren().addAll(iconTitleBox, spacer);
         }
-        mainBox.setUserData(graphic);
-
+        updateAppearance(mainBox, item.isSelected());
         return mainBox;
+    }
+
+    public static void updateAppearance(HBox mainBox, boolean isSelected) {
+        Label titleLabel = (Label) ((HBox) mainBox.getChildren().getFirst()).getChildren().get(1);
+        Node icon = ((HBox) mainBox.getChildren().getFirst()).getChildren().get(0);
+
+        if (isSelected) {
+            titleLabel.setTextFill(ColorThemeConstants.getMain950());
+            titleLabel.setFont(Font.font("Inter", FontWeight.BOLD, 12));
+            mainBox.setBackground(new Background(new BackgroundFill(ColorThemeConstants.getMain100(), null, null)));
+            if (!(icon instanceof FontIcon)) {
+                return;
+            }
+            ((FontIcon) icon).setIconColor(ColorThemeConstants.getMain950());
+        } else {
+            titleLabel.setTextFill(ColorThemeConstants.getGrey800());
+            titleLabel.setFont(Font.font("Inter", FontPosture.REGULAR, 12));
+            mainBox.setBackground(new Background(new BackgroundFill(Color.TRANSPARENT, null, null)));
+            if (!(icon instanceof FontIcon)) {
+                return;
+            }
+            ((FontIcon) icon).setIconColor(ColorThemeConstants.getGrey800());
+        }
     }
 }
