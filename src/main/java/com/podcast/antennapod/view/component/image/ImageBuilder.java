@@ -20,16 +20,16 @@ import javafx.scene.text.Text;
 import java.util.concurrent.ConcurrentHashMap;
 
 public class ImageBuilder {
-    private static final String font = "Inter";
-    private static final double padding = Constant.PODCAST_CARD_DEFAULT_PADDING;
-    private static final double imageSize = Constant.PODCAST_CARD_DEFAULT_IMAGE_WIDTH_HEIGHT;
-    private static final double width = imageSize + 2 * padding;
+    private static final String FONT = "Inter";
+    private static final double PADDING = Constant.PODCAST_CARD_DEFAULT_PADDING;
+    private static final double IMAGE_SIZE = Constant.PODCAST_CARD_DEFAULT_IMAGE_WIDTH_HEIGHT;
+    private static final double WIDTH = IMAGE_SIZE + 2 * PADDING;
     private final ConcurrentHashMap<String, Image> imageCache = new ConcurrentHashMap<>();
     private final BoxBlur backgroundBlur = new BoxBlur(200, 200, 5);
     private final Color overlayColor = Color.hsb(230.0, 0.17, 0.14, 0.2);
-    private final Font titleFont = Font.font(font, FontWeight.BOLD, 15);
-    private final Font dateFont = Font.font(font, FontPosture.REGULAR, 10);
-    private final Font countFont = Font.font(font, FontWeight.MEDIUM, 12);
+    private final Font titleFont = Font.font(FONT, FontWeight.BOLD, 15);
+    private final Font dateFont = Font.font(FONT, FontPosture.REGULAR, 10);
+    private final Font countFont = Font.font(FONT, FontWeight.MEDIUM, 12);
     private final CornerRadii badgeCorner = new CornerRadii(99.0);
     private final Insets badgePadding = new Insets(2.0, 7.0, 2.0, 7.0);
     private final Insets badgeMargin = new Insets(10, 0, 0, 10);
@@ -62,7 +62,7 @@ public class ImageBuilder {
         Image image = getOrLoadImage(imageUrl);
 
         // Calculer la hauteur du contenu
-        double contentHeight = imageSize;
+        double contentHeight = IMAGE_SIZE;
         if (title != null) contentHeight += 25.0;
         if (date != null) contentHeight += 25.0;
 
@@ -81,7 +81,7 @@ public class ImageBuilder {
     }
 
     private StackPane createContainer(double contentHeight) {
-        double containerWidth = width;
+        double containerWidth = WIDTH;
         double containerHeight = calculateTotalHeight(contentHeight);
 
         StackPane stackPane = new StackPane();
@@ -93,13 +93,13 @@ public class ImageBuilder {
         stackPane.setClip(clip);
 
         stackPane.setAlignment(Pos.CENTER);
-        stackPane.setPadding(new Insets(padding));
+        stackPane.setPadding(new Insets(PADDING));
 
         return stackPane;
     }
 
     private ImageView createBlurredBackground(Image image, double height) {
-        double totalWidth = width;
+        double totalWidth = WIDTH;
         double totalHeight = calculateTotalHeight(height);
 
         ImageView blurredBackground = new ImageView(image);
@@ -120,13 +120,13 @@ public class ImageBuilder {
     }
 
     private Rectangle createColorOverlay(double height) {
-        Rectangle overlay = new Rectangle(width, calculateTotalHeight(height));
+        Rectangle overlay = new Rectangle(WIDTH, calculateTotalHeight(height));
         overlay.setFill(overlayColor);
         return overlay;
     }
 
     private double calculateTotalHeight(double contentHeight) {
-        return contentHeight + 2 * padding;
+        return contentHeight + 2 * PADDING;
     }
 
     private Image getOrLoadImage(String url) {
@@ -150,8 +150,8 @@ public class ImageBuilder {
 
     private ImageView createMainImage(Image image) {
         ImageView imageView = new ImageView(image);
-        imageView.setFitWidth(imageSize);
-        imageView.setFitHeight(imageSize);
+        imageView.setFitWidth(IMAGE_SIZE);
+        imageView.setFitHeight(IMAGE_SIZE);
         imageView.setPreserveRatio(true);
         imageView.setSmooth(true);  // Meilleure qualité d'image
         imageView.setCache(true);   // Activer le cache pour de meilleures performances
@@ -178,13 +178,13 @@ public class ImageBuilder {
         label.setTextFill(color);
         label.setFont(font);
         label.setWrapText(true);
-        label.setMaxWidth(imageSize);
+        label.setMaxWidth(IMAGE_SIZE);
         label.setAlignment(Pos.BASELINE_LEFT);
 
         // Optimisation pour éviter le recalcul de mise en page
         Text helper = new Text(text);
         helper.setFont(font);
-        double preferredWidth = Math.min(helper.getLayoutBounds().getWidth(), imageSize);
+        double preferredWidth = Math.min(helper.getLayoutBounds().getWidth(), IMAGE_SIZE);
         label.setPrefWidth(preferredWidth);
 
         return label;
