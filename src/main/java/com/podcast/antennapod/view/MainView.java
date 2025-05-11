@@ -81,6 +81,7 @@ public class MainView extends Application {
         scrollPane.setHbarPolicy(ScrollPane.ScrollBarPolicy.NEVER);
         scrollPane.setBackground(Background.EMPTY);
         scrollPane.setFitToWidth(true);
+        scrollPane.setVvalue(0);
         HBox.setHgrow(scrollPane, Priority.ALWAYS);
 
         scrollPane.setContent(HomeContainer.getHomeContainer());

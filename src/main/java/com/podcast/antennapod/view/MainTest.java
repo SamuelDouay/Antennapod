@@ -3,7 +3,7 @@ package com.podcast.antennapod.view;
 import com.podcast.antennapod.view.component.BadgeComponent;
 import com.podcast.antennapod.view.component.ButtonComponent;
 import com.podcast.antennapod.view.component.EpisodeComponent;
-import com.podcast.antennapod.view.component.PodcastComponent;
+import com.podcast.antennapod.view.component.image.ImageComponentFactory;
 import com.podcast.antennapod.view.item.EpisodeItem;
 import com.podcast.antennapod.view.item.NavigationItem;
 import com.podcast.antennapod.view.util.BadgeType;
@@ -236,26 +236,28 @@ public class MainTest extends Application {
 
     private HBox createPodcastRow() {
         HBox hBox = new HBox(15.0);
+        ImageComponentFactory factory = new ImageComponentFactory();
 
         // Ajouter les cartes de podcast
-        hBox.getChildren().add(PodcastComponent.createPodcastCard(String.valueOf(MainTest.class.getResource("/images/ex.jpeg"))));
-        hBox.getChildren().add(PodcastComponent.createPodcastCard(String.valueOf(MainTest.class.getResource("/images/heure_du_monde.png"))));
-        hBox.getChildren().add(PodcastComponent.createPodcastCard(String.valueOf(MainTest.class.getResource("/images/small_talk.jpg"))));
-        hBox.getChildren().add(PodcastComponent.createPodcastCard(String.valueOf(MainTest.class.getResource("/images/underscore.jpeg"))));
-        hBox.getChildren().add(PodcastComponent.createPodcastCard(String.valueOf(MainTest.class.getResource("/images/zerl.jpg"))));
+        hBox.getChildren().add(factory.createImageCard(String.valueOf(MainTest.class.getResource("/images/ex.jpeg"))));
+        hBox.getChildren().add(factory.createImageCard(String.valueOf(MainTest.class.getResource("/images/heure_du_monde.png"))));
+        hBox.getChildren().add(factory.createImageCard(String.valueOf(MainTest.class.getResource("/images/small_talk.jpg"))));
+        hBox.getChildren().add(factory.createImageCard(String.valueOf(MainTest.class.getResource("/images/underscore.jpeg"))));
+        hBox.getChildren().add(factory.createImageCard(String.valueOf(MainTest.class.getResource("/images/zerl.jpg"))));
 
         return hBox;
     }
 
     private HBox createPodcastWithInfoRow() {
         HBox hBox = new HBox(15.0);
+        ImageComponentFactory factory = new ImageComponentFactory();
 
         // Ajouter les cartes de podcast avec titre et nombre d'épisodes
-        hBox.getChildren().add(PodcastComponent.createPodcastCard(String.valueOf(MainTest.class.getResource("/images/ex.jpeg")), "EX...", 10));
-        hBox.getChildren().add(PodcastComponent.createPodcastCard(String.valueOf(MainTest.class.getResource("/images/heure_du_monde.png")), "L'heure du monde", 0));
-        hBox.getChildren().add(PodcastComponent.createPodcastCard(String.valueOf(MainTest.class.getResource("/images/small_talk.jpg")), "Small Talk", 125));
-        hBox.getChildren().add(PodcastComponent.createPodcastCard(String.valueOf(MainTest.class.getResource("/images/underscore.jpeg")), "Undersore", 25));
-        hBox.getChildren().add(PodcastComponent.createPodcastCard(String.valueOf(MainTest.class.getResource("/images/zerl.jpg")), "Zack en roue libre", 5));
+        hBox.getChildren().add(factory.createImageCard(String.valueOf(MainTest.class.getResource("/images/ex.jpeg")), "EX...", 10));
+        hBox.getChildren().add(factory.createImageCard(String.valueOf(MainTest.class.getResource("/images/heure_du_monde.png")), "L'heure du monde", 0));
+        hBox.getChildren().add(factory.createImageCard(String.valueOf(MainTest.class.getResource("/images/small_talk.jpg")), "Small Talk", 125));
+        hBox.getChildren().add(factory.createImageCard(String.valueOf(MainTest.class.getResource("/images/underscore.jpeg")), "Undersore", 25));
+        hBox.getChildren().add(factory.createImageCard(String.valueOf(MainTest.class.getResource("/images/zerl.jpg")), "Zack en roue libre", 5));
 
         return hBox;
     }

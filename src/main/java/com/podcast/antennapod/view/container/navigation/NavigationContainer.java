@@ -69,7 +69,7 @@ public class NavigationContainer {
     private static ScrollPane createScrollList() {
         VBox box = createList();
 
-        for (int i = 0; i < 2; i++) {
+        for (int i = 0; i < 5; i++) {
             NavigationItem podcast1 = new NavigationItem(String.valueOf(NavigationContainer.class.getResource("/images/zerl.jpg")), "Zack en Roue Libre by Zack Nani", 12);
             NavigationItem podcast2 = new NavigationItem(String.valueOf(NavigationContainer.class.getResource("/images/heure_du_monde.png")), "L'heure du monde");
             NavigationItem podcast3 = new NavigationItem(String.valueOf(NavigationContainer.class.getResource("/images/small_talk.jpg")), "Small Tallk - Kobini", 12);
@@ -95,13 +95,19 @@ public class NavigationContainer {
 
         }
 
+        ScrollPane scrollPane = getScrollPane(box);
+        VBox.setVgrow(scrollPane, Priority.ALWAYS);
+        return scrollPane;
+    }
+
+    private static ScrollPane getScrollPane(VBox box) {
         ScrollPane scrollPane = new ScrollPane(box);
         scrollPane.setFitToWidth(true);
+        scrollPane.setFitToHeight(true);
         scrollPane.setHbarPolicy(ScrollPane.ScrollBarPolicy.NEVER);
         scrollPane.setVbarPolicy(ScrollPane.ScrollBarPolicy.NEVER);
         scrollPane.setBackground(new Background(new BackgroundFill(ColorThemeConstants.getMain000(), null, null)));
         scrollPane.setBorder(new Border(new BorderStroke(ColorThemeConstants.getGrey950(), BorderStrokeStyle.SOLID, null, new BorderWidths(1.0, 0, 0, 0))));
-        VBox.setVgrow(scrollPane, Priority.ALWAYS);
         return scrollPane;
     }
 
