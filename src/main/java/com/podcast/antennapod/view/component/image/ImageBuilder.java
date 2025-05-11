@@ -20,7 +20,10 @@ import javafx.scene.text.Text;
 import java.util.concurrent.ConcurrentHashMap;
 
 public class ImageBuilder {
-    private final String font = "Inter";
+    private static final String font = "Inter";
+    private static final double padding = Constant.PODCAST_CARD_DEFAULT_PADDING;
+    private static final double imageSize = Constant.PODCAST_CARD_DEFAULT_IMAGE_WIDTH_HEIGHT;
+    private static final double width = imageSize + 2 * padding;
     private final ConcurrentHashMap<String, Image> imageCache = new ConcurrentHashMap<>();
     private final BoxBlur backgroundBlur = new BoxBlur(200, 200, 5);
     private final Color overlayColor = Color.hsb(230.0, 0.17, 0.14, 0.2);
@@ -30,9 +33,6 @@ public class ImageBuilder {
     private final CornerRadii badgeCorner = new CornerRadii(99.0);
     private final Insets badgePadding = new Insets(2.0, 7.0, 2.0, 7.0);
     private final Insets badgeMargin = new Insets(10, 0, 0, 10);
-    private final double imageSize = Constant.PODCAST_CARD_DEFAULT_IMAGE_WIDTH_HEIGHT;
-    private final double padding = Constant.PODCAST_CARD_DEFAULT_PADDING;
-    private final double width = imageSize + 2 * padding;
     private final String imageUrl;
     private String title;
     private String date;
@@ -105,13 +105,13 @@ public class ImageBuilder {
         ImageView blurredBackground = new ImageView(image);
 
         // Dimensionner l'image d'arrière-plan pour qu'elle couvre entièrement
-        double SCALE_FACTOR = 1.2;
-        blurredBackground.setFitWidth(totalWidth * SCALE_FACTOR);
-        blurredBackground.setFitHeight(totalHeight * SCALE_FACTOR);
+        double scaleFactor = 1.2;
+        blurredBackground.setFitWidth(totalWidth * scaleFactor);
+        blurredBackground.setFitHeight(totalHeight * scaleFactor);
 
         // Centrer l'image agrandie
-        blurredBackground.setTranslateX((totalWidth * SCALE_FACTOR - totalWidth) / -2);
-        blurredBackground.setTranslateY((totalHeight * SCALE_FACTOR - totalHeight) / -2);
+        blurredBackground.setTranslateX((totalWidth * scaleFactor - totalWidth) / -2);
+        blurredBackground.setTranslateY((totalHeight * scaleFactor - totalHeight) / -2);
 
         // Appliquer l'effet de flou
         blurredBackground.setEffect(backgroundBlur);

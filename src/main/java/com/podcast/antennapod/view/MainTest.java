@@ -28,6 +28,8 @@ import org.kordamp.ikonli.materialdesign2.MaterialDesignP;
 
 public class MainTest extends Application {
     public static final Logger logger = LogManager.getLogger(MainTest.class);
+    public static final String IMAGES_HEURE_DU_MONDE_PNG = "/images/heure_du_monde.png";
+    public static final String TITLE_EXAMPLE = "Lil Nas X, une icône noire, et gay et flamboyante [REDIF]";
     private Scene scene;
     private ListView<NavigationItem> navigationListView;
     private Label currentSelectionLabel;
@@ -132,16 +134,16 @@ public class MainTest extends Application {
         mainContainer.setPadding(new Insets(10));
 
 
-        EpisodeItem episodeItem = new EpisodeItem(String.valueOf(MainTest.class.getResource("/images/heure_du_monde.png")),
+        EpisodeItem episodeItem = new EpisodeItem(String.valueOf(MainTest.class.getResource(IMAGES_HEURE_DU_MONDE_PNG)),
                 false,
-                "Lil Nas X, une icône noire, et gay et flamboyante [REDIF]",
+                TITLE_EXAMPLE,
                 "00:20:40",
                 "28/10/2024",
                 "18 Mo");
 
-        EpisodeItem episodeItem1 = new EpisodeItem(String.valueOf(MainTest.class.getResource("/images/heure_du_monde.png")),
+        EpisodeItem episodeItem1 = new EpisodeItem(String.valueOf(MainTest.class.getResource(IMAGES_HEURE_DU_MONDE_PNG)),
                 true,
-                "Lil Nas X, une icône noire, et gay et flamboyante [REDIF]",
+                TITLE_EXAMPLE,
                 "00:20:40",
                 "28/10/2024",
                 "18 Mo");
@@ -240,7 +242,7 @@ public class MainTest extends Application {
 
         // Ajouter les cartes de podcast
         hBox.getChildren().add(factory.createImageCard(String.valueOf(MainTest.class.getResource("/images/ex.jpeg"))));
-        hBox.getChildren().add(factory.createImageCard(String.valueOf(MainTest.class.getResource("/images/heure_du_monde.png"))));
+        hBox.getChildren().add(factory.createImageCard(String.valueOf(MainTest.class.getResource(IMAGES_HEURE_DU_MONDE_PNG))));
         hBox.getChildren().add(factory.createImageCard(String.valueOf(MainTest.class.getResource("/images/small_talk.jpg"))));
         hBox.getChildren().add(factory.createImageCard(String.valueOf(MainTest.class.getResource("/images/underscore.jpeg"))));
         hBox.getChildren().add(factory.createImageCard(String.valueOf(MainTest.class.getResource("/images/zerl.jpg"))));
@@ -254,7 +256,7 @@ public class MainTest extends Application {
 
         // Ajouter les cartes de podcast avec titre et nombre d'épisodes
         hBox.getChildren().add(factory.createImageCard(String.valueOf(MainTest.class.getResource("/images/ex.jpeg")), "EX...", 10));
-        hBox.getChildren().add(factory.createImageCard(String.valueOf(MainTest.class.getResource("/images/heure_du_monde.png")), "L'heure du monde", 0));
+        hBox.getChildren().add(factory.createImageCard(String.valueOf(MainTest.class.getResource(IMAGES_HEURE_DU_MONDE_PNG)), "L'heure du monde", 0));
         hBox.getChildren().add(factory.createImageCard(String.valueOf(MainTest.class.getResource("/images/small_talk.jpg")), "Small Talk", 125));
         hBox.getChildren().add(factory.createImageCard(String.valueOf(MainTest.class.getResource("/images/underscore.jpeg")), "Undersore", 25));
         hBox.getChildren().add(factory.createImageCard(String.valueOf(MainTest.class.getResource("/images/zerl.jpg")), "Zack en roue libre", 5));
