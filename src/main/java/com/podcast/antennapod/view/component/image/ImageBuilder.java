@@ -20,25 +20,18 @@ import javafx.scene.text.Text;
 import java.util.concurrent.ConcurrentHashMap;
 
 public class ImageBuilder {
-    private static final double SCALE_FACTOR = 1.2;
-    private static final double PADDING = Constant.PODCAST_CARD_DEFAULT_PADDING;
-    private static final double IMAGE_SIZE = Constant.PODCAST_CARD_DEFAULT_IMAGE_WIDTH_HEIGHT;
-    public static final double WIDTH = calculateTotalWidth();
-
-    // Effets et styles préchargés
-    private static final BoxBlur BACKGROUND_BLUR = new BoxBlur(200, 200, 5);
-    private static final Color OVERLAY_COLOR = Color.hsb(230.0, 0.17, 0.14, 0.2);
-    private static final Font TITLE_FONT = Font.font("Inter", FontWeight.BOLD, 15);
-    private static final Font DATE_FONT = Font.font("Inter", FontPosture.REGULAR, 10);
-    private static final Font COUNT_FONT = Font.font("Inter", FontWeight.MEDIUM, 12);
-    private static final CornerRadii BADGE_CORNER = new CornerRadii(99.0);
-    private static final Insets BADGE_PADDING = new Insets(2.0, 7.0, 2.0, 7.0);
-    private static final Insets BADGE_MARGIN = new Insets(10, 0, 0, 10);
-
-
-    // Cache d'images
     private static final ConcurrentHashMap<String, Image> IMAGE_CACHE = new ConcurrentHashMap<>();
-
+    private final BoxBlur BACKGROUND_BLUR = new BoxBlur(200, 200, 5);
+    private final Color OVERLAY_COLOR = Color.hsb(230.0, 0.17, 0.14, 0.2);
+    private final Font TITLE_FONT = Font.font("Inter", FontWeight.BOLD, 15);
+    private final Font DATE_FONT = Font.font("Inter", FontPosture.REGULAR, 10);
+    private final Font COUNT_FONT = Font.font("Inter", FontWeight.MEDIUM, 12);
+    private final CornerRadii BADGE_CORNER = new CornerRadii(99.0);
+    private final Insets BADGE_PADDING = new Insets(2.0, 7.0, 2.0, 7.0);
+    private final Insets BADGE_MARGIN = new Insets(10, 0, 0, 10);
+    private final double IMAGE_SIZE = Constant.PODCAST_CARD_DEFAULT_IMAGE_WIDTH_HEIGHT;
+    private final double PADDING = Constant.PODCAST_CARD_DEFAULT_PADDING;
+    public final double WIDTH = IMAGE_SIZE + 2 * PADDING;
     private final String imageUrl;
     private String title;
     private String date;
@@ -46,18 +39,6 @@ public class ImageBuilder {
 
     public ImageBuilder(String imageUrl) {
         this.imageUrl = imageUrl;
-    }
-
-    private static double calculateTotalWidth() {
-        return IMAGE_SIZE + 2 * PADDING;
-    }
-
-    private static double calculateTotalHeight(double contentHeight) {
-        return contentHeight + 2 * PADDING;
-    }
-
-    private static Image getOrLoadImage(String url) {
-        return IMAGE_CACHE.computeIfAbsent(url, Image::new);
     }
 
     public ImageBuilder withTitle(String title) {
@@ -123,6 +104,7 @@ public class ImageBuilder {
         ImageView blurredBackground = new ImageView(image);
 
         // Dimensionner l'image d'arrière-plan pour qu'elle couvre entièrement
+        double SCALE_FACTOR = 1.2;
         blurredBackground.setFitWidth(totalWidth * SCALE_FACTOR);
         blurredBackground.setFitHeight(totalHeight * SCALE_FACTOR);
 
@@ -140,6 +122,14 @@ public class ImageBuilder {
         Rectangle overlay = new Rectangle(WIDTH, calculateTotalHeight(height));
         overlay.setFill(OVERLAY_COLOR);
         return overlay;
+    }
+
+    private double calculateTotalHeight(double contentHeight) {
+        return contentHeight + 2 * PADDING;
+    }
+
+    private Image getOrLoadImage(String url) {
+        return IMAGE_CACHE.computeIfAbsent(url, Image::new);
     }
 
     private VBox createContent(Image image) {

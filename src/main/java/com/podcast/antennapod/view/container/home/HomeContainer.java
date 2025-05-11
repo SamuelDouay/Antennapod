@@ -15,6 +15,9 @@ import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
 
 public class HomeContainer {
+
+    public static final ImageComponentFactory FACTORY = new ImageComponentFactory();
+
     private HomeContainer() {
 
     }
@@ -106,8 +109,6 @@ public class HomeContainer {
 
     private static ScrollPane getClassic() {
         ScrollPane scrollPane = new ScrollPane();
-        ImageComponentFactory factory = new ImageComponentFactory();
-
         scrollPane.setVbarPolicy(ScrollPane.ScrollBarPolicy.NEVER);
         scrollPane.setHbarPolicy(ScrollPane.ScrollBarPolicy.NEVER);
         scrollPane.setBackground(new Background(new BackgroundFill(ColorThemeConstants.getGrey000(), null, null)));
@@ -119,14 +120,14 @@ public class HomeContainer {
         box.setBackground(new Background(new BackgroundFill(ColorThemeConstants.getGrey000(), null, null)));
         HBox.setHgrow(box, Priority.ALWAYS);
 
-        box.getChildren().add(factory.createImageCard(String.valueOf(MainTest.class.getResource("/images/ex.jpeg"))));
-        box.getChildren().add(factory.createImageCard(String.valueOf(MainTest.class.getResource("/images/heure_du_monde.png"))));
-        box.getChildren().add(factory.createImageCard(String.valueOf(MainTest.class.getResource("/images/small_talk.jpg"))));
-        box.getChildren().add(factory.createImageCard(String.valueOf(MainTest.class.getResource("/images/underscore.jpeg"))));
-        box.getChildren().add(factory.createImageCard(String.valueOf(MainTest.class.getResource("/images/zerl.jpg"))));
-        box.getChildren().add(factory.createImageCard(String.valueOf(MainTest.class.getResource("/images/underscore.jpeg"))));
-        box.getChildren().add(factory.createImageCard(String.valueOf(MainTest.class.getResource("/images/zerl.jpg"))));
-        box.getChildren().add(factory.createImageCard(String.valueOf(MainTest.class.getResource("/images/small_talk.jpg"))));
+        box.getChildren().add(FACTORY.createImageCard(String.valueOf(MainTest.class.getResource("/images/ex.jpeg"))));
+        box.getChildren().add(FACTORY.createImageCard(String.valueOf(MainTest.class.getResource("/images/heure_du_monde.png"))));
+        box.getChildren().add(FACTORY.createImageCard(String.valueOf(MainTest.class.getResource("/images/small_talk.jpg"))));
+        box.getChildren().add(FACTORY.createImageCard(String.valueOf(MainTest.class.getResource("/images/underscore.jpeg"))));
+        box.getChildren().add(FACTORY.createImageCard(String.valueOf(MainTest.class.getResource("/images/zerl.jpg"))));
+        box.getChildren().add(FACTORY.createImageCard(String.valueOf(MainTest.class.getResource("/images/underscore.jpeg"))));
+        box.getChildren().add(FACTORY.createImageCard(String.valueOf(MainTest.class.getResource("/images/zerl.jpg"))));
+        box.getChildren().add(FACTORY.createImageCard(String.valueOf(MainTest.class.getResource("/images/small_talk.jpg"))));
 
         scrollPane.setContent(box);
         return scrollPane;
@@ -134,8 +135,6 @@ public class HomeContainer {
 
     private static ScrollPane getListening() {
         ScrollPane scrollPane = new ScrollPane();
-        ImageComponentFactory factory = new ImageComponentFactory();
-
         scrollPane.setVbarPolicy(ScrollPane.ScrollBarPolicy.NEVER);
         scrollPane.setHbarPolicy(ScrollPane.ScrollBarPolicy.NEVER);
         scrollPane.setBackground(new Background(new BackgroundFill(ColorThemeConstants.getGrey000(), null, null)));
@@ -147,14 +146,14 @@ public class HomeContainer {
         box.setBackground(new Background(new BackgroundFill(ColorThemeConstants.getGrey000(), null, null)));
         HBox.setHgrow(box, Priority.ALWAYS);
 
-        box.getChildren().add(factory.createImageCard(String.valueOf(MainTest.class.getResource("/images/ex.jpeg")), "Lil Nas X, une icône noire, et gay et flamboyante [REDIF]", "24/05/25"));
-        box.getChildren().add(factory.createImageCard(String.valueOf(MainTest.class.getResource("/images/heure_du_monde.png")), "Lil Nas X, une icône noire, et gay et flamboyante [REDIF]", "24/12/24"));
-        box.getChildren().add(factory.createImageCard(String.valueOf(MainTest.class.getResource("/images/small_talk.jpg")), "Lil Nas X, une icône noire, et gay et flamboyante [REDIF]", "11/05/25"));
-        box.getChildren().add(factory.createImageCard(String.valueOf(MainTest.class.getResource("/images/underscore.jpeg")), "Lil Nas X, une icône noire, et gay et flamboyante [REDIF]", "15/05/24"));
-        box.getChildren().add(factory.createImageCard(String.valueOf(MainTest.class.getResource("/images/zerl.jpg")), "Lil Nas X, une icône noire, et gay et flamboyante [REDIF]", "09/03/24"));
-        box.getChildren().add(factory.createImageCard(String.valueOf(MainTest.class.getResource("/images/underscore.jpeg")), "Lil Nas X, une icône noire, et gay et flamboyante [REDIF]", "12/12/25"));
-        box.getChildren().add(factory.createImageCard(String.valueOf(MainTest.class.getResource("/images/zerl.jpg")), "Lil Nas X, une icône noire, et gay et flamboyante [REDIF]", "16/11/24"));
-        box.getChildren().add(factory.createImageCard(String.valueOf(MainTest.class.getResource("/images/small_talk.jpg")), "Lil Nas X, une icône noire, et gay et flamboyante [REDIF]", "12/03/24"));
+        box.getChildren().add(FACTORY.createImageCard(String.valueOf(MainTest.class.getResource("/images/ex.jpeg")), "Lil Nas X, une icône noire, et gay et flamboyante [REDIF]", "24/05/25"));
+        box.getChildren().add(FACTORY.createImageCard(String.valueOf(MainTest.class.getResource("/images/heure_du_monde.png")), "Lil Nas X, une icône noire, et gay et flamboyante [REDIF]", "24/12/24"));
+        box.getChildren().add(FACTORY.createImageCard(String.valueOf(MainTest.class.getResource("/images/small_talk.jpg")), "Lil Nas X, une icône noire, et gay et flamboyante [REDIF]", "11/05/25"));
+        box.getChildren().add(FACTORY.createImageCard(String.valueOf(MainTest.class.getResource("/images/underscore.jpeg")), "Lil Nas X, une icône noire, et gay et flamboyante [REDIF]", "15/05/24"));
+        box.getChildren().add(FACTORY.createImageCard(String.valueOf(MainTest.class.getResource("/images/zerl.jpg")), "Lil Nas X, une icône noire, et gay et flamboyante [REDIF]", "09/03/24"));
+        box.getChildren().add(FACTORY.createImageCard(String.valueOf(MainTest.class.getResource("/images/underscore.jpeg")), "Lil Nas X, une icône noire, et gay et flamboyante [REDIF]", "12/12/25"));
+        box.getChildren().add(FACTORY.createImageCard(String.valueOf(MainTest.class.getResource("/images/zerl.jpg")), "Lil Nas X, une icône noire, et gay et flamboyante [REDIF]", "16/11/24"));
+        box.getChildren().add(FACTORY.createImageCard(String.valueOf(MainTest.class.getResource("/images/small_talk.jpg")), "Lil Nas X, une icône noire, et gay et flamboyante [REDIF]", "12/03/24"));
 
         scrollPane.setContent(box);
         return scrollPane;
