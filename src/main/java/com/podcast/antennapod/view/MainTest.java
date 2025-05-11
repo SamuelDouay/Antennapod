@@ -46,7 +46,7 @@ public class MainTest extends Application {
         scene = new Scene(root, 320, 240);
 
         // Ajouter un écouteur pour mettre à jour l'interface lors du changement de thème
-        ColorThemeConstants.addThemeChangeListener(newTheme -> refreshInterface());
+        ColorThemeConstants.addThemeChangeListener(_ -> refreshInterface());
 
         // Finaliser la configuration du stage
         stage.setScene(scene);
