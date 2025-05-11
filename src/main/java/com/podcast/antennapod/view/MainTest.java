@@ -5,7 +5,6 @@ import com.podcast.antennapod.view.component.ButtonComponent;
 import com.podcast.antennapod.view.component.EpisodeComponent;
 import com.podcast.antennapod.view.component.image.ImageComponentFactory;
 import com.podcast.antennapod.view.item.EpisodeItem;
-import com.podcast.antennapod.view.item.NavigationItem;
 import com.podcast.antennapod.view.util.BadgeType;
 import com.podcast.antennapod.view.util.ColorThemeConstants;
 import com.podcast.antennapod.view.util.ThemeType;
@@ -16,7 +15,6 @@ import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
-import javafx.scene.control.ListView;
 import javafx.scene.layout.*;
 import javafx.scene.text.Font;
 import javafx.stage.Stage;
@@ -31,7 +29,6 @@ public class MainTest extends Application {
     public static final String IMAGES_HEURE_DU_MONDE_PNG = "/images/heure_du_monde.png";
     public static final String TITLE_EXAMPLE = "Lil Nas X, une icône noire, et gay et flamboyante [REDIF]";
     private Scene scene;
-    private ListView<NavigationItem> navigationListView;
     private Label currentSelectionLabel;
 
     public static void main(String[] args) {
@@ -62,15 +59,9 @@ public class MainTest extends Application {
     private void refreshInterface() {
         // Sauvegarder l'état actuel (si nécessaire)
         String currentSelection = currentSelectionLabel.getText();
-        int selectedIndex = navigationListView.getSelectionModel().getSelectedIndex();
 
         // Créer une nouvelle interface
         AnchorPane newRoot = createInterface();
-
-        // Restaurer l'état précédent
-        if (selectedIndex >= 0) {
-            navigationListView.getSelectionModel().select(selectedIndex);
-        }
         currentSelectionLabel.setText(currentSelection);
 
         // Mettre à jour la scène
@@ -81,38 +72,14 @@ public class MainTest extends Application {
     private AnchorPane createInterface() {
         AnchorPane root = new AnchorPane();
 
-        // Créer les composants principaux
-        VBox menuContainer = createNavigationMenu();
         VBox mainContainer = createMainContainer();
 
         // Ajouter les composants au root
-        root.getChildren().addAll(menuContainer, mainContainer);
+        root.getChildren().addAll(mainContainer);
 
         root.setBackground(new Background(new BackgroundFill(ColorThemeConstants.getGrey000(), null, null)));
 
         return root;
-    }
-
-    private VBox createNavigationMenu() {
-        VBox menu = new VBox();
-        menu.setPrefWidth(240.0);
-
-        // Créer la liste de navigation
-        //navigationListView = NavigationContainer.createMenu();
-        menu.getChildren().add(navigationListView);
-
-        // Configurer les écouteurs
-        navigationListView.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> {
-            if (newValue != null && newValue.getTitle() != null) {
-                currentSelectionLabel.setText("Sélection actuelle : " + newValue.getTitle());
-            }
-        });
-
-        // Configurer le positionnement
-        AnchorPane.setLeftAnchor(menu, 0.0);
-        AnchorPane.setTopAnchor(menu, 0.0);
-
-        return menu;
     }
 
     private VBox createMainContainer() {
