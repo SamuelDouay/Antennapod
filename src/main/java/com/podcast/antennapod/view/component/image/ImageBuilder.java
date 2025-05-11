@@ -20,18 +20,19 @@ import javafx.scene.text.Text;
 import java.util.concurrent.ConcurrentHashMap;
 
 public class ImageBuilder {
-    private static final ConcurrentHashMap<String, Image> IMAGE_CACHE = new ConcurrentHashMap<>();
-    private final BoxBlur BACKGROUND_BLUR = new BoxBlur(200, 200, 5);
-    private final Color OVERLAY_COLOR = Color.hsb(230.0, 0.17, 0.14, 0.2);
-    private final Font TITLE_FONT = Font.font("Inter", FontWeight.BOLD, 15);
-    private final Font DATE_FONT = Font.font("Inter", FontPosture.REGULAR, 10);
-    private final Font COUNT_FONT = Font.font("Inter", FontWeight.MEDIUM, 12);
-    private final CornerRadii BADGE_CORNER = new CornerRadii(99.0);
-    private final Insets BADGE_PADDING = new Insets(2.0, 7.0, 2.0, 7.0);
-    private final Insets BADGE_MARGIN = new Insets(10, 0, 0, 10);
-    private final double IMAGE_SIZE = Constant.PODCAST_CARD_DEFAULT_IMAGE_WIDTH_HEIGHT;
-    private final double PADDING = Constant.PODCAST_CARD_DEFAULT_PADDING;
-    public final double WIDTH = IMAGE_SIZE + 2 * PADDING;
+    private final String font = "Inter";
+    private final ConcurrentHashMap<String, Image> imageCache = new ConcurrentHashMap<>();
+    private final BoxBlur backgroundBlur = new BoxBlur(200, 200, 5);
+    private final Color overlayColor = Color.hsb(230.0, 0.17, 0.14, 0.2);
+    private final Font titleFont = Font.font(font, FontWeight.BOLD, 15);
+    private final Font dateFont = Font.font(font, FontPosture.REGULAR, 10);
+    private final Font countFont = Font.font(font, FontWeight.MEDIUM, 12);
+    private final CornerRadii badgeCorner = new CornerRadii(99.0);
+    private final Insets badgePadding = new Insets(2.0, 7.0, 2.0, 7.0);
+    private final Insets badgeMargin = new Insets(10, 0, 0, 10);
+    private final double imageSize = Constant.PODCAST_CARD_DEFAULT_IMAGE_WIDTH_HEIGHT;
+    private final double padding = Constant.PODCAST_CARD_DEFAULT_PADDING;
+    private final double width = imageSize + 2 * padding;
     private final String imageUrl;
     private String title;
     private String date;
@@ -61,7 +62,7 @@ public class ImageBuilder {
         Image image = getOrLoadImage(imageUrl);
 
         // Calculer la hauteur du contenu
-        double contentHeight = IMAGE_SIZE;
+        double contentHeight = imageSize;
         if (title != null) contentHeight += 25.0;
         if (date != null) contentHeight += 25.0;
 
@@ -80,7 +81,7 @@ public class ImageBuilder {
     }
 
     private StackPane createContainer(double contentHeight) {
-        double containerWidth = WIDTH;
+        double containerWidth = width;
         double containerHeight = calculateTotalHeight(contentHeight);
 
         StackPane stackPane = new StackPane();
@@ -92,13 +93,13 @@ public class ImageBuilder {
         stackPane.setClip(clip);
 
         stackPane.setAlignment(Pos.CENTER);
-        stackPane.setPadding(new Insets(PADDING));
+        stackPane.setPadding(new Insets(padding));
 
         return stackPane;
     }
 
     private ImageView createBlurredBackground(Image image, double height) {
-        double totalWidth = WIDTH;
+        double totalWidth = width;
         double totalHeight = calculateTotalHeight(height);
 
         ImageView blurredBackground = new ImageView(image);
@@ -113,23 +114,23 @@ public class ImageBuilder {
         blurredBackground.setTranslateY((totalHeight * SCALE_FACTOR - totalHeight) / -2);
 
         // Appliquer l'effet de flou
-        blurredBackground.setEffect(BACKGROUND_BLUR);
+        blurredBackground.setEffect(backgroundBlur);
 
         return blurredBackground;
     }
 
     private Rectangle createColorOverlay(double height) {
-        Rectangle overlay = new Rectangle(WIDTH, calculateTotalHeight(height));
-        overlay.setFill(OVERLAY_COLOR);
+        Rectangle overlay = new Rectangle(width, calculateTotalHeight(height));
+        overlay.setFill(overlayColor);
         return overlay;
     }
 
     private double calculateTotalHeight(double contentHeight) {
-        return contentHeight + 2 * PADDING;
+        return contentHeight + 2 * padding;
     }
 
     private Image getOrLoadImage(String url) {
-        return IMAGE_CACHE.computeIfAbsent(url, Image::new);
+        return imageCache.computeIfAbsent(url, Image::new);
     }
 
     private VBox createContent(Image image) {
@@ -149,8 +150,8 @@ public class ImageBuilder {
 
     private ImageView createMainImage(Image image) {
         ImageView imageView = new ImageView(image);
-        imageView.setFitWidth(IMAGE_SIZE);
-        imageView.setFitHeight(IMAGE_SIZE);
+        imageView.setFitWidth(imageSize);
+        imageView.setFitHeight(imageSize);
         imageView.setPreserveRatio(true);
         imageView.setSmooth(true);  // Meilleure qualité d'image
         imageView.setCache(true);   // Activer le cache pour de meilleures performances
@@ -162,11 +163,11 @@ public class ImageBuilder {
         textContainer.setAlignment(Pos.BASELINE_LEFT);
 
         if (title != null) {
-            textContainer.getChildren().add(createLabel(title, TITLE_FONT, ColorThemeConstants.getGrey100()));
+            textContainer.getChildren().add(createLabel(title, titleFont, ColorThemeConstants.getGrey100()));
         }
 
         if (date != null) {
-            textContainer.getChildren().add(createLabel(date, DATE_FONT, ColorThemeConstants.getGrey100()));
+            textContainer.getChildren().add(createLabel(date, dateFont, ColorThemeConstants.getGrey100()));
         }
 
         return textContainer;
@@ -177,13 +178,13 @@ public class ImageBuilder {
         label.setTextFill(color);
         label.setFont(font);
         label.setWrapText(true);
-        label.setMaxWidth(IMAGE_SIZE);
+        label.setMaxWidth(imageSize);
         label.setAlignment(Pos.BASELINE_LEFT);
 
         // Optimisation pour éviter le recalcul de mise en page
         Text helper = new Text(text);
         helper.setFont(font);
-        double preferredWidth = Math.min(helper.getLayoutBounds().getWidth(), IMAGE_SIZE);
+        double preferredWidth = Math.min(helper.getLayoutBounds().getWidth(), imageSize);
         label.setPrefWidth(preferredWidth);
 
         return label;
@@ -191,12 +192,12 @@ public class ImageBuilder {
 
     private Node createEpisodeCountBadge(int count) {
         Label countLabel = new Label(String.valueOf(count));
-        countLabel.setFont(COUNT_FONT);
+        countLabel.setFont(countFont);
         countLabel.setTextFill(ColorThemeConstants.getMain900());
 
         HBox badgeBox = new HBox();
-        badgeBox.setBackground(new Background(new BackgroundFill(ColorThemeConstants.getMain100(), BADGE_CORNER, Insets.EMPTY)));
-        badgeBox.setPadding(BADGE_PADDING);
+        badgeBox.setBackground(new Background(new BackgroundFill(ColorThemeConstants.getMain100(), badgeCorner, Insets.EMPTY)));
+        badgeBox.setPadding(badgePadding);
         badgeBox.setAlignment(Pos.CENTER);
         badgeBox.setMaxSize(Region.USE_PREF_SIZE, Region.USE_PREF_SIZE);
         badgeBox.setMinSize(Region.USE_PREF_SIZE, Region.USE_PREF_SIZE);
@@ -204,7 +205,7 @@ public class ImageBuilder {
 
         // Positionner le badge en haut à gauche
         StackPane.setAlignment(badgeBox, Pos.TOP_LEFT);
-        StackPane.setMargin(badgeBox, BADGE_MARGIN);
+        StackPane.setMargin(badgeBox, badgeMargin);
 
         return badgeBox;
     }

@@ -5,6 +5,7 @@ import javafx.scene.Node;
 public class ImageComponent {
 
     public ImageComponent() {
+        // no parameter
     }
 
     public Node createImageCard(String imageUrl) {

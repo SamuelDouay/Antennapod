@@ -20,6 +20,7 @@ public class NavigationComponent {
     private static final double MAX_WIDTH = 224.0;
     private static final double SPACING = 14.0;
     private static final Insets PADDING = new Insets(6.0, 12.0, 6.0, 12.0);
+    private static final String FONT = "Inter";
 
     private NavigationComponent() {
         // Prevents instantiation
@@ -44,7 +45,7 @@ public class NavigationComponent {
         // Create and configure title label
         Label titleLabel = new Label(item.getTitle());
         titleLabel.setMaxWidth(TITLE_MAX_WIDTH);
-        titleLabel.setFont(Font.font("Inter", FontPosture.REGULAR, 12));
+        titleLabel.setFont(Font.font(FONT, FontPosture.REGULAR, 12));
         titleLabel.setTextFill(ColorThemeConstants.getGrey800());
 
         // Create icon and title container
@@ -66,7 +67,7 @@ public class NavigationComponent {
         if (item.getNumber() != 0) {
             Label numberLabel = new Label(String.valueOf(item.getNumber()));
             numberLabel.setTextFill(ColorThemeConstants.getMain950());
-            numberLabel.setFont(Font.font("Inter", FontWeight.BOLD, 10));
+            numberLabel.setFont(Font.font(FONT, FontWeight.BOLD, 10));
             mainBox.getChildren().addAll(iconTitleBox, spacer, numberLabel);
         } else {
             mainBox.getChildren().addAll(iconTitleBox, spacer);
@@ -81,7 +82,7 @@ public class NavigationComponent {
 
         if (isSelected) {
             titleLabel.setTextFill(ColorThemeConstants.getMain950());
-            titleLabel.setFont(Font.font("Inter", FontWeight.BOLD, 12));
+            titleLabel.setFont(Font.font(FONT, FontWeight.BOLD, 12));
             mainBox.setBackground(new Background(new BackgroundFill(ColorThemeConstants.getMain100(), new CornerRadii(2.0), null)));
             if (!(icon instanceof FontIcon)) {
                 return;
@@ -89,7 +90,7 @@ public class NavigationComponent {
             ((FontIcon) icon).setIconColor(ColorThemeConstants.getMain950());
         } else {
             titleLabel.setTextFill(ColorThemeConstants.getGrey800());
-            titleLabel.setFont(Font.font("Inter", FontPosture.REGULAR, 12));
+            titleLabel.setFont(Font.font(FONT, FontPosture.REGULAR, 12));
             mainBox.setBackground(new Background(new BackgroundFill(Color.TRANSPARENT, null, null)));
             if (!(icon instanceof FontIcon)) {
                 return;
