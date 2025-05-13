@@ -1,5 +1,7 @@
-package com.podcast.antennapod.view.component;
+package com.podcast.antennapod.view.component.episode;
 
+import com.podcast.antennapod.view.component.BadgeComponent;
+import com.podcast.antennapod.view.component.ButtonComponent;
 import com.podcast.antennapod.view.item.EpisodeItem;
 import com.podcast.antennapod.view.util.BadgeType;
 import com.podcast.antennapod.view.util.ColorThemeConstants;

@@ -2,10 +2,12 @@ package com.podcast.antennapod.view.container.home;
 
 import com.podcast.antennapod.view.MainTest;
 import com.podcast.antennapod.view.MainView;
-import com.podcast.antennapod.view.component.EpisodeComponent;
+import com.podcast.antennapod.view.component.episode.EpisodeComponent;
+import com.podcast.antennapod.view.component.episode.SurpriseComponent;
 import com.podcast.antennapod.view.component.image.ImageComponentFactory;
 import com.podcast.antennapod.view.item.EpisodeItem;
 import com.podcast.antennapod.view.util.ColorThemeConstants;
+import javafx.geometry.HPos;
 import javafx.geometry.Insets;
 import javafx.scene.Node;
 import javafx.scene.control.Label;
@@ -34,6 +36,7 @@ public class HomeContainer {
         box.getChildren().add(getTitle());
         box.getChildren().add(getListeningSection());
         box.getChildren().add(getNewsSection());
+        box.getChildren().add(getSurpriseSection());
         box.getChildren().add(getClassicsSection());
         box.getChildren().add(getDownloadSection());
 
@@ -56,6 +59,46 @@ public class HomeContainer {
         HBox.setHgrow(box, Priority.ALWAYS);
         box.getChildren().add(getTitleSection("Nouveautés"));
         box.getChildren().add(getNewsTable());
+        return box;
+    }
+
+    private static VBox getSurpriseSection() {
+        VBox box = new VBox(12);
+        HBox.setHgrow(box, Priority.ALWAYS);
+        box.getChildren().add(getTitleSection("Soyez surpris"));
+        box.getChildren().add(getSurpriseTable());
+        return box;
+    }
+
+    private static Node getSurpriseTable() {
+        GridPane box = new GridPane();
+        box.setVgap(15.0);
+        box.setHgap(15.0);
+        box.setPrefWidth(Region.USE_PREF_SIZE);
+        box.setMaxHeight(Region.USE_PREF_SIZE);
+
+        int numColumns = 3;
+        for (int i = 0; i < numColumns; i++) {
+            ColumnConstraints column = new ColumnConstraints();
+            column.setHgrow(Priority.ALWAYS);
+            column.setPercentWidth(100.0 / numColumns);
+            box.getColumnConstraints().add(column);
+        }
+
+        EpisodeItem episodeItem = new EpisodeItem(String.valueOf(MainView.class.getResource("/images/heure_du_monde.png")),
+                false,
+                TITLE_EXAMPLE,
+                "00:20:40",
+                "28/10/2024",
+                "18 Mo");
+
+        for(int i = 0; i < 3; i++) {
+            for(int j = 0; j < 3; j++) {
+                Node surpriseComponent = SurpriseComponent.createSurprise(episodeItem);
+                GridPane.setHalignment(surpriseComponent, HPos.CENTER);
+                box.add(surpriseComponent, i, j, 1, 1);
+            }
+        }
         return box;
     }
 

@@ -2,7 +2,7 @@ package com.podcast.antennapod.view;
 
 import com.podcast.antennapod.view.component.BadgeComponent;
 import com.podcast.antennapod.view.component.ButtonComponent;
-import com.podcast.antennapod.view.component.EpisodeComponent;
+import com.podcast.antennapod.view.component.episode.EpisodeComponent;
 import com.podcast.antennapod.view.component.image.ImageComponentFactory;
 import com.podcast.antennapod.view.item.EpisodeItem;
 import com.podcast.antennapod.view.util.BadgeType;
