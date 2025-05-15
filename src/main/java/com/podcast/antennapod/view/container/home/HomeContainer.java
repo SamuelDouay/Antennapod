@@ -1,7 +1,5 @@
 package com.podcast.antennapod.view.container.home;
 
-import com.podcast.antennapod.view.MainTest;
-import com.podcast.antennapod.view.MainView;
 import com.podcast.antennapod.view.component.episode.EpisodeComponent;
 import com.podcast.antennapod.view.component.episode.SurpriseComponent;
 import com.podcast.antennapod.view.component.image.ImageComponentFactory;
@@ -19,12 +17,15 @@ import javafx.scene.text.FontWeight;
 public class HomeContainer {
 
     public static final ImageComponentFactory FACTORY = new ImageComponentFactory();
-    public static final String IMAGE_EX = String.valueOf(MainTest.class.getResource("/images/ex.jpeg"));
-    public static final String IMAGE_HDM = String.valueOf(MainTest.class.getResource("/images/heure_du_monde.png"));
-    public static final String IMAGE_SMLTLK = String.valueOf(MainTest.class.getResource("/images/small_talk.jpg"));
-    public static final String IMAGE_UNDERSCORE = String.valueOf(MainTest.class.getResource("/images/underscore.jpeg"));
-    public static final String IMAGE_ZERL = String.valueOf(MainTest.class.getResource("/images/zerl.jpg"));
+    public static final String IMAGE_EX = String.valueOf(HomeContainer.class.getResource("/images/ex.jpeg"));
+    public static final String IMAGE_HDM = String.valueOf(HomeContainer.class.getResource("/images/heure_du_monde.png"));
+    public static final String IMAGE_SMLTLK = String.valueOf(HomeContainer.class.getResource("/images/small_talk.jpg"));
+    public static final String IMAGE_UNDERSCORE = String.valueOf(HomeContainer.class.getResource("/images/underscore.jpeg"));
+    public static final String IMAGE_ZERL = String.valueOf(HomeContainer.class.getResource("/images/zerl.jpg"));
     public static final String TITLE_EXAMPLE = "Lil Nas X, une icône noire, et gay et flamboyante [REDIF]";
+    public static final String TIME_EXAMPLE = "00:20:40";
+    public static final String DATE_EXAMPLE = "28/10/2024";
+    public static final String MO_EXAMPLE = "18 Mo";
 
     private HomeContainer() {
 
@@ -85,15 +86,15 @@ public class HomeContainer {
             box.getColumnConstraints().add(column);
         }
 
-        EpisodeItem episodeItem = new EpisodeItem(String.valueOf(MainView.class.getResource("/images/heure_du_monde.png")),
+        EpisodeItem episodeItem = new EpisodeItem(IMAGE_HDM,
                 false,
                 TITLE_EXAMPLE,
-                "00:20:40",
-                "28/10/2024",
-                "18 Mo");
+                TIME_EXAMPLE,
+                DATE_EXAMPLE,
+                MO_EXAMPLE);
 
-        for(int i = 0; i < 3; i++) {
-            for(int j = 0; j < 3; j++) {
+        for (int i = 0; i < 3; i++) {
+            for (int j = 0; j < 3; j++) {
                 Node surpriseComponent = SurpriseComponent.createSurprise(episodeItem);
                 GridPane.setHalignment(surpriseComponent, HPos.CENTER);
                 box.add(surpriseComponent, i, j, 1, 1);
@@ -114,19 +115,19 @@ public class HomeContainer {
         VBox box = new VBox();
 
         for (int i = 0; i < 4; i++) {
-            EpisodeItem episodeItem = new EpisodeItem(String.valueOf(MainView.class.getResource("/images/heure_du_monde.png")),
+            EpisodeItem episodeItem = new EpisodeItem(IMAGE_HDM,
                     false,
                     TITLE_EXAMPLE,
-                    "00:20:40",
-                    "28/10/2024",
-                    "18 Mo");
+                    TIME_EXAMPLE,
+                    DATE_EXAMPLE,
+                    MO_EXAMPLE);
 
-            EpisodeItem episodeItem1 = new EpisodeItem(String.valueOf(MainView.class.getResource("/images/ex.jpeg")),
+            EpisodeItem episodeItem1 = new EpisodeItem(String.valueOf(HomeContainer.class.getResource("/images/ex.jpeg")),
                     true,
                     TITLE_EXAMPLE,
-                    "00:20:40",
-                    "28/10/2024",
-                    "18 Mo");
+                    TIME_EXAMPLE,
+                    DATE_EXAMPLE,
+                    MO_EXAMPLE);
 
             box.getChildren().add(EpisodeComponent.createNewEpisode(episodeItem));
             box.getChildren().add(EpisodeComponent.createNewEpisode(episodeItem1));
