@@ -33,13 +33,17 @@ public class ImageBuilder {
     private final CornerRadii badgeCorner = new CornerRadii(99.0);
     private final Insets badgePadding = new Insets(2.0, 7.0, 2.0, 7.0);
     private final Insets badgeMargin = new Insets(10, 0, 0, 10);
-    private final String imageUrl;
+    private String imageUrl;
     private String title;
     private String date;
     private int episodeCount;
 
-    public ImageBuilder(String imageUrl) {
+    ImageBuilder() {
+    }
+
+    public ImageBuilder withImage(String imageUrl) {
         this.imageUrl = imageUrl;
+        return this;
     }
 
     public ImageBuilder withTitle(String title) {

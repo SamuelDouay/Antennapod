@@ -1,4 +1,4 @@
-package com.podcast.antennapod.view.component;
+package com.podcast.antennapod.view.component.badge;
 
 import com.podcast.antennapod.view.util.BadgeType;
 import javafx.geometry.Insets;

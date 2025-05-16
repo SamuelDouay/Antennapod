@@ -1,6 +1,6 @@
 package com.podcast.antennapod.view;
 
-import com.podcast.antennapod.view.component.BadgeComponent;
+import com.podcast.antennapod.view.component.badge.BadgeComponent;
 import com.podcast.antennapod.view.component.button.ButtonComponent;
 import com.podcast.antennapod.view.component.episode.EpisodeComponent;
 import com.podcast.antennapod.view.component.image.ImageComponent;
@@ -29,7 +29,7 @@ public class MainTest extends Application {
     public static final String IMAGES_HEURE_DU_MONDE_PNG = "/images/heure_du_monde.png";
     public static final String TITLE_EXAMPLE = "Lil Nas X, une icône noire, et gay et flamboyante [REDIF]";
 
-    private static ButtonComponent btnComponant = new ButtonComponent();
+    private static final ButtonComponent BUTTON_COMPONENT = new ButtonComponent();
     private Scene scene;
     private Label currentSelectionLabel;
 
@@ -128,7 +128,7 @@ public class MainTest extends Application {
     }
 
     private Button createThemeToggleButton() {
-        Button btn = btnComponant.createPrimaryButton("MODE");
+        Button btn = BUTTON_COMPONENT.createPrimaryButton("MODE");
 
         btn.setOnAction(_ -> {
             if (ColorThemeConstants.getCurrentTheme().equals(ThemeType.LIGHT)) {
@@ -170,9 +170,9 @@ public class MainTest extends Application {
         HBox hBox = new HBox(15.0);
 
         // Ajouter les boutons
-        hBox.getChildren().add(btnComponant.createPrimaryButton(TypeButton.PRIMARY.name()));
-        hBox.getChildren().add(btnComponant.createSecondaryButton(TypeButton.SECONDARY.name()));
-        hBox.getChildren().add(btnComponant.createTertiaryButton(TypeButton.TERTIARY.name()));
+        hBox.getChildren().add(BUTTON_COMPONENT.createPrimaryButton(TypeButton.PRIMARY.name()));
+        hBox.getChildren().add(BUTTON_COMPONENT.createSecondaryButton(TypeButton.SECONDARY.name()));
+        hBox.getChildren().add(BUTTON_COMPONENT.createTertiaryButton(TypeButton.TERTIARY.name()));
 
         // Ajouter les badges avec icônes
         hBox.getChildren().add(BadgeComponent.createBadge(new FontIcon(MaterialDesignP.PLUS), BadgeType.RED));
@@ -193,14 +193,14 @@ public class MainTest extends Application {
         HBox hBox = new HBox(15.0);
 
         // Ajouter les boutons avec icônes
-        hBox.getChildren().add(btnComponant.createPrimaryIconButton(new FontIcon(MaterialDesignP.PLAY)));
-        hBox.getChildren().add(btnComponant.createSecondaryIconButton(new FontIcon(MaterialDesignP.PLAY)));
-        hBox.getChildren().add(btnComponant.createTertiaryIconButton(new FontIcon(MaterialDesignP.PLAY)));
+        hBox.getChildren().add(BUTTON_COMPONENT.createPrimaryIconButton(new FontIcon(MaterialDesignP.PLAY)));
+        hBox.getChildren().add(BUTTON_COMPONENT.createSecondaryIconButton(new FontIcon(MaterialDesignP.PLAY)));
+        hBox.getChildren().add(BUTTON_COMPONENT.createTertiaryIconButton(new FontIcon(MaterialDesignP.PLAY)));
 
         // Ajouter les boutons avec texte et icônes
-        hBox.getChildren().add(btnComponant.createPrimaryButton("PLAY", new FontIcon(MaterialDesignP.PLAY)));
-        hBox.getChildren().add(btnComponant.createSecondaryButton("PLAY", new FontIcon(MaterialDesignP.PLAY)));
-        hBox.getChildren().add(btnComponant.createTertiaryButton("PLAY", new FontIcon(MaterialDesignP.PLAY)));
+        hBox.getChildren().add(BUTTON_COMPONENT.createPrimaryButton("PLAY", new FontIcon(MaterialDesignP.PLAY)));
+        hBox.getChildren().add(BUTTON_COMPONENT.createSecondaryButton("PLAY", new FontIcon(MaterialDesignP.PLAY)));
+        hBox.getChildren().add(BUTTON_COMPONENT.createTertiaryButton("PLAY", new FontIcon(MaterialDesignP.PLAY)));
 
         return hBox;
     }

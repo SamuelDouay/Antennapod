@@ -9,15 +9,15 @@ public class ImageComponent {
     }
 
     public Node createImageCard(String imageUrl) {
-        return new ImageBuilder(imageUrl).build();
+        return new ImageBuilder().withImage(imageUrl).build();
     }
 
     public Node createImageCard(String imageUrl, String title, int episodeCount) {
-        return new ImageBuilder(imageUrl).withTitle(title).withEpisodeCount(episodeCount).build();
+        return new ImageBuilder().withImage(imageUrl).withTitle(title).withEpisodeCount(episodeCount).build();
     }
 
-    public Node createImageCard(String url, String title, String date) {
-        return new ImageBuilder(url).withTitle(title).withDate(date).build();
+    public Node createImageCard(String imageUrl, String title, String date) {
+        return new ImageBuilder().withImage(imageUrl).withTitle(title).withDate(date).build();
 
     }
 }
