@@ -3,7 +3,7 @@ package com.podcast.antennapod.view;
 import com.podcast.antennapod.view.component.BadgeComponent;
 import com.podcast.antennapod.view.component.ButtonComponent;
 import com.podcast.antennapod.view.component.episode.EpisodeComponent;
-import com.podcast.antennapod.view.component.image.ImageComponentFactory;
+import com.podcast.antennapod.view.component.image.ImageComponent;
 import com.podcast.antennapod.view.item.EpisodeItem;
 import com.podcast.antennapod.view.util.BadgeType;
 import com.podcast.antennapod.view.util.ColorThemeConstants;
@@ -205,7 +205,7 @@ public class MainTest extends Application {
 
     private HBox createPodcastRow() {
         HBox hBox = new HBox(15.0);
-        ImageComponentFactory factory = new ImageComponentFactory();
+        ImageComponent factory = new ImageComponent();
 
         // Ajouter les cartes de podcast
         hBox.getChildren().add(factory.createImageCard(String.valueOf(MainTest.class.getResource("/images/ex.jpeg"))));
@@ -219,7 +219,7 @@ public class MainTest extends Application {
 
     private HBox createPodcastWithInfoRow() {
         HBox hBox = new HBox(15.0);
-        ImageComponentFactory factory = new ImageComponentFactory();
+        ImageComponent factory = new ImageComponent();
 
         // Ajouter les cartes de podcast avec titre et nombre d'épisodes
         hBox.getChildren().add(factory.createImageCard(String.valueOf(MainTest.class.getResource("/images/ex.jpeg")), "EX...", 10));

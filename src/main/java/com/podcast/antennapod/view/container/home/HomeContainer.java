@@ -2,7 +2,7 @@ package com.podcast.antennapod.view.container.home;
 
 import com.podcast.antennapod.view.component.episode.EpisodeComponent;
 import com.podcast.antennapod.view.component.episode.SurpriseComponent;
-import com.podcast.antennapod.view.component.image.ImageComponentFactory;
+import com.podcast.antennapod.view.component.image.ImageComponent;
 import com.podcast.antennapod.view.item.EpisodeItem;
 import com.podcast.antennapod.view.util.ColorThemeConstants;
 import javafx.geometry.HPos;
@@ -16,7 +16,7 @@ import javafx.scene.text.FontWeight;
 
 public class HomeContainer {
 
-    public static final ImageComponentFactory FACTORY = new ImageComponentFactory();
+    public static final ImageComponent IMAGE_COMPONENT = new ImageComponent();
     public static final String IMAGE_EX = String.valueOf(HomeContainer.class.getResource("/images/ex.jpeg"));
     public static final String IMAGE_HDM = String.valueOf(HomeContainer.class.getResource("/images/heure_du_monde.png"));
     public static final String IMAGE_SMLTLK = String.valueOf(HomeContainer.class.getResource("/images/small_talk.jpg"));
@@ -170,14 +170,14 @@ public class HomeContainer {
         box.setBackground(new Background(new BackgroundFill(ColorThemeConstants.getGrey000(), null, null)));
         HBox.setHgrow(box, Priority.ALWAYS);
 
-        box.getChildren().add(FACTORY.createImageCard(IMAGE_EX));
-        box.getChildren().add(FACTORY.createImageCard(IMAGE_HDM));
-        box.getChildren().add(FACTORY.createImageCard(IMAGE_SMLTLK));
-        box.getChildren().add(FACTORY.createImageCard(IMAGE_UNDERSCORE));
-        box.getChildren().add(FACTORY.createImageCard(IMAGE_ZERL));
-        box.getChildren().add(FACTORY.createImageCard(IMAGE_UNDERSCORE));
-        box.getChildren().add(FACTORY.createImageCard(IMAGE_ZERL));
-        box.getChildren().add(FACTORY.createImageCard(IMAGE_SMLTLK));
+        box.getChildren().add(IMAGE_COMPONENT.createImageCard(IMAGE_EX));
+        box.getChildren().add(IMAGE_COMPONENT.createImageCard(IMAGE_HDM));
+        box.getChildren().add(IMAGE_COMPONENT.createImageCard(IMAGE_SMLTLK));
+        box.getChildren().add(IMAGE_COMPONENT.createImageCard(IMAGE_UNDERSCORE));
+        box.getChildren().add(IMAGE_COMPONENT.createImageCard(IMAGE_ZERL));
+        box.getChildren().add(IMAGE_COMPONENT.createImageCard(IMAGE_UNDERSCORE));
+        box.getChildren().add(IMAGE_COMPONENT.createImageCard(IMAGE_ZERL));
+        box.getChildren().add(IMAGE_COMPONENT.createImageCard(IMAGE_SMLTLK));
 
         scrollPane.setContent(box);
         return scrollPane;
@@ -196,14 +196,14 @@ public class HomeContainer {
         box.setBackground(new Background(new BackgroundFill(ColorThemeConstants.getGrey000(), null, null)));
         HBox.setHgrow(box, Priority.ALWAYS);
 
-        box.getChildren().add(FACTORY.createImageCard(IMAGE_EX, TITLE_EXAMPLE, "24/05/25"));
-        box.getChildren().add(FACTORY.createImageCard(IMAGE_HDM, TITLE_EXAMPLE, "24/12/24"));
-        box.getChildren().add(FACTORY.createImageCard(IMAGE_SMLTLK, TITLE_EXAMPLE, "11/05/25"));
-        box.getChildren().add(FACTORY.createImageCard(IMAGE_UNDERSCORE, TITLE_EXAMPLE, "15/05/24"));
-        box.getChildren().add(FACTORY.createImageCard(IMAGE_ZERL, TITLE_EXAMPLE, "09/03/24"));
-        box.getChildren().add(FACTORY.createImageCard(IMAGE_UNDERSCORE, TITLE_EXAMPLE, "12/12/25"));
-        box.getChildren().add(FACTORY.createImageCard(IMAGE_ZERL, TITLE_EXAMPLE, "16/11/24"));
-        box.getChildren().add(FACTORY.createImageCard(IMAGE_SMLTLK, TITLE_EXAMPLE, "12/03/24"));
+        box.getChildren().add(IMAGE_COMPONENT.createImageCard(IMAGE_EX, TITLE_EXAMPLE, "24/05/25"));
+        box.getChildren().add(IMAGE_COMPONENT.createImageCard(IMAGE_HDM, TITLE_EXAMPLE, "24/12/24"));
+        box.getChildren().add(IMAGE_COMPONENT.createImageCard(IMAGE_SMLTLK, TITLE_EXAMPLE, "11/05/25"));
+        box.getChildren().add(IMAGE_COMPONENT.createImageCard(IMAGE_UNDERSCORE, TITLE_EXAMPLE, "15/05/24"));
+        box.getChildren().add(IMAGE_COMPONENT.createImageCard(IMAGE_ZERL, TITLE_EXAMPLE, "09/03/24"));
+        box.getChildren().add(IMAGE_COMPONENT.createImageCard(IMAGE_UNDERSCORE, TITLE_EXAMPLE, "12/12/25"));
+        box.getChildren().add(IMAGE_COMPONENT.createImageCard(IMAGE_ZERL, TITLE_EXAMPLE, "16/11/24"));
+        box.getChildren().add(IMAGE_COMPONENT.createImageCard(IMAGE_SMLTLK, TITLE_EXAMPLE, "12/03/24"));
 
         scrollPane.setContent(box);
         return scrollPane;

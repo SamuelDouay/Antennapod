@@ -1,21 +1,26 @@
 package com.podcast.antennapod.view.container.navigation;
 
-import com.podcast.antennapod.view.component.NavigationComponent;
+import com.podcast.antennapod.view.component.navigation.NavigationComponent;
 import com.podcast.antennapod.view.item.ItemManager;
 import com.podcast.antennapod.view.item.NavigationItem;
 import com.podcast.antennapod.view.util.ColorThemeConstants;
 import javafx.geometry.Insets;
+import javafx.scene.Node;
+import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.layout.*;
+import javafx.scene.paint.Color;
+import javafx.scene.text.Font;
+import javafx.scene.text.FontPosture;
+import javafx.scene.text.FontWeight;
 import org.kordamp.ikonli.javafx.FontIcon;
 import org.kordamp.ikonli.materialdesign2.*;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import static com.podcast.antennapod.view.component.NavigationComponent.updateAppearance;
-
 public class NavigationContainer {
+    private static final String FONT = "Inter";
     private static final ItemManager manager = new ItemManager();
     private static final List<HBox> listNav = new ArrayList<>();
 
@@ -113,7 +118,9 @@ public class NavigationContainer {
 
     private static HBox createNavigationComponent(NavigationItem item) {
         manager.addItem(item);
-        HBox box = NavigationComponent.createNavigation(item);
+        NavigationComponent container = new NavigationComponent();
+        HBox box = container.createNavigationCard(item);
+        
         box.setOnMouseClicked(_ -> {
             manager.setItemState(true, item.getUuid());
             for (HBox hBox : listNav) {
@@ -126,5 +133,28 @@ public class NavigationContainer {
         box.setOnMouseReleased(_ -> updateAppearance(box, item.isSelected()));
 
         return box;
+    }
+
+    private static void updateAppearance(HBox mainBox, boolean isSelected) {
+        Label titleLabel = (Label) ((HBox) mainBox.getChildren().getFirst()).getChildren().get(1);
+        Node icon = ((HBox) mainBox.getChildren().getFirst()).getChildren().get(0);
+
+        if (isSelected) {
+            titleLabel.setTextFill(ColorThemeConstants.getMain950());
+            titleLabel.setFont(Font.font(FONT, FontWeight.BOLD, 12));
+            mainBox.setBackground(new Background(new BackgroundFill(ColorThemeConstants.getMain100(), new CornerRadii(2.0), null)));
+            if (!(icon instanceof FontIcon)) {
+                return;
+            }
+            ((FontIcon) icon).setIconColor(ColorThemeConstants.getMain950());
+        } else {
+            titleLabel.setTextFill(ColorThemeConstants.getGrey800());
+            titleLabel.setFont(Font.font(FONT, FontPosture.REGULAR, 12));
+            mainBox.setBackground(new Background(new BackgroundFill(Color.TRANSPARENT, null, null)));
+            if (!(icon instanceof FontIcon)) {
+                return;
+            }
+            ((FontIcon) icon).setIconColor(ColorThemeConstants.getGrey800());
+        }
     }
 }
