@@ -1,11 +1,10 @@
 package com.podcast.antennapod.view.component.episode;
 
 import com.podcast.antennapod.view.component.BadgeComponent;
-import com.podcast.antennapod.view.component.ButtonComponent;
+import com.podcast.antennapod.view.component.button.ButtonComponent;
 import com.podcast.antennapod.view.item.EpisodeItem;
 import com.podcast.antennapod.view.util.BadgeType;
 import com.podcast.antennapod.view.util.ColorThemeConstants;
-import com.podcast.antennapod.view.util.TypeButton;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.control.Label;
@@ -89,7 +88,7 @@ public class EpisodeComponent {
         box.getChildren().add(region2);
         box.getChildren().add(getLabel(episodeItem.getDuration()));
         box.getChildren().add(region3);
-        box.getChildren().add(ButtonComponent.createButton("Télécharger", TypeButton.PRIMARY));
+        box.getChildren().add(new ButtonComponent().createPrimaryButton("Télécharger"));
         box.getChildren().add(region4);
         FontIcon icon = new FontIcon(MaterialDesignD.DOTS_VERTICAL);
         icon.setIconSize(15);

@@ -35,61 +35,28 @@ public class NavigationBuilder {
         this.title = title;
     }
 
-    /**
-     * Create a new NavigationBuilder with the specified title
-     *
-     * @param title The title for the navigation item
-     * @return A new NavigationBuilder instance
-     */
     public NavigationBuilder create(String title) {
         return new NavigationBuilder(title);
     }
 
-    /**
-     * Set the icon for this navigation
-     *
-     * @param icon The FontIcon to use
-     */
     public void withIcon(FontIcon icon) {
         this.icon = icon;
     }
-
-    /**
-     * Set the image URL for this navigation
-     *
-     * @param imageUrl The image URL to use
-     */
+    
     public void withImage(String imageUrl) {
         this.imageUrl = imageUrl;
     }
 
-    /**
-     * Set the badge count for this navigation
-     *
-     * @param badgeCount The badge count to display
-     * @return This builder instance for chaining
-     */
     public NavigationBuilder withBadgeCount(int badgeCount) {
         this.badgeCount = badgeCount;
         return this;
     }
 
-    /**
-     * Set whether this navigation  is selected
-     *
-     * @param selected Whether the  is selected
-     * @return This builder instance for chaining
-     */
     public NavigationBuilder setSelected(boolean selected) {
         this.selected = selected;
         return this;
     }
 
-    /**
-     * Build and return the navigation
-     *
-     * @return The constructed HBox navigation
-     */
     public HBox build() {
         Node graphic = createNodeGraphic();
 
@@ -176,12 +143,6 @@ public class NavigationBuilder {
         return graphic;
     }
 
-    /**
-     * Create a badge label for displaying counts
-     *
-     * @param count The count to display in the badge
-     * @return A styled Label for the badge
-     */
     private Label createBadgeLabel(int count) {
         Label numberLabel = new Label(String.valueOf(count));
         numberLabel.setTextFill(ColorThemeConstants.getMain950());
@@ -189,47 +150,7 @@ public class NavigationBuilder {
         return numberLabel;
     }
 
-    /**
-     * Get an image from cache or load it if not present
-     *
-     * @param url The image URL
-     * @return The loaded Image
-     */
     private Image getOrLoadImage(String url) {
         return imageCache.computeIfAbsent(url, Image::new);
-    }
-
-    /**
-     * Utility method to update the appearance of an existing navigation
-     *
-     * @param mainBox    The HBox containing the navigation
-     * @param isSelected Whether the  should be displayed as selected
-     */
-    public static void updateAppearance(HBox mainBox, boolean isSelected) {
-        if (mainBox.getChildren().isEmpty() ||
-                ((HBox) mainBox.getChildren().getFirst()).getChildren().size() < 2) {
-            return;
-        }
-
-        Label titleLabel = (Label) ((HBox) mainBox.getChildren().getFirst()).getChildren().get(1);
-        Node icon = ((HBox) mainBox.getChildren().getFirst()).getChildren().get(0);
-
-        if (isSelected) {
-            titleLabel.setTextFill(ColorThemeConstants.getMain950());
-            titleLabel.setFont(Font.font(FONT, FontWeight.BOLD, 12));
-            mainBox.setBackground(new Background(new BackgroundFill(
-                    ColorThemeConstants.getMain100(), new CornerRadii(2.0), null)));
-            if (icon instanceof FontIcon) {
-                ((FontIcon) icon).setIconColor(ColorThemeConstants.getMain950());
-            }
-        } else {
-            titleLabel.setTextFill(ColorThemeConstants.getGrey800());
-            titleLabel.setFont(Font.font(FONT, FontPosture.REGULAR, 12));
-            mainBox.setBackground(new Background(new BackgroundFill(
-                    Color.TRANSPARENT, null, null)));
-            if (icon instanceof FontIcon) {
-                ((FontIcon) icon).setIconColor(ColorThemeConstants.getGrey800());
-            }
-        }
     }
 }
