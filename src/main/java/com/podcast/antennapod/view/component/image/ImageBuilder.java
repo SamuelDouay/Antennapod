@@ -62,6 +62,10 @@ public class ImageBuilder {
     }
 
     public Node build() {
+
+        if (imageUrl == null) {
+            throw new IllegalStateException("Image url must be specified");
+        }
         // Charger l'image (avec cache)
         Image image = getOrLoadImage(imageUrl);
 

@@ -3,7 +3,6 @@ package com.podcast.antennapod.view.component.episode;
 import com.podcast.antennapod.view.component.badge.BadgeComponent;
 import com.podcast.antennapod.view.component.button.ButtonComponent;
 import com.podcast.antennapod.view.item.EpisodeItem;
-import com.podcast.antennapod.view.util.BadgeType;
 import com.podcast.antennapod.view.util.ColorThemeConstants;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
@@ -80,7 +79,7 @@ public class EpisodeComponent {
         Region region4 = new Region();
         HBox.setHgrow(region4, Priority.ALWAYS);
 
-        box.getChildren().add(BadgeComponent.createBadge(new FontIcon(MaterialDesignI.INBOX), BadgeType.BLUE));
+        box.getChildren().add(new BadgeComponent().createBlueBadge(new FontIcon(MaterialDesignI.INBOX)));
         box.getChildren().add(region);
         box.getChildren().add(getLabel(episodeItem.getDate()));
         box.getChildren().add(region1);

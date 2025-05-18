@@ -24,7 +24,7 @@ public class ButtonComponent {
                 .build();
     }
 
-    public Button createPrimaryIconButton(FontIcon icon) {
+    public Button createPrimaryButton(FontIcon icon) {
         return new ButtonBuilder()
                 .withIcon(icon)
                 .withType(TypeButton.PRIMARY)
@@ -47,7 +47,7 @@ public class ButtonComponent {
                 .build();
     }
 
-    public Button createSecondaryIconButton(FontIcon icon) {
+    public Button createSecondaryButton(FontIcon icon) {
         return new ButtonBuilder()
                 .withIcon(icon)
                 .withType(TypeButton.SECONDARY)
@@ -70,7 +70,7 @@ public class ButtonComponent {
                 .build();
     }
 
-    public Button createTertiaryIconButton(FontIcon icon) {
+    public Button createTertiaryButton(FontIcon icon) {
         return new ButtonBuilder()
                 .withIcon(icon)
                 .withType(TypeButton.TERTIARY)

@@ -5,7 +5,6 @@ import com.podcast.antennapod.view.component.button.ButtonComponent;
 import com.podcast.antennapod.view.component.episode.EpisodeComponent;
 import com.podcast.antennapod.view.component.image.ImageComponent;
 import com.podcast.antennapod.view.item.EpisodeItem;
-import com.podcast.antennapod.view.util.BadgeType;
 import com.podcast.antennapod.view.util.ColorThemeConstants;
 import com.podcast.antennapod.view.util.ThemeType;
 import com.podcast.antennapod.view.util.TypeButton;
@@ -30,6 +29,7 @@ public class MainTest extends Application {
     public static final String TITLE_EXAMPLE = "Lil Nas X, une icône noire, et gay et flamboyante [REDIF]";
 
     private static final ButtonComponent BUTTON_COMPONENT = new ButtonComponent();
+    private static final BadgeComponent BADGE_COMPONENT = new BadgeComponent();
     private Scene scene;
     private Label currentSelectionLabel;
 
@@ -175,16 +175,16 @@ public class MainTest extends Application {
         hBox.getChildren().add(BUTTON_COMPONENT.createTertiaryButton(TypeButton.TERTIARY.name()));
 
         // Ajouter les badges avec icônes
-        hBox.getChildren().add(BadgeComponent.createBadge(new FontIcon(MaterialDesignP.PLUS), BadgeType.RED));
-        hBox.getChildren().add(BadgeComponent.createBadge(new FontIcon(MaterialDesignI.INBOX), BadgeType.BLUE));
-        hBox.getChildren().add(BadgeComponent.createBadge(new FontIcon(MaterialDesignI.INBOX), BadgeType.GREEN));
-        hBox.getChildren().add(BadgeComponent.createBadge(new FontIcon(MaterialDesignP.PLAYLIST_PLAY), BadgeType.PURPLE));
+        hBox.getChildren().add(BADGE_COMPONENT.createRedBadge(new FontIcon(MaterialDesignP.PLUS)));
+        hBox.getChildren().add(BADGE_COMPONENT.createBlueBadge(new FontIcon(MaterialDesignI.INBOX)));
+        hBox.getChildren().add(BADGE_COMPONENT.createGreenBadge(new FontIcon(MaterialDesignI.INBOX)));
+        hBox.getChildren().add(BADGE_COMPONENT.createPurpleBadge(new FontIcon(MaterialDesignP.PLAYLIST_PLAY)));
 
         // Ajouter les badges avec texte et icônes
-        hBox.getChildren().add(BadgeComponent.createBadge("PLUS", new FontIcon(MaterialDesignP.PLUS), BadgeType.RED));
-        hBox.getChildren().add(BadgeComponent.createBadge("MAIL", new FontIcon(MaterialDesignI.INBOX), BadgeType.BLUE));
-        hBox.getChildren().add(BadgeComponent.createBadge("MAIL", new FontIcon(MaterialDesignI.INBOX), BadgeType.GREEN));
-        hBox.getChildren().add(BadgeComponent.createBadge("PLAY", new FontIcon(MaterialDesignP.PLAYLIST_PLAY), BadgeType.PURPLE));
+        hBox.getChildren().add(BADGE_COMPONENT.createRedBadge("PLUS", new FontIcon(MaterialDesignP.PLUS)));
+        hBox.getChildren().add(BADGE_COMPONENT.createBlueBadge("MAIL", new FontIcon(MaterialDesignI.INBOX)));
+        hBox.getChildren().add(BADGE_COMPONENT.createGreenBadge("MAIL", new FontIcon(MaterialDesignI.INBOX)));
+        hBox.getChildren().add(BADGE_COMPONENT.createPurpleBadge("PLAY", new FontIcon(MaterialDesignP.PLAYLIST_PLAY)));
 
         return hBox;
     }
@@ -193,9 +193,9 @@ public class MainTest extends Application {
         HBox hBox = new HBox(15.0);
 
         // Ajouter les boutons avec icônes
-        hBox.getChildren().add(BUTTON_COMPONENT.createPrimaryIconButton(new FontIcon(MaterialDesignP.PLAY)));
-        hBox.getChildren().add(BUTTON_COMPONENT.createSecondaryIconButton(new FontIcon(MaterialDesignP.PLAY)));
-        hBox.getChildren().add(BUTTON_COMPONENT.createTertiaryIconButton(new FontIcon(MaterialDesignP.PLAY)));
+        hBox.getChildren().add(BUTTON_COMPONENT.createPrimaryButton(new FontIcon(MaterialDesignP.PLAY)));
+        hBox.getChildren().add(BUTTON_COMPONENT.createSecondaryButton(new FontIcon(MaterialDesignP.PLAY)));
+        hBox.getChildren().add(BUTTON_COMPONENT.createTertiaryButton(new FontIcon(MaterialDesignP.PLAY)));
 
         // Ajouter les boutons avec texte et icônes
         hBox.getChildren().add(BUTTON_COMPONENT.createPrimaryButton("PLAY", new FontIcon(MaterialDesignP.PLAY)));
@@ -237,10 +237,10 @@ public class MainTest extends Application {
         HBox hBox = new HBox(15.0);
 
         // Ajouter les badges texte
-        hBox.getChildren().add(BadgeComponent.createBadge("Download", BadgeType.GREEN));
-        hBox.getChildren().add(BadgeComponent.createBadge("Sans media", BadgeType.RED));
-        hBox.getChildren().add(BadgeComponent.createBadge("Téléchargé", BadgeType.BLUE));
-        hBox.getChildren().add(BadgeComponent.createBadge("Téléchargé", BadgeType.PURPLE));
+        hBox.getChildren().add(BADGE_COMPONENT.createGreenBadge("Download"));
+        hBox.getChildren().add(BADGE_COMPONENT.createRedBadge("Sans media"));
+        hBox.getChildren().add(BADGE_COMPONENT.createBlueBadge("Téléchargé"));
+        hBox.getChildren().add(BADGE_COMPONENT.createPurpleBadge("Téléchargé"));
 
         return hBox;
     }
