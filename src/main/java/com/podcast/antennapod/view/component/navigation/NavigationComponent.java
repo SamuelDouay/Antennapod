@@ -9,7 +9,8 @@ public class NavigationComponent {
     }
 
     public HBox createNavigationCard(NavigationItem item) {
-        NavigationBuilder builder = new NavigationBuilder(item.getTitle())
+        NavigationBuilder builder = new NavigationBuilder()
+                .withTitle(item.getTitle())
                 .setSelected(item.isSelected())
                 .withBadgeCount(item.getNumber());
 

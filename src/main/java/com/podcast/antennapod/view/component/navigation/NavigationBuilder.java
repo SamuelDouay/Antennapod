@@ -1,6 +1,7 @@
 package com.podcast.antennapod.view.component.navigation;
 
 import com.podcast.antennapod.view.util.ColorThemeConstants;
+import com.podcast.antennapod.view.util.ImageCache;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Node;
@@ -25,18 +26,19 @@ public class NavigationBuilder {
     private static final String FONT = "Inter";
     private static final ConcurrentHashMap<String, Image> imageCache = new ConcurrentHashMap<>();
 
-    private final String title;
+    private String title;
     private FontIcon icon;
     private String imageUrl;
     private int badgeCount;
     private boolean selected;
 
-    public NavigationBuilder(String title) {
-        this.title = title;
+    public NavigationBuilder() {
+        // no parameter
     }
 
-    public NavigationBuilder create(String title) {
-        return new NavigationBuilder(title);
+    public NavigationBuilder withTitle(String title) {
+        this.title = title;
+        return this;
     }
 
     public void withIcon(FontIcon icon) {
@@ -117,7 +119,7 @@ public class NavigationBuilder {
         Node graphic;
         if (imageUrl != null) {
             // Create image view
-            Image image = getOrLoadImage(imageUrl);
+            Image image = ImageCache.getImage(imageUrl);
             ImageView imageView = new ImageView(image);
             imageView.setFitWidth(ICON_SIZE);
             imageView.setFitHeight(ICON_SIZE);
@@ -148,9 +150,5 @@ public class NavigationBuilder {
         numberLabel.setTextFill(ColorThemeConstants.getMain950());
         numberLabel.setFont(Font.font(FONT, FontWeight.BOLD, 10));
         return numberLabel;
-    }
-
-    private Image getOrLoadImage(String url) {
-        return imageCache.computeIfAbsent(url, Image::new);
     }
 }

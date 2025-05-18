@@ -2,6 +2,7 @@ package com.podcast.antennapod.view.component.episode;
 
 import com.podcast.antennapod.view.item.EpisodeItem;
 import com.podcast.antennapod.view.util.ColorThemeConstants;
+import com.podcast.antennapod.view.util.ImageCache;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.control.Button;
@@ -91,7 +92,7 @@ public class EpisodeBuilder {
 
         FontIcon icon = createFavoriteIcon();
 
-        ImageView image = new ImageView(episodeItem.getUrlImage());
+        ImageView image = new ImageView(ImageCache.getImage(episodeItem.getUrlImage()));
         image.setFitHeight(40.0);
         image.setFitWidth(40.0);
 

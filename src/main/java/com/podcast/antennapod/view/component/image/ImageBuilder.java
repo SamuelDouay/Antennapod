@@ -2,6 +2,7 @@ package com.podcast.antennapod.view.component.image;
 
 import com.podcast.antennapod.view.util.ColorThemeConstants;
 import com.podcast.antennapod.view.util.Constant;
+import com.podcast.antennapod.view.util.ImageCache;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Node;
@@ -17,14 +18,11 @@ import javafx.scene.text.FontPosture;
 import javafx.scene.text.FontWeight;
 import javafx.scene.text.Text;
 
-import java.util.concurrent.ConcurrentHashMap;
-
 public class ImageBuilder {
     private static final String FONT = "Inter";
     private static final double PADDING = Constant.PODCAST_CARD_DEFAULT_PADDING;
     private static final double IMAGE_SIZE = Constant.PODCAST_CARD_DEFAULT_IMAGE_WIDTH_HEIGHT;
     private static final double WIDTH = IMAGE_SIZE + 2 * PADDING;
-    private final ConcurrentHashMap<String, Image> imageCache = new ConcurrentHashMap<>();
     private final BoxBlur backgroundBlur = new BoxBlur(200, 200, 5);
     private final Color overlayColor = Color.hsb(230.0, 0.17, 0.14, 0.2);
     private final Font titleFont = Font.font(FONT, FontWeight.BOLD, 15);
@@ -67,7 +65,7 @@ public class ImageBuilder {
             throw new IllegalStateException("Image url must be specified");
         }
         // Charger l'image (avec cache)
-        Image image = getOrLoadImage(imageUrl);
+        Image image = ImageCache.getImage(imageUrl);
 
         // Calculer la hauteur du contenu
         double contentHeight = IMAGE_SIZE;
@@ -135,10 +133,6 @@ public class ImageBuilder {
 
     private double calculateTotalHeight(double contentHeight) {
         return contentHeight + 2 * PADDING;
-    }
-
-    private Image getOrLoadImage(String url) {
-        return imageCache.computeIfAbsent(url, Image::new);
     }
 
     private VBox createContent(Image image) {
