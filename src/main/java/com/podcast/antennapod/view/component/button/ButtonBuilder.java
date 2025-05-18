@@ -118,7 +118,6 @@ public class ButtonBuilder {
         return this;
     }
 
-
     /**
      * Build and return the button
      *
@@ -129,221 +128,164 @@ public class ButtonBuilder {
             throw new IllegalStateException("Button type must be specified");
         }
 
-        Button button;
+        Button button = new Button();
+        button.setFocusTraversable(true);
+        button.setAlignment(Pos.CENTER);
 
         if (iconOnly && icon != null) {
             // Icon-only button (circular)
-            button = new Button();
-            button.setFocusTraversable(true);
             button.setGraphic(icon);
-            button.setAlignment(Pos.CENTER);
             button.setPrefSize(ICON_BUTTON_SIZE, ICON_BUTTON_SIZE);
             button.setMinSize(Region.USE_PREF_SIZE, Region.USE_PREF_SIZE);
             button.setMaxSize(Region.USE_PREF_SIZE, Region.USE_PREF_SIZE);
-
-            applyIconButtonStyle(button);
         } else {
             // Text button (with optional icon)
-            button = new Button(text != null ? text : "");
-            button.setFocusTraversable(true);
-            button.setAlignment(Pos.CENTER);
-
+            button.setText(text != null ? text : "");
             if (icon != null) {
-                icon.setIconSize(ICON_SIZE);
+                configureIcon();
                 button.setGraphic(icon);
             }
-
-            applyButtonStyle(button);
         }
+
+        applyButtonStyle(button);
 
         return button;
     }
 
-    private void applyButtonStyle(Button button) {
-        // Apply base styling based on button type
-        switch (typeButton) {
-            case PRIMARY:
-                applyPrimaryButtonStyle(button);
-                break;
-            case SECONDARY:
-                applySecondaryButtonStyle(button);
-                break;
-            case TERTIARY:
-                applyTertiaryButtonStyle(button);
-                break;
-        }
-
-        // Apply custom styling if specified
-        if (textColor != null) {
-            button.textFillProperty().set(textColor);
-        }
-
-        if (backgroundColor != null) {
-            button.setBackground(createBackground(backgroundColor));
-        }
-
-        if (icon != null && iconColor != null) {
-            icon.setIconColor(iconColor);
-        }
-    }
-
-    private void applyIconButtonStyle(Button button) {
-        // Apply base styling based on button type
-        switch (typeButton) {
-            case PRIMARY:
-                applyPrimaryIconButtonStyle(button);
-                break;
-            case SECONDARY:
-                applySecondaryIconButtonStyle(button);
-                break;
-            case TERTIARY:
-                applyTertiaryIconButtonStyle(button);
-                break;
-        }
-
-        // Apply custom styling if specified
-        if (backgroundColor != null) {
-            button.setBackground(createCircleBackground(backgroundColor));
-        }
-
-        if (icon != null && iconColor != null) {
-            icon.setIconColor(iconColor);
-        }
-    }
-
-    private void applyPrimaryButtonStyle(Button button) {
-        // Base styling
-        button.textFillProperty().set(textColor != null ? textColor : ColorThemeConstants.getMain950());
-        button.setBackground(createBackground(backgroundColor != null ? backgroundColor : ColorThemeConstants.getMain500()));
-        button.setBorder(null);
-        button.setPadding(PRIMARY_TERTIARY_PADDING);
-
-        setIconParameter();
-
-        button.setOnMouseEntered(_ -> button.setBackground(createBackground(ColorThemeConstants.getMain400())));
-        button.setOnMouseExited(_ -> button.setBackground(createBackground(ColorThemeConstants.getMain500())));
-        button.setOnMousePressed(_ -> button.setBackground(createBackground(ColorThemeConstants.getMain600())));
-        button.setOnMouseReleased(_ -> {
-            if (button.isHover()) {
-                button.setBackground(createBackground(ColorThemeConstants.getMain400()));
-            } else {
-                button.setBackground(createBackground(ColorThemeConstants.getMain500()));
-            }
-        });
-    }
-
-    private void setIconParameter() {
+    private void configureIcon() {
         if (icon != null) {
             icon.setIconColor(iconColor != null ? iconColor : ColorThemeConstants.getGrey950());
             icon.setIconSize(ICON_SIZE);
         }
     }
 
-    private void applySecondaryButtonStyle(Button button) {
-        // Base styling
-        button.textFillProperty().set(textColor != null ? textColor : ColorThemeConstants.getGrey950());
-        button.setBackground(null);
-        button.setPadding(SECONDARY_PADDING);
-        button.setBorder(createBorderSecondaryButton());
-
-        setIconParameter();
-
-        button.setOnMouseEntered(_ -> button.setBackground(createBackground(ColorThemeConstants.getMain050())));
-        button.setOnMouseExited(_ -> button.setBackground(null));
-        button.setOnMousePressed(_ -> button.setBackground(createBackground(ColorThemeConstants.getMain100())));
-        button.setOnMouseReleased(_ -> {
-            if (button.isHover()) {
-                button.setBackground(createBackground(ColorThemeConstants.getMain050()));
-            } else {
-                button.setBackground(null);
-            }
-        });
+    private void applyButtonStyle(Button button) {
+        // Apply base styling based on button type
+        switch (typeButton) {
+            case PRIMARY:
+                applyPrimaryStyle(button);
+                break;
+            case SECONDARY:
+                applySecondaryStyle(button);
+                break;
+            case TERTIARY:
+                applyTertiaryStyle(button);
+                break;
+        }
     }
 
-    private void applyTertiaryButtonStyle(Button button) {
-        // Base styling
-        button.textFillProperty().set(textColor != null ? textColor : ColorThemeConstants.getGrey950());
+    private void applyPrimaryStyle(Button button) {
+        // Styling common for both regular and icon-only buttons
+        configureIcon();
+
+        // Button-specific styling
+        if (iconOnly) {
+            Color bgColor = backgroundColor != null ? backgroundColor : ColorThemeConstants.getMain400();
+            button.setBackground(createCircleBackground(bgColor));
+            button.setPadding(ICON_BUTTON_PADDING);
+
+            // Set mouse event handlers
+            setMouseHandlers(button,
+                    ColorThemeConstants.getMain500(),
+                    ColorThemeConstants.getMain400(),
+                    ColorThemeConstants.getMain600(),
+                    true);
+        } else {
+            button.textFillProperty().set(textColor != null ? textColor : ColorThemeConstants.getMain950());
+            Color bgColor = backgroundColor != null ? backgroundColor : ColorThemeConstants.getMain500();
+            button.setBackground(createBackground(bgColor));
+            button.setPadding(PRIMARY_TERTIARY_PADDING);
+
+            // Set mouse event handlers
+            setMouseHandlers(button,
+                    ColorThemeConstants.getMain400(),
+                    ColorThemeConstants.getMain500(),
+                    ColorThemeConstants.getMain600(),
+                    false);
+        }
+
+        // Common settings
+        button.setBorder(null);
+    }
+
+    private void applySecondaryStyle(Button button) {
+        // Styling common for both regular and icon-only buttons
+        configureIcon();
+        button.setBackground(null);
+
+        // Button-specific styling
+        if (iconOnly) {
+            button.setBorder(createCircleBorder());
+            button.setPadding(ICON_BUTTON_PADDING);
+
+            // Set mouse event handlers
+            setMouseHandlers(button,
+                    ColorThemeConstants.getMain100(),
+                    null,
+                    ColorThemeConstants.getMain300(),
+                    true);
+        } else {
+            button.textFillProperty().set(textColor != null ? textColor : ColorThemeConstants.getGrey950());
+            button.setBorder(createBorder());
+            button.setPadding(SECONDARY_PADDING);
+
+            // Set mouse event handlers
+            setMouseHandlers(button,
+                    ColorThemeConstants.getMain050(),
+                    null,
+                    ColorThemeConstants.getMain100(),
+                    false);
+        }
+    }
+
+    private void applyTertiaryStyle(Button button) {
+        // Styling common for both regular and icon-only buttons
+        configureIcon();
         button.setBackground(null);
         button.setBorder(null);
-        button.setPadding(PRIMARY_TERTIARY_PADDING);
 
-        setIconParameter();
+        // Button-specific styling
+        if (iconOnly) {
+            button.setPadding(ICON_BUTTON_PADDING);
 
-        button.setOnMouseEntered(_ -> button.setBackground(createBackground(ColorThemeConstants.getMain050())));
-        button.setOnMouseExited(_ -> button.setBackground(null));
-        button.setOnMousePressed(_ -> button.setBackground(createBackground(ColorThemeConstants.getMain100())));
-        button.setOnMouseReleased(_ -> {
-            if (button.isHover()) {
-                button.setBackground(createBackground(ColorThemeConstants.getMain050()));
-            } else {
-                button.setBackground(null);
-            }
-        });
+            // Set mouse event handlers
+            setMouseHandlers(button,
+                    ColorThemeConstants.getMain100(),
+                    null,
+                    ColorThemeConstants.getMain300(),
+                    true);
+        } else {
+            button.textFillProperty().set(textColor != null ? textColor : ColorThemeConstants.getGrey950());
+            button.setPadding(PRIMARY_TERTIARY_PADDING);
+
+            // Set mouse event handlers
+            setMouseHandlers(button,
+                    ColorThemeConstants.getMain050(),
+                    null,
+                    ColorThemeConstants.getMain100(),
+                    false);
+        }
     }
 
-    private void applyPrimaryIconButtonStyle(Button button) {
-        // Base styling
-        setIconParameter();
+    private void setMouseHandlers(Button button, Color hoverColor, Color normalColor, Color pressedColor, boolean isCircle) {
+        button.setOnMouseEntered(_ ->
+                button.setBackground(isCircle ? createCircleBackground(hoverColor) : createBackground(hoverColor)));
 
-        button.setBackground(createCircleBackground(backgroundColor != null ? backgroundColor : ColorThemeConstants.getMain400()));
-        button.setBorder(null);
-        button.setPadding(ICON_BUTTON_PADDING);
+        button.setOnMouseExited(_ ->
+                button.setBackground(normalColor == null ? null :
+                        (isCircle ? createCircleBackground(normalColor) : createBackground(normalColor))));
 
-        button.setOnMouseEntered(_ -> button.setBackground(createCircleBackground(ColorThemeConstants.getMain500())));
-        button.setOnMouseExited(_ -> button.setBackground(createCircleBackground(ColorThemeConstants.getMain400())));
-        button.setOnMousePressed(_ -> button.setBackground(createCircleBackground(ColorThemeConstants.getMain600())));
+        button.setOnMousePressed(_ ->
+                button.setBackground(isCircle ? createCircleBackground(pressedColor) : createBackground(pressedColor)));
+
         button.setOnMouseReleased(_ -> {
             if (button.isHover()) {
-                button.setBackground(createCircleBackground(ColorThemeConstants.getMain500()));
+                button.setBackground(isCircle ? createCircleBackground(hoverColor) : createBackground(hoverColor));
             } else {
-                button.setBackground(createCircleBackground(ColorThemeConstants.getMain400()));
+                button.setBackground(normalColor == null ? null :
+                        (isCircle ? createCircleBackground(normalColor) : createBackground(normalColor)));
             }
         });
-    }
-
-    private void applySecondaryIconButtonStyle(Button button) {
-        // Base styling
-        setIconParameter();
-
-        button.setBackground(null);
-        button.setBorder(this.createCircleBorderSecondaryButton());
-        button.setPadding(ICON_BUTTON_PADDING);
-
-
-        button.setOnMouseEntered(_ -> button.setBackground(createCircleBackground(ColorThemeConstants.getMain100())));
-        button.setOnMouseExited(_ -> button.setBackground(null));
-        button.setOnMousePressed(_ -> button.setBackground(createCircleBackground(ColorThemeConstants.getMain300())));
-        button.setOnMouseReleased(_ -> {
-            if (button.isHover()) {
-                button.setBackground(createCircleBackground(ColorThemeConstants.getMain100()));
-            } else {
-                button.setBackground(null);
-            }
-        });
-
-    }
-
-    private void applyTertiaryIconButtonStyle(Button button) {
-        // Base styling
-        setIconParameter();
-
-        button.setBackground(null);
-        button.setBorder(null);
-        button.setPadding(ICON_BUTTON_PADDING);
-
-        // Mouse event handlers
-
-        button.setOnMouseEntered(_ -> button.setBackground(createCircleBackground(ColorThemeConstants.getMain100())));
-        button.setOnMouseExited(_ -> button.setBackground(null));
-        button.setOnMousePressed(_ -> button.setBackground(createCircleBackground(ColorThemeConstants.getMain300())));
-        button.setOnMouseReleased(_ -> {
-            if (button.isHover()) {
-                button.setBackground(createCircleBackground(ColorThemeConstants.getMain100()));
-            } else {
-                button.setBackground(null);
-            }
-        });
-
     }
 
     private Background createBackground(Color color) {
@@ -354,7 +296,7 @@ public class ButtonBuilder {
         return new Background(new BackgroundFill(color, CIRCLE_RADII, Insets.EMPTY));
     }
 
-    private Border createBorderSecondaryButton() {
+    private Border createBorder() {
         Color color = borderColor != null ? borderColor : ColorThemeConstants.getGrey950();
         return new Border(new BorderStroke(
                 color,
@@ -364,7 +306,7 @@ public class ButtonBuilder {
         ));
     }
 
-    private Border createCircleBorderSecondaryButton() {
+    private Border createCircleBorder() {
         Color color = borderColor != null ? borderColor : ColorThemeConstants.getGrey950();
         return new Border(new BorderStroke(
                 color,

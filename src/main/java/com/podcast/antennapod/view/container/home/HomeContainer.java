@@ -37,7 +37,7 @@ public class HomeContainer {
         box.getChildren().add(getTitle());
         box.getChildren().add(getListeningSection());
         box.getChildren().add(getNewsSection());
-        box.getChildren().add(getSurpriseSection());
+        //box.getChildren().add(getSurpriseSection());
         box.getChildren().add(getClassicsSection());
         box.getChildren().add(getDownloadSection());
 
