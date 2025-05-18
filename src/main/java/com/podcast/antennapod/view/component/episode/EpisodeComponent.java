@@ -9,7 +9,7 @@ import org.kordamp.ikonli.materialdesign2.MaterialDesignI;
 
 public class EpisodeComponent {
     public EpisodeComponent() {
-
+        // no parameters
     }
 
     public HBox createInboxEpisode(EpisodeItem item) {

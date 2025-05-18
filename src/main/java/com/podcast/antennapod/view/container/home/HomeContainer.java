@@ -1,8 +1,8 @@
 package com.podcast.antennapod.view.container.home;
 
-import com.podcast.antennapod.view.component.SurpriseComponent;
 import com.podcast.antennapod.view.component.episode.EpisodeComponent;
 import com.podcast.antennapod.view.component.image.ImageComponent;
+import com.podcast.antennapod.view.component.surprise.SurpriseComponent;
 import com.podcast.antennapod.view.item.EpisodeItem;
 import com.podcast.antennapod.view.util.ColorThemeConstants;
 import javafx.geometry.HPos;
@@ -17,6 +17,7 @@ import javafx.scene.text.FontWeight;
 public class HomeContainer {
     public static final ImageComponent IMAGE_COMPONENT = new ImageComponent();
     public static final EpisodeComponent EPISODE_COMPONENT = new EpisodeComponent();
+    public static final SurpriseComponent SURPRISE_COMPONENT = new SurpriseComponent();
     public static final String IMAGE_EX = String.valueOf(HomeContainer.class.getResource("/images/ex.jpeg"));
     public static final String IMAGE_HDM = String.valueOf(HomeContainer.class.getResource("/images/heure_du_monde.png"));
     public static final String IMAGE_SMLTLK = String.valueOf(HomeContainer.class.getResource("/images/small_talk.jpg"));
@@ -37,7 +38,7 @@ public class HomeContainer {
         box.getChildren().add(getTitle());
         box.getChildren().add(getListeningSection());
         box.getChildren().add(getNewsSection());
-        //box.getChildren().add(getSurpriseSection());
+        box.getChildren().add(getSurpriseSection());
         box.getChildren().add(getClassicsSection());
         box.getChildren().add(getDownloadSection());
 
@@ -86,16 +87,9 @@ public class HomeContainer {
             box.getColumnConstraints().add(column);
         }
 
-        EpisodeItem episodeItem = new EpisodeItem(IMAGE_HDM,
-                false,
-                TITLE_EXAMPLE,
-                TIME_EXAMPLE,
-                DATE_EXAMPLE,
-                MO_EXAMPLE);
-
         for (int i = 0; i < 3; i++) {
             for (int j = 0; j < 3; j++) {
-                Node surpriseComponent = SurpriseComponent.createSurprise(episodeItem);
+                Node surpriseComponent = SURPRISE_COMPONENT.createSurprise(IMAGE_HDM, TITLE_EXAMPLE, "L'heure du monde");
                 GridPane.setHalignment(surpriseComponent, HPos.CENTER);
                 box.add(surpriseComponent, i, j, 1, 1);
             }

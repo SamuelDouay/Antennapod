@@ -23,6 +23,7 @@ public class EpisodeBuilder {
      * Create a new EpisodeBuilder
      */
     public EpisodeBuilder() {
+        // no parameter
     }
 
     /**

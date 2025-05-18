@@ -1,4 +1,4 @@
-package com.podcast.antennapod.view.component;
+package com.podcast.antennapod.view.component.surprise;
 
 import com.podcast.antennapod.view.item.EpisodeItem;
 import com.podcast.antennapod.view.util.ColorThemeConstants;
@@ -14,8 +14,8 @@ import org.kordamp.ikonli.javafx.FontIcon;
 import org.kordamp.ikonli.materialdesign2.MaterialDesignD;
 
 public class SurpriseComponent {
-    private SurpriseComponent() {
-        //  no instance
+    public SurpriseComponent() {
+        //  no parameters
     }
 
     public static HBox createSurprise(EpisodeItem episodeItem) {
@@ -64,5 +64,13 @@ public class SurpriseComponent {
         box.getChildren().addAll(labelTitle, labelPodcast);
 
         return box;
+    }
+
+    public HBox createSurprise(String imageUrl, String episodeTitle, String podcastTitle) {
+        return new SurpriseBuilder()
+                .withImageUrl(imageUrl)
+                .withEpisodeTitle(episodeTitle)
+                .withPodcastTitle(podcastTitle)
+                .build();
     }
 }
