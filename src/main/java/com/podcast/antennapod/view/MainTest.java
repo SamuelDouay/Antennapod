@@ -30,6 +30,7 @@ public class MainTest extends Application {
 
     private static final ButtonComponent BUTTON_COMPONENT = new ButtonComponent();
     private static final BadgeComponent BADGE_COMPONENT = new BadgeComponent();
+    private static final EpisodeComponent EPISODE_COMPONENT = new EpisodeComponent();
     private Scene scene;
     private Label currentSelectionLabel;
 
@@ -117,7 +118,7 @@ public class MainTest extends Application {
                 "28/10/2024",
                 "18 Mo");
 
-        mainContainer.getChildren().addAll(EpisodeComponent.createNewEpisode(episodeItem), EpisodeComponent.createNewEpisode(episodeItem1));
+        mainContainer.getChildren().addAll(EPISODE_COMPONENT.createInboxEpisode(episodeItem), EPISODE_COMPONENT.createInboxEpisode(episodeItem1));
 
         // Configurer le positionnement
         AnchorPane.setLeftAnchor(mainContainer, 240.0);

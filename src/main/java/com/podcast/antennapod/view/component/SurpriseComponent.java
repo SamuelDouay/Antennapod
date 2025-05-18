@@ -1,4 +1,4 @@
-package com.podcast.antennapod.view.component.episode;
+package com.podcast.antennapod.view.component;
 
 import com.podcast.antennapod.view.item.EpisodeItem;
 import com.podcast.antennapod.view.util.ColorThemeConstants;

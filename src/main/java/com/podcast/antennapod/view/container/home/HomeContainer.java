@@ -1,7 +1,7 @@
 package com.podcast.antennapod.view.container.home;
 
+import com.podcast.antennapod.view.component.SurpriseComponent;
 import com.podcast.antennapod.view.component.episode.EpisodeComponent;
-import com.podcast.antennapod.view.component.episode.SurpriseComponent;
 import com.podcast.antennapod.view.component.image.ImageComponent;
 import com.podcast.antennapod.view.item.EpisodeItem;
 import com.podcast.antennapod.view.util.ColorThemeConstants;
@@ -15,8 +15,8 @@ import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
 
 public class HomeContainer {
-
     public static final ImageComponent IMAGE_COMPONENT = new ImageComponent();
+    public static final EpisodeComponent EPISODE_COMPONENT = new EpisodeComponent();
     public static final String IMAGE_EX = String.valueOf(HomeContainer.class.getResource("/images/ex.jpeg"));
     public static final String IMAGE_HDM = String.valueOf(HomeContainer.class.getResource("/images/heure_du_monde.png"));
     public static final String IMAGE_SMLTLK = String.valueOf(HomeContainer.class.getResource("/images/small_talk.jpg"));
@@ -129,8 +129,8 @@ public class HomeContainer {
                     DATE_EXAMPLE,
                     MO_EXAMPLE);
 
-            box.getChildren().add(EpisodeComponent.createNewEpisode(episodeItem));
-            box.getChildren().add(EpisodeComponent.createNewEpisode(episodeItem1));
+            box.getChildren().add(EPISODE_COMPONENT.createInboxEpisode(episodeItem));
+            box.getChildren().add(EPISODE_COMPONENT.createInboxEpisode(episodeItem1));
         }
 
         return box;
