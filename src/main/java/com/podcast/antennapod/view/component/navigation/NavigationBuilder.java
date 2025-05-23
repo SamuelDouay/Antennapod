@@ -15,8 +15,6 @@ import javafx.scene.text.FontPosture;
 import javafx.scene.text.FontWeight;
 import org.kordamp.ikonli.javafx.FontIcon;
 
-import java.util.concurrent.ConcurrentHashMap;
-
 public class NavigationBuilder {
     private static final double ICON_SIZE = 25.0;
     private static final double TITLE_MAX_WIDTH = 140.0;
@@ -24,7 +22,6 @@ public class NavigationBuilder {
     private static final double SPACING = 14.0;
     private static final Insets PADDING = new Insets(6.0, 12.0, 6.0, 12.0);
     private static final String FONT = "Inter";
-    private static final ConcurrentHashMap<String, Image> imageCache = new ConcurrentHashMap<>();
 
     private String title;
     private FontIcon icon;
@@ -44,7 +41,7 @@ public class NavigationBuilder {
     public void withIcon(FontIcon icon) {
         this.icon = icon;
     }
-    
+
     public void withImage(String imageUrl) {
         this.imageUrl = imageUrl;
     }

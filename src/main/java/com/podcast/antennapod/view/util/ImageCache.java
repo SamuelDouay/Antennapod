@@ -6,27 +6,31 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class ImageCache {
-    private static final Map<String, Image> imageCache = new HashMap<>();
+    private static final Map<String, Image> IMAGE_CACHE = new HashMap<>();
     private static final int MAX_CACHE_SIZE = 1000; // Ajuste selon tes besoins
 
+    private ImageCache() {
+        // no parameters
+    }
+
     public static Image getImage(String url) {
-        if (imageCache.containsKey(url)) {
-            return imageCache.get(url);
+        if (IMAGE_CACHE.containsKey(url)) {
+            return IMAGE_CACHE.get(url);
         }
 
         // Mécanisme de contrôle de taille du cache
-        if (imageCache.size() >= MAX_CACHE_SIZE) {
+        if (IMAGE_CACHE.size() >= MAX_CACHE_SIZE) {
             // Stratégie simple: supprimer une entrée aléatoire
-            String keyToRemove = imageCache.keySet().iterator().next();
-            imageCache.remove(keyToRemove);
+            String keyToRemove = IMAGE_CACHE.keySet().iterator().next();
+            IMAGE_CACHE.remove(keyToRemove);
         }
 
         Image image = new Image(url, true); // true pour chargement en background
-        imageCache.put(url, image);
+        IMAGE_CACHE.put(url, image);
         return image;
     }
 
     public static void clearCache() {
-        imageCache.clear();
+        IMAGE_CACHE.clear();
     }
 }
