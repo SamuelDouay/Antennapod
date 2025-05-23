@@ -1,9 +1,10 @@
-package com.podcast.antennapod.view.container.navigation;
+package com.podcast.antennapod.view.layout;
 
 import com.podcast.antennapod.view.component.navigation.NavigationComponent;
 import com.podcast.antennapod.view.item.ItemManager;
 import com.podcast.antennapod.view.item.NavigationItem;
 import com.podcast.antennapod.view.util.ColorThemeConstants;
+import com.podcast.antennapod.view.util.LayoutType;
 import javafx.geometry.Insets;
 import javafx.scene.Node;
 import javafx.scene.control.Label;
@@ -21,14 +22,30 @@ import java.util.List;
 
 public class NavigationContainer {
     private static final String FONT = "Inter";
-    private static final ItemManager manager = new ItemManager();
-    private static final List<HBox> listNav = new ArrayList<>();
 
-    private NavigationContainer() {
+    private final ItemManager manager;
+    private final List<HBox> listNav;
+    private LayoutManager layoutManager;
 
+    public NavigationContainer() {
+        this.manager = new ItemManager();
+        this.listNav = new ArrayList<>();
     }
 
-    public static VBox createMenu() {
+    public NavigationContainer(LayoutManager layoutManager) {
+        this();
+        this.layoutManager = layoutManager;
+    }
+
+    public void setLayoutManager(LayoutManager layoutManager) {
+        this.layoutManager = layoutManager;
+    }
+
+    public LayoutManager getLayoutManager() {
+        return layoutManager;
+    }
+
+    public VBox createMenu() {
         VBox mainContainer = new VBox();
         mainContainer.setBackground(new Background(new BackgroundFill(ColorThemeConstants.getMain000(), null, null)));
         VBox.setVgrow(mainContainer, Priority.ALWAYS);
@@ -36,7 +53,7 @@ public class NavigationContainer {
         return mainContainer;
     }
 
-    private static VBox createList() {
+    private VBox createList() {
         VBox box = new VBox();
         box.setPadding(new Insets(8.0));
         box.setBackground(new Background(new BackgroundFill(ColorThemeConstants.getMain000(), null, null)));
@@ -44,34 +61,34 @@ public class NavigationContainer {
         return box;
     }
 
-    private static VBox createFixedList() {
+    private VBox createFixedList() {
         VBox box = createList();
 
-        NavigationItem homeItem = new NavigationItem(new FontIcon(MaterialDesignH.HOME), "Accueil");
+        NavigationItem homeItem = new NavigationItem(new FontIcon(MaterialDesignH.HOME), "Home");
         homeItem.setSelected(true);
-        NavigationItem playlistItem = new NavigationItem(new FontIcon(MaterialDesignP.PLAYLIST_PLAY), "Liste de lecture");
-        NavigationItem inboxItem = new NavigationItem(new FontIcon(MaterialDesignI.INBOX), "Boîte de reception", 12);
+        NavigationItem playlistItem = new NavigationItem(new FontIcon(MaterialDesignP.PLAYLIST_PLAY), "Queue");
+        NavigationItem inboxItem = new NavigationItem(new FontIcon(MaterialDesignI.INBOX), "Inbox", 12);
         NavigationItem episodesItem = new NavigationItem(new FontIcon(MaterialDesignR.RSS), "Episodes");
-        NavigationItem subscriptionsItem = new NavigationItem(new FontIcon(MaterialDesignV.VIEW_GRID_OUTLINE), "Abonnements");
-        NavigationItem downloadsItem = new NavigationItem(new FontIcon(MaterialDesignD.DOWNLOAD), "Téléchargement", 123);
-        NavigationItem historyItem = new NavigationItem(new FontIcon(MaterialDesignH.HISTORY), "Journal de lecture");
-        NavigationItem addPodcastItem = new NavigationItem(new FontIcon(MaterialDesignP.PLUS), "Ajouter un podcast");
+        NavigationItem subscriptionsItem = new NavigationItem(new FontIcon(MaterialDesignV.VIEW_GRID_OUTLINE), "Subscription");
+        NavigationItem downloadsItem = new NavigationItem(new FontIcon(MaterialDesignD.DOWNLOAD), "Downloads", 123);
+        NavigationItem historyItem = new NavigationItem(new FontIcon(MaterialDesignH.HISTORY), "Playback history");
+        NavigationItem addPodcastItem = new NavigationItem(new FontIcon(MaterialDesignP.PLUS), "Add podcast");
 
-        listNav.add(createNavigationComponent(homeItem));
-        listNav.add(createNavigationComponent(playlistItem));
-        listNav.add(createNavigationComponent(inboxItem));
-        listNav.add(createNavigationComponent(episodesItem));
-        listNav.add(createNavigationComponent(subscriptionsItem));
-        listNav.add(createNavigationComponent(downloadsItem));
-        listNav.add(createNavigationComponent(historyItem));
-        listNav.add(createNavigationComponent(addPodcastItem));
+        listNav.add(createNavigationComponent(homeItem, LayoutType.HOME));
+        listNav.add(createNavigationComponent(playlistItem, null));
+        listNav.add(createNavigationComponent(inboxItem, null));
+        listNav.add(createNavigationComponent(episodesItem, null));
+        listNav.add(createNavigationComponent(subscriptionsItem, LayoutType.SUBSCRIPTION));
+        listNav.add(createNavigationComponent(downloadsItem, null));
+        listNav.add(createNavigationComponent(historyItem, null));
+        listNav.add(createNavigationComponent(addPodcastItem, null));
 
         box.getChildren().addAll(listNav);
 
         return box;
     }
 
-    private static ScrollPane createScrollList() {
+    private ScrollPane createScrollList() {
         VBox box = createList();
 
         for (int i = 0; i < 5; i++) {
@@ -82,12 +99,12 @@ public class NavigationContainer {
             NavigationItem podcast5 = new NavigationItem(String.valueOf(NavigationContainer.class.getResource("/images/ex.jpeg")), "Ex...", 12);
             NavigationItem podcast6 = new NavigationItem(String.valueOf(NavigationContainer.class.getResource("/images/ex.jpeg")), "Ex...");
 
-            HBox box1 = createNavigationComponent(podcast1);
-            HBox box2 = createNavigationComponent(podcast2);
-            HBox box3 = createNavigationComponent(podcast3);
-            HBox box4 = createNavigationComponent(podcast4);
-            HBox box5 = createNavigationComponent(podcast5);
-            HBox box6 = createNavigationComponent(podcast6);
+            HBox box1 = createNavigationComponent(podcast1, null);
+            HBox box2 = createNavigationComponent(podcast2, null);
+            HBox box3 = createNavigationComponent(podcast3, null);
+            HBox box4 = createNavigationComponent(podcast4, null);
+            HBox box5 = createNavigationComponent(podcast5, null);
+            HBox box6 = createNavigationComponent(podcast6, null);
 
             listNav.add(box1);
             listNav.add(box2);
@@ -97,7 +114,6 @@ public class NavigationContainer {
             listNav.add(box6);
 
             box.getChildren().addAll(box1, box2, box3, box4, box5, box6);
-
         }
 
         ScrollPane scrollPane = getScrollPane(box);
@@ -105,7 +121,7 @@ public class NavigationContainer {
         return scrollPane;
     }
 
-    private static ScrollPane getScrollPane(VBox box) {
+    private ScrollPane getScrollPane(VBox box) {
         ScrollPane scrollPane = new ScrollPane(box);
         scrollPane.setFitToWidth(true);
         scrollPane.setFitToHeight(true);
@@ -116,15 +132,18 @@ public class NavigationContainer {
         return scrollPane;
     }
 
-    private static HBox createNavigationComponent(NavigationItem item) {
+    private HBox createNavigationComponent(NavigationItem item, LayoutType layoutType) {
         manager.addItem(item);
         NavigationComponent container = new NavigationComponent();
         HBox box = container.createNavigationCard(item);
-        
+
         box.setOnMouseClicked(_ -> {
             manager.setItemState(true, item.getUuid());
             for (HBox hBox : listNav) {
                 updateAppearance(hBox, hBox.equals(box));
+            }
+            if (layoutType != null && layoutManager != null) {
+                layoutManager.setLayout(layoutType);
             }
         });
         box.setOnMouseEntered(_ -> updateAppearance(box, true));
@@ -135,7 +154,7 @@ public class NavigationContainer {
         return box;
     }
 
-    private static void updateAppearance(HBox mainBox, boolean isSelected) {
+    private void updateAppearance(HBox mainBox, boolean isSelected) {
         Label titleLabel = (Label) ((HBox) mainBox.getChildren().getFirst()).getChildren().get(1);
         Node icon = ((HBox) mainBox.getChildren().getFirst()).getChildren().get(0);
 
