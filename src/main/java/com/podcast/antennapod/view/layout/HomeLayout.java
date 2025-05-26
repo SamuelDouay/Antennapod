@@ -4,7 +4,11 @@ import com.podcast.antennapod.view.component.episode.EpisodeComponent;
 import com.podcast.antennapod.view.component.image.ImageComponent;
 import com.podcast.antennapod.view.component.surprise.SurpriseComponent;
 import com.podcast.antennapod.view.item.EpisodeItem;
+import com.podcast.antennapod.view.layout.context.ContextualLayout;
+import com.podcast.antennapod.view.layout.context.HomeContext;
+import com.podcast.antennapod.view.layout.context.LayoutContext;
 import com.podcast.antennapod.view.util.ColorThemeConstants;
+import javafx.application.Platform;
 import javafx.geometry.HPos;
 import javafx.geometry.Insets;
 import javafx.scene.Node;
@@ -14,7 +18,7 @@ import javafx.scene.layout.*;
 import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
 
-public class HomeLayout extends Layout {
+public class HomeLayout extends Layout implements ContextualLayout {
     public static final ImageComponent IMAGE_COMPONENT = new ImageComponent();
     public static final EpisodeComponent EPISODE_COMPONENT = new EpisodeComponent();
     public static final SurpriseComponent SURPRISE_COMPONENT = new SurpriseComponent();
@@ -32,20 +36,11 @@ public class HomeLayout extends Layout {
     public static final String DATE_EXAMPLE = "28/10/2024";
     public static final String MO_EXAMPLE = "18 Mo";
 
+    private HomeContext currentContext;
+    private VBox mainContainer;
+
     public HomeLayout() {
         super("Home");
-    }
-
-    @Override
-    public VBox getLayout() {
-        VBox box = getContainer();
-        box.getChildren().add(getTitle());
-        box.getChildren().add(getListeningSection());
-        box.getChildren().add(getNewsSection());
-        box.getChildren().add(getSurpriseSection());
-        box.getChildren().add(getClassicsSection());
-        box.getChildren().add(getDownloadSection());
-        return box;
     }
 
     private static VBox getNewsSection() {
@@ -62,6 +57,35 @@ public class HomeLayout extends Layout {
         box.getChildren().add(getTitleSection("Get surprised"));
         box.getChildren().add(getSurpriseTable());
         return box;
+    }
+
+    private static VBox getDownloadSection() {
+        VBox box = new VBox(12);
+        HBox.setHgrow(box, Priority.ALWAYS);
+        box.getChildren().add(getTitleSection("Manage downloads"));
+        box.getChildren().add(getNewsTable());
+        return box;
+    }
+
+    private static VBox getClassicsSection() {
+        VBox box = new VBox(12);
+        box.getChildren().add(getTitleSection("Check your classic"));
+        box.getChildren().add(getClassic());
+        return box;
+    }
+
+    private static VBox getListeningSection() {
+        VBox box = new VBox(12);
+        box.getChildren().add(getTitleSection("Continue listening"));
+        box.getChildren().add(getListening());
+        return box;
+    }
+
+    private static Label getTitleSection(String title) {
+        Label label = new Label(title);
+        label.setFont(Font.font("Inter", FontWeight.BOLD, 20));
+        label.setTextFill(ColorThemeConstants.getMain950());
+        return label;
     }
 
     private static Node getSurpriseTable() {
@@ -89,14 +113,6 @@ public class HomeLayout extends Layout {
         return box;
     }
 
-    private static VBox getDownloadSection() {
-        VBox box = new VBox(12);
-        HBox.setHgrow(box, Priority.ALWAYS);
-        box.getChildren().add(getTitleSection("Manage downloads"));
-        box.getChildren().add(getNewsTable());
-        return box;
-    }
-
     private static Node getNewsTable() {
         VBox box = new VBox();
 
@@ -119,27 +135,6 @@ public class HomeLayout extends Layout {
             box.getChildren().add(EPISODE_COMPONENT.createInboxEpisode(episodeItem1));
         }
 
-        return box;
-    }
-
-    private static Label getTitleSection(String title) {
-        Label label = new Label(title);
-        label.setFont(Font.font("Inter", FontWeight.BOLD, 20));
-        label.setTextFill(ColorThemeConstants.getMain950());
-        return label;
-    }
-
-    private static VBox getClassicsSection() {
-        VBox box = new VBox(12);
-        box.getChildren().add(getTitleSection("Check your classic"));
-        box.getChildren().add(getClassic());
-        return box;
-    }
-
-    private static VBox getListeningSection() {
-        VBox box = new VBox(12);
-        box.getChildren().add(getTitleSection("Continue listening"));
-        box.getChildren().add(getListening());
         return box;
     }
 
@@ -191,5 +186,53 @@ public class HomeLayout extends Layout {
 
         scrollPane.setContent(box);
         return scrollPane;
+    }
+
+    @Override
+    public VBox getLayout() {
+        mainContainer = getContainer();
+        buildLayout();
+        return mainContainer;
+    }
+
+    private void buildLayout() {
+        mainContainer.getChildren().clear();
+        mainContainer.getChildren().addAll(
+                getTitle(),
+                getListeningSection(),
+                getNewsSection(),
+                getSurpriseSection(),
+                getClassicsSection(),
+                getDownloadSection()
+        );
+    }
+
+    @Override
+    public void updateContext(LayoutContext context) {
+        if (context instanceof HomeContext homeContext) {
+            Platform.runLater(() -> {
+                this.currentContext = homeContext;
+
+                // Mise à jour du titre avec personnalisation
+                String welcomeTitle = homeContext.userName() != null
+                        ? "Welcome back, " + homeContext.userName() + "!"
+                        : "Home";
+                setTitle(welcomeTitle);
+
+                // Reconstruire le layout si nécessaire
+                if (mainContainer != null) {
+                    refreshLayout();
+                }
+            });
+        }
+    }
+
+    @Override
+    public boolean acceptsContext(Class<? extends LayoutContext> contextType) {
+        return HomeContext.class.isAssignableFrom(contextType);
+    }
+
+    private void refreshLayout() {
+        buildLayout();
     }
 }

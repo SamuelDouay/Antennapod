@@ -1,6 +1,8 @@
 package com.podcast.antennapod.view.layout;
 
 import com.podcast.antennapod.view.util.ColorThemeConstants;
+import javafx.beans.property.SimpleStringProperty;
+import javafx.beans.property.StringProperty;
 import javafx.geometry.Insets;
 import javafx.scene.control.Label;
 import javafx.scene.layout.*;
@@ -8,18 +10,27 @@ import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
 
 public abstract class Layout {
-    private final String title;
+    private static final String FONT_FAMILY = "Inter";
+    protected final StringProperty titleProperty;
 
-    protected Layout(String title) {
-        this.title = title;
+    protected Layout(String initialTitle) {
+        this.titleProperty = new SimpleStringProperty(initialTitle);
     }
 
+    public final StringProperty titleProperty() {
+        return titleProperty;
+    }
 
     protected Label getTitle() {
-        Label label = new Label(title);
-        label.setFont(Font.font("Inter", FontWeight.BOLD, 36));
+        Label label = new Label();
+        label.textProperty().bind(titleProperty);
+        label.setFont(Font.font(FONT_FAMILY, FontWeight.BOLD, 36));
         label.setTextFill(ColorThemeConstants.getMain950());
         return label;
+    }
+
+    protected final void setTitle(String title) {
+        titleProperty.set(title);
     }
 
     protected VBox getContainer() {

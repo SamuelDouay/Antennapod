@@ -1,5 +1,5 @@
 package com.podcast.antennapod.view.util;
 
 public enum LayoutType {
-    HOME, SUBSCRIPTION
+    HOME, QUEUE, INBOX, EPISODES, SUBSCRIPTION, DOWNLOAD, HISTORY, ADD, FEED;
 }

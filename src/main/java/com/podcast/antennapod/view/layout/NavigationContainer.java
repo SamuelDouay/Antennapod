@@ -3,6 +3,7 @@ package com.podcast.antennapod.view.layout;
 import com.podcast.antennapod.view.component.navigation.NavigationComponent;
 import com.podcast.antennapod.view.item.ItemManager;
 import com.podcast.antennapod.view.item.NavigationItem;
+import com.podcast.antennapod.view.layout.context.FeedContext;
 import com.podcast.antennapod.view.util.ColorThemeConstants;
 import com.podcast.antennapod.view.util.LayoutType;
 import javafx.geometry.Insets;
@@ -37,12 +38,12 @@ public class NavigationContainer {
         this.layoutManager = layoutManager;
     }
 
-    public void setLayoutManager(LayoutManager layoutManager) {
-        this.layoutManager = layoutManager;
-    }
-
     public LayoutManager getLayoutManager() {
         return layoutManager;
+    }
+
+    public void setLayoutManager(LayoutManager layoutManager) {
+        this.layoutManager = layoutManager;
     }
 
     public VBox createMenu() {
@@ -75,13 +76,13 @@ public class NavigationContainer {
         NavigationItem addPodcastItem = new NavigationItem(new FontIcon(MaterialDesignP.PLUS), "Add podcast");
 
         listNav.add(createNavigationComponent(homeItem, LayoutType.HOME));
-        listNav.add(createNavigationComponent(playlistItem, null));
-        listNav.add(createNavigationComponent(inboxItem, null));
-        listNav.add(createNavigationComponent(episodesItem, null));
+        listNav.add(createNavigationComponent(playlistItem, LayoutType.QUEUE));
+        listNav.add(createNavigationComponent(inboxItem, LayoutType.INBOX));
+        listNav.add(createNavigationComponent(episodesItem, LayoutType.EPISODES));
         listNav.add(createNavigationComponent(subscriptionsItem, LayoutType.SUBSCRIPTION));
-        listNav.add(createNavigationComponent(downloadsItem, null));
-        listNav.add(createNavigationComponent(historyItem, null));
-        listNav.add(createNavigationComponent(addPodcastItem, null));
+        listNav.add(createNavigationComponent(downloadsItem, LayoutType.DOWNLOAD));
+        listNav.add(createNavigationComponent(historyItem, LayoutType.HISTORY));
+        listNav.add(createNavigationComponent(addPodcastItem, LayoutType.ADD));
 
         box.getChildren().addAll(listNav);
 
@@ -94,17 +95,17 @@ public class NavigationContainer {
         for (int i = 0; i < 5; i++) {
             NavigationItem podcast1 = new NavigationItem(String.valueOf(NavigationContainer.class.getResource("/images/zerl.jpg")), "Zack en Roue Libre by Zack Nani", 12);
             NavigationItem podcast2 = new NavigationItem(String.valueOf(NavigationContainer.class.getResource("/images/heure_du_monde.png")), "L'heure du monde");
-            NavigationItem podcast3 = new NavigationItem(String.valueOf(NavigationContainer.class.getResource("/images/small_talk.jpg")), "Small Tallk - Kobini", 12);
-            NavigationItem podcast4 = new NavigationItem(String.valueOf(NavigationContainer.class.getResource("/images/underscore.jpeg")), "Underscore_", 12);
-            NavigationItem podcast5 = new NavigationItem(String.valueOf(NavigationContainer.class.getResource("/images/ex.jpeg")), "Ex...", 12);
+            NavigationItem podcast3 = new NavigationItem(String.valueOf(NavigationContainer.class.getResource("/images/small_talk.jpg")), "Small Tallk - Kobini", 142);
+            NavigationItem podcast4 = new NavigationItem(String.valueOf(NavigationContainer.class.getResource("/images/underscore.jpeg")), "Underscore_", 5);
+            NavigationItem podcast5 = new NavigationItem(String.valueOf(NavigationContainer.class.getResource("/images/ex.jpeg")), "Ex...", 200);
             NavigationItem podcast6 = new NavigationItem(String.valueOf(NavigationContainer.class.getResource("/images/ex.jpeg")), "Ex...");
 
-            HBox box1 = createNavigationComponent(podcast1, null);
-            HBox box2 = createNavigationComponent(podcast2, null);
-            HBox box3 = createNavigationComponent(podcast3, null);
-            HBox box4 = createNavigationComponent(podcast4, null);
-            HBox box5 = createNavigationComponent(podcast5, null);
-            HBox box6 = createNavigationComponent(podcast6, null);
+            HBox box1 = createNavigationComponent(podcast1, LayoutType.FEED);
+            HBox box2 = createNavigationComponent(podcast2, LayoutType.FEED);
+            HBox box3 = createNavigationComponent(podcast3, LayoutType.FEED);
+            HBox box4 = createNavigationComponent(podcast4, LayoutType.FEED);
+            HBox box5 = createNavigationComponent(podcast5, LayoutType.FEED);
+            HBox box6 = createNavigationComponent(podcast6, LayoutType.FEED);
 
             listNav.add(box1);
             listNav.add(box2);
@@ -143,12 +144,18 @@ public class NavigationContainer {
                 updateAppearance(hBox, hBox.equals(box));
             }
             if (layoutType != null && layoutManager != null) {
-                layoutManager.setLayout(layoutType);
+                if (layoutType.equals(LayoutType.FEED)) {
+                    FeedContext context = new FeedContext(item.getTitle(), item.getUuid().toString(), item.getNumber());
+                    layoutManager.setLayout(layoutType, context);
+
+                } else {
+                    layoutManager.setLayout(layoutType);
+                }
             }
         });
         box.setOnMouseEntered(_ -> updateAppearance(box, true));
         box.setOnMouseExited(_ -> updateAppearance(box, item.isSelected()));
-        box.setOnMousePressed(e -> box.setBackground(new Background(new BackgroundFill(ColorThemeConstants.getMain050(), null, null))));
+        box.setOnMousePressed(_ -> box.setBackground(new Background(new BackgroundFill(ColorThemeConstants.getMain050(), null, null))));
         box.setOnMouseReleased(_ -> updateAppearance(box, item.isSelected()));
 
         return box;
