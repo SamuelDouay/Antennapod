@@ -1,6 +1,7 @@
 package com.podcast.antennapod.view.component.surprise;
 
 import com.podcast.antennapod.view.util.ColorThemeConstants;
+import com.podcast.antennapod.view.util.ImageCache;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.control.Label;
@@ -27,7 +28,7 @@ public class SurpriseBuilder {
      * @param episodeTitle The text to display on the button
      * @return This builder instance for chaining
      */
-    public SurpriseBuilder withEpisodeTitle (String episodeTitle) {
+    public SurpriseBuilder withEpisodeTitle(String episodeTitle) {
         this.episodeTitle = episodeTitle;
         return this;
     }
@@ -56,32 +57,39 @@ public class SurpriseBuilder {
     }
 
 
-
     public HBox build() {
-        HBox box = new HBox();
+        HBox box = getContainer();
 
-        box.setMinSize(Region.USE_PREF_SIZE, Region.USE_PREF_SIZE);
-        HBox.setHgrow(box, Priority.ALWAYS);
-        box.setPadding(new Insets(8.0, 16.0,8.0,16.0));
-        box.setBackground(new Background(new BackgroundFill(ColorThemeConstants.getMain500(), null, null)));
-        box.setAlignment(Pos.CENTER);
-
-        ImageView imageView = new ImageView(imageUrl);
+        ImageView imageView = new ImageView(ImageCache.getImage(imageUrl));
         imageView.setFitHeight(45.0);
         imageView.setFitWidth(45.0);
-
-        VBox titleBox = getTextComponent();
 
         FontIcon icon = new FontIcon(MaterialDesignD.DOTS_VERTICAL);
         icon.setIconSize(15);
 
+        box.getChildren().add(imageView);
+        addSpacer(box);
+        box.getChildren().add(getTextComponent());
+        addSpacer(box);
+        box.getChildren().add(icon);
 
-        Region region = new Region();
-        HBox.setHgrow(region, Priority.ALWAYS);
-        Region region1 = new Region();
-        HBox.setHgrow(region1, Priority.ALWAYS);
-        box.getChildren().addAll(imageView, region, titleBox, region1, icon);
+        return box;
+    }
 
+    private void addSpacer(HBox container) {
+        Region spacer = new Region();
+        HBox.setHgrow(spacer, Priority.ALWAYS);
+        container.getChildren().add(spacer);
+    }
+
+    private HBox getContainer() {
+        HBox box = new HBox();
+
+        box.setMinSize(Region.USE_PREF_SIZE, Region.USE_PREF_SIZE);
+        HBox.setHgrow(box, Priority.ALWAYS);
+        box.setPadding(new Insets(8.0, 16.0, 8.0, 16.0));
+        box.setBackground(new Background(new BackgroundFill(ColorThemeConstants.getMain500(), null, null)));
+        box.setAlignment(Pos.CENTER);
         return box;
     }
 
