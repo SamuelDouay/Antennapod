@@ -109,14 +109,16 @@ public class MainTest extends Application {
                 TITLE_EXAMPLE,
                 "00:20:40",
                 "28/10/2024",
-                "18 Mo");
+                "18 Mo",
+                true);
 
         EpisodeItem episodeItem1 = new EpisodeItem(String.valueOf(MainTest.class.getResource(IMAGES_HEURE_DU_MONDE_PNG)),
                 true,
                 TITLE_EXAMPLE,
                 "00:20:40",
                 "28/10/2024",
-                "18 Mo");
+                "18 Mo",
+                false);
 
         mainContainer.getChildren().addAll(EPISODE_COMPONENT.createInboxEpisode(episodeItem), EPISODE_COMPONENT.createInboxEpisode(episodeItem1));
 

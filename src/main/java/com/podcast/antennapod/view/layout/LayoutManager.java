@@ -63,7 +63,7 @@ public class LayoutManager {
                     contextualLayout.updateContext(context);
                     contextCache.put(layoutType, context);
                 } else {
-                    logger.warn("Layout " + layoutType + " does not accept context of type " + context.getClass().getSimpleName());
+                    logger.warn("Layout {} does not accept context of type {}", layoutType, context.getClass().getSimpleName());
                 }
             }
 
@@ -71,7 +71,7 @@ public class LayoutManager {
             currentLayoutType = layoutType;
 
         } catch (Exception e) {
-            logger.warn("Failed to set layout " + layoutType + ": " + e.getMessage());
+            logger.warn("Failed to set layout {}: {}", layoutType, e.getMessage());
             // Fallback vers un layout sûr
             if (layoutType != LayoutType.HOME) {
                 setLayout(LayoutType.HOME);

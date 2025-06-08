@@ -122,14 +122,16 @@ public class HomeLayout extends Layout implements ContextualLayout {
                     TITLE_EXAMPLE,
                     TIME_EXAMPLE,
                     DATE_EXAMPLE,
-                    MO_EXAMPLE);
+                    MO_EXAMPLE,
+                    false);
 
             EpisodeItem episodeItem1 = new EpisodeItem(IMAGE_EX,
                     true,
                     TITLE_EXAMPLE,
                     TIME_EXAMPLE,
                     DATE_EXAMPLE,
-                    MO_EXAMPLE);
+                    MO_EXAMPLE,
+                    true);
 
             box.getChildren().add(EPISODE_COMPONENT.createInboxEpisode(episodeItem));
             box.getChildren().add(EPISODE_COMPONENT.createInboxEpisode(episodeItem1));

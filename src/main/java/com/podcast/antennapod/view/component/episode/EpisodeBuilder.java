@@ -78,7 +78,8 @@ public class EpisodeBuilder {
         box.getChildren().add(region);
         box.getChildren().add(createSecondPart());
 
-        box.setBackground(new Background(new BackgroundFill(ColorThemeConstants.getMain050(), null, null)));
+        setOnMouseHandler(box);
+
         HBox.setHgrow(box, Priority.ALWAYS);
         box.setPadding( new Insets(8.0, 16.0, 8.0, 16.0));
         box.setAlignment(Pos.CENTER);
@@ -98,7 +99,12 @@ public class EpisodeBuilder {
 
         Label title = new Label(episodeItem.getName());
         title.maxWidth(360.0);
-        title.setTextFill(ColorThemeConstants.getGrey950());
+
+        if (episodeItem.isRead()) {
+            title.setTextFill(ColorThemeConstants.getGrey800());
+        } else {
+            title.setTextFill(ColorThemeConstants.getGrey950());
+        }
         title.setFont(Font.font("Inter", FontWeight.MEDIUM, 14));
 
         box.getChildren().addAll(icon, image, title);
@@ -145,7 +151,11 @@ public class EpisodeBuilder {
         addSpacer(box);
         FontIcon menuIcon = new FontIcon(MaterialDesignD.DOTS_VERTICAL);
         menuIcon.setIconSize(15);
-        menuIcon.setIconColor(ColorThemeConstants.getGrey950());
+        if (episodeItem.isRead()) {
+            menuIcon.setIconColor(ColorThemeConstants.getGrey800());
+        } else {
+            menuIcon.setIconColor(ColorThemeConstants.getGrey950());
+        }
         box.getChildren().add(menuIcon);
 
         box.setAlignment(Pos.CENTER);
@@ -168,7 +178,16 @@ public class EpisodeBuilder {
 
     private Label createLabel(String text) {
         Label label = new Label(text);
-        label.setTextFill(ColorThemeConstants.getGrey950());
+        if (episodeItem.isRead()) {
+            label.setTextFill(ColorThemeConstants.getGrey800());
+        } else {
+            label.setTextFill(ColorThemeConstants.getGrey950());
+        }
         return label;
+    }
+
+    private void setOnMouseHandler(HBox box) {
+        box.setOnMouseEntered(_ -> box.setBackground(new Background(new BackgroundFill(ColorThemeConstants.getMain050(), null, null))));
+        box.setOnMouseExited(_ -> box.setBackground(null));
     }
 }
