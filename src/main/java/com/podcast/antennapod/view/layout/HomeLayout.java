@@ -8,7 +8,6 @@ import com.podcast.antennapod.view.layout.context.ContextualLayout;
 import com.podcast.antennapod.view.layout.context.HomeContext;
 import com.podcast.antennapod.view.layout.context.LayoutContext;
 import com.podcast.antennapod.view.util.ColorThemeConstants;
-import javafx.application.Platform;
 import javafx.geometry.HPos;
 import javafx.geometry.Insets;
 import javafx.scene.Node;
@@ -36,59 +35,63 @@ public class HomeLayout extends Layout implements ContextualLayout {
     public static final String DATE_EXAMPLE = "28/10/2024";
     public static final String MO_EXAMPLE = "18 Mo";
 
-    private HomeContext currentContext;
     private VBox mainContainer;
 
     public HomeLayout() {
         super("Home");
     }
 
-    private static VBox getNewsSection() {
-        VBox box = new VBox(12);
-        HBox.setHgrow(box, Priority.ALWAYS);
+    private VBox getNewsSection() {
+        VBox box = getMainBox();
         box.getChildren().add(getTitleSection("See what's news"));
         box.getChildren().add(getNewsTable());
         return box;
     }
 
-    private static VBox getSurpriseSection() {
+    private VBox getMainBox() {
         VBox box = new VBox(12);
+        box.setPrefWidth(Region.USE_PREF_SIZE);
+        box.setMaxHeight(Region.USE_PREF_SIZE);
         HBox.setHgrow(box, Priority.ALWAYS);
+        return box;
+    }
+
+    private VBox getSurpriseSection() {
+        VBox box = getMainBox();
         box.getChildren().add(getTitleSection("Get surprised"));
         box.getChildren().add(getSurpriseTable());
         return box;
     }
 
-    private static VBox getDownloadSection() {
-        VBox box = new VBox(12);
-        HBox.setHgrow(box, Priority.ALWAYS);
+    private VBox getDownloadSection() {
+        VBox box = getMainBox();
         box.getChildren().add(getTitleSection("Manage downloads"));
         box.getChildren().add(getNewsTable());
         return box;
     }
 
-    private static VBox getClassicsSection() {
-        VBox box = new VBox(12);
+    private VBox getClassicsSection() {
+        VBox box = getMainBox();
         box.getChildren().add(getTitleSection("Check your classic"));
         box.getChildren().add(getClassic());
         return box;
     }
 
-    private static VBox getListeningSection() {
-        VBox box = new VBox(12);
+    private VBox getListeningSection() {
+        VBox box = getMainBox();
         box.getChildren().add(getTitleSection("Continue listening"));
         box.getChildren().add(getListening());
         return box;
     }
 
-    private static Label getTitleSection(String title) {
+    private Label getTitleSection(String title) {
         Label label = new Label(title);
         label.setFont(Font.font("Inter", FontWeight.BOLD, 20));
         label.setTextFill(ColorThemeConstants.getMain950());
         return label;
     }
 
-    private static Node getSurpriseTable() {
+    private Node getSurpriseTable() {
         GridPane box = new GridPane();
         box.setVgap(15.0);
         box.setHgap(15.0);
@@ -113,7 +116,7 @@ public class HomeLayout extends Layout implements ContextualLayout {
         return box;
     }
 
-    private static Node getNewsTable() {
+    private Node getNewsTable() {
         VBox box = new VBox();
 
         for (int i = 0; i < 4; i++) {
@@ -140,7 +143,7 @@ public class HomeLayout extends Layout implements ContextualLayout {
         return box;
     }
 
-    private static ScrollPane getClassic() {
+    private ScrollPane getClassic() {
         ScrollPane scrollPane = new ScrollPane();
         scrollPane.setVbarPolicy(ScrollPane.ScrollBarPolicy.NEVER);
         scrollPane.setHbarPolicy(ScrollPane.ScrollBarPolicy.NEVER);
@@ -165,7 +168,7 @@ public class HomeLayout extends Layout implements ContextualLayout {
         return scrollPane;
     }
 
-    private static ScrollPane getListening() {
+    private ScrollPane getListening() {
         ScrollPane scrollPane = new ScrollPane();
         scrollPane.setVbarPolicy(ScrollPane.ScrollBarPolicy.NEVER);
         scrollPane.setHbarPolicy(ScrollPane.ScrollBarPolicy.NEVER);
@@ -211,30 +214,11 @@ public class HomeLayout extends Layout implements ContextualLayout {
 
     @Override
     public void updateContext(LayoutContext context) {
-        if (context instanceof HomeContext homeContext) {
-            Platform.runLater(() -> {
-                this.currentContext = homeContext;
-
-                // Mise à jour du titre avec personnalisation
-                String welcomeTitle = homeContext.userName() != null
-                        ? "Welcome back, " + homeContext.userName() + "!"
-                        : "Home";
-                setTitle(welcomeTitle);
-
-                // Reconstruire le layout si nécessaire
-                if (mainContainer != null) {
-                    refreshLayout();
-                }
-            });
-        }
+        // no
     }
 
     @Override
     public boolean acceptsContext(Class<? extends LayoutContext> contextType) {
         return HomeContext.class.isAssignableFrom(contextType);
-    }
-
-    private void refreshLayout() {
-        buildLayout();
     }
 }
