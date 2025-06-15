@@ -1,6 +1,6 @@
 package com.podcast.antennapod.view.component.episode;
 
-import com.podcast.antennapod.view.item.EpisodeItem;
+import com.podcast.antennapod.item.EpisodeItem;
 import com.podcast.antennapod.view.util.ColorThemeConstants;
 import com.podcast.antennapod.view.util.ImageCache;
 import javafx.geometry.Insets;

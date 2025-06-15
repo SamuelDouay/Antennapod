@@ -1,5 +1,6 @@
 package com.podcast.antennapod.view.item;
 
+import com.podcast.antennapod.item.NavigationItem;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.kordamp.ikonli.javafx.FontIcon;

@@ -1,9 +1,10 @@
 package com.podcast.antennapod.view.layout;
 
+import com.podcast.antennapod.item.EpisodeItem;
+import com.podcast.antennapod.service.EpisodeService;
 import com.podcast.antennapod.view.component.episode.EpisodeComponent;
 import com.podcast.antennapod.view.component.image.ImageComponent;
 import com.podcast.antennapod.view.component.surprise.SurpriseComponent;
-import com.podcast.antennapod.view.item.EpisodeItem;
 import com.podcast.antennapod.view.layout.context.ContextualLayout;
 import com.podcast.antennapod.view.layout.context.HomeContext;
 import com.podcast.antennapod.view.layout.context.LayoutContext;
@@ -180,6 +181,13 @@ public class HomeLayout extends Layout implements ContextualLayout {
         box.setBackground(new Background(new BackgroundFill(ColorThemeConstants.getGrey000(), null, null)));
         HBox.setHgrow(box, Priority.ALWAYS);
 
+        EpisodeService episodeService = new EpisodeService();
+
+        for (EpisodeItem e : episodeService.getTop8Queue()) {
+            box.getChildren().add(IMAGE_COMPONENT.createImageCard(e.getUrlImage(), e.getName(), e.getDate()));
+        }
+
+        /*
         box.getChildren().add(IMAGE_COMPONENT.createImageCard(IMAGE_EX, TITLE_EXAMPLE, "24/05/25"));
         box.getChildren().add(IMAGE_COMPONENT.createImageCard(IMAGE_HDM, TITLE_EXAMPLE, "24/12/24"));
         box.getChildren().add(IMAGE_COMPONENT.createImageCard(IMAGE_SMLTLK, TITLE_EXAMPLE, "11/05/25"));
@@ -187,7 +195,7 @@ public class HomeLayout extends Layout implements ContextualLayout {
         box.getChildren().add(IMAGE_COMPONENT.createImageCard(IMAGE_ZERL, TITLE_EXAMPLE, "09/03/24"));
         box.getChildren().add(IMAGE_COMPONENT.createImageCard(IMAGE_UNDERSCORE, TITLE_EXAMPLE, "12/12/25"));
         box.getChildren().add(IMAGE_COMPONENT.createImageCard(IMAGE_ZERL, TITLE_EXAMPLE, "16/11/24"));
-        box.getChildren().add(IMAGE_COMPONENT.createImageCard(IMAGE_SMLTLK, TITLE_EXAMPLE, "12/03/24"));
+        box.getChildren().add(IMAGE_COMPONENT.createImageCard(IMAGE_SMLTLK, TITLE_EXAMPLE, "12/03/24")); */
 
         scrollPane.setContent(box);
         return scrollPane;

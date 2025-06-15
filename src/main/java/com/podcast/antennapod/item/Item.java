@@ -1,10 +1,10 @@
-package com.podcast.antennapod.view.item;
+package com.podcast.antennapod.item;
 
 import java.util.UUID;
 
 public class Item {
-    private boolean selected;
     private final UUID uuid;
+    private boolean selected;
 
     public Item() {
         this.selected = false;

@@ -1,8 +1,8 @@
 package com.podcast.antennapod.view.layout;
 
+import com.podcast.antennapod.item.ItemManager;
+import com.podcast.antennapod.item.NavigationItem;
 import com.podcast.antennapod.view.component.navigation.NavigationComponent;
-import com.podcast.antennapod.view.item.ItemManager;
-import com.podcast.antennapod.view.item.NavigationItem;
 import com.podcast.antennapod.view.layout.context.FeedContext;
 import com.podcast.antennapod.view.util.ColorThemeConstants;
 import com.podcast.antennapod.view.util.LayoutType;
@@ -35,14 +35,6 @@ public class NavigationContainer {
 
     public NavigationContainer(LayoutManager layoutManager) {
         this();
-        this.layoutManager = layoutManager;
-    }
-
-    public LayoutManager getLayoutManager() {
-        return layoutManager;
-    }
-
-    public void setLayoutManager(LayoutManager layoutManager) {
         this.layoutManager = layoutManager;
     }
 

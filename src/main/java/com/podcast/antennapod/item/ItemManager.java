@@ -1,4 +1,4 @@
-package com.podcast.antennapod.view.item;
+package com.podcast.antennapod.item;
 
 import java.util.ArrayList;
 import java.util.List;

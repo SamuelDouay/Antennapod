@@ -1,10 +1,10 @@
 package com.podcast.antennapod.view;
 
+import com.podcast.antennapod.item.EpisodeItem;
 import com.podcast.antennapod.view.component.badge.BadgeComponent;
 import com.podcast.antennapod.view.component.button.ButtonComponent;
 import com.podcast.antennapod.view.component.episode.EpisodeComponent;
 import com.podcast.antennapod.view.component.image.ImageComponent;
-import com.podcast.antennapod.view.item.EpisodeItem;
 import com.podcast.antennapod.view.util.ColorThemeConstants;
 import com.podcast.antennapod.view.util.ThemeType;
 import com.podcast.antennapod.view.util.TypeButton;

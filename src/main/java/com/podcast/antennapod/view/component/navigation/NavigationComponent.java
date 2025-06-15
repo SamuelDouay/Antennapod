@@ -1,6 +1,6 @@
 package com.podcast.antennapod.view.component.navigation;
 
-import com.podcast.antennapod.view.item.NavigationItem;
+import com.podcast.antennapod.item.NavigationItem;
 import javafx.scene.layout.HBox;
 
 public class NavigationComponent {

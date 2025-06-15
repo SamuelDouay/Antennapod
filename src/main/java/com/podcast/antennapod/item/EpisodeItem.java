@@ -1,4 +1,4 @@
-package com.podcast.antennapod.view.item;
+package com.podcast.antennapod.item;
 
 public class EpisodeItem extends Item {
     private final String urlImage;
