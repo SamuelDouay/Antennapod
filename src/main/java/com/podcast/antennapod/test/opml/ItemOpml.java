@@ -1,4 +1,4 @@
-package com.podcast.antennapod.util.opml;
+package com.podcast.antennapod.test.opml;
 
 public class ItemOpml {
     private String text;

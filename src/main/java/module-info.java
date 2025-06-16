@@ -12,6 +12,6 @@ module com.podcast.antennapod {
     exports com.podcast.antennapod;
     exports com.podcast.antennapod.view;
     exports com.podcast.antennapod.test;
-    exports com.podcast.antennapod.util.opml;
+    exports com.podcast.antennapod.test.opml;
     exports com.podcast.antennapod.test.gppoder;
 }

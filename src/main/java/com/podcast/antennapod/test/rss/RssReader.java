@@ -1,8 +1,8 @@
-package com.podcast.antennapod.util.rss;
+package com.podcast.antennapod.test.rss;
 
 import com.apptasticsoftware.rssreader.module.itunes.ItunesItem;
 import com.apptasticsoftware.rssreader.module.itunes.ItunesRssReader;
-import com.podcast.antennapod.util.MainUtil;
+import com.podcast.antennapod.test.MainUtil;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -19,9 +19,9 @@ public class RssReader {
     public static void main(String[] args) {
         String fileFeed = "/tmp/ex_01022025_feed.xml";
 
-        List<FeedItem> feedItems =  RssReader.readRssFeed(fileFeed);
+        List<FeedItem> feedItems = RssReader.readRssFeed(fileFeed);
 
-        for(FeedItem feedItem : feedItems) {
+        for (FeedItem feedItem : feedItems) {
             logger.info(feedItem);
         }
 

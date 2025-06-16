@@ -120,25 +120,10 @@ public class HomeLayout extends Layout implements ContextualLayout {
     private Node getNewsTable() {
         VBox box = new VBox();
 
-        for (int i = 0; i < 4; i++) {
-            EpisodeItem episodeItem = new EpisodeItem(IMAGE_HDM,
-                    false,
-                    TITLE_EXAMPLE,
-                    TIME_EXAMPLE,
-                    DATE_EXAMPLE,
-                    MO_EXAMPLE,
-                    false);
+        EpisodeService episodeService = new EpisodeService();
 
-            EpisodeItem episodeItem1 = new EpisodeItem(IMAGE_EX,
-                    true,
-                    TITLE_EXAMPLE,
-                    TIME_EXAMPLE,
-                    DATE_EXAMPLE,
-                    MO_EXAMPLE,
-                    true);
-
-            box.getChildren().add(EPISODE_COMPONENT.createInboxEpisode(episodeItem));
-            box.getChildren().add(EPISODE_COMPONENT.createInboxEpisode(episodeItem1));
+        for (EpisodeItem e : episodeService.getNewsTop8()) {
+            box.getChildren().add(EPISODE_COMPONENT.createInboxEpisode(e));
         }
 
         return box;

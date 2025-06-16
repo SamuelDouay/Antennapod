@@ -15,4 +15,8 @@ public class EpisodeService {
     public List<EpisodeItem> getTop8Queue() {
         return episodeDao.getTop8InQueue();
     }
+
+    public List<EpisodeItem> getNewsTop8() {
+        return episodeDao.getNewsTop8();
+    }
 }

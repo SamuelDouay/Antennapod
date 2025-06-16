@@ -1,4 +1,4 @@
-package com.podcast.antennapod.util.opml;
+package com.podcast.antennapod.test.opml;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -43,7 +43,7 @@ public final class OpmlWriter {
     /**
      * Écrit le contenu OPML dans le flux de sortie spécifié.
      *
-     * @param items Liste d'éléments à inclure dans le fichier OPML
+     * @param items        Liste d'éléments à inclure dans le fichier OPML
      * @param outputStream Flux de sortie où écrire le contenu
      * @throws OpmlWriterException si une erreur survient lors de l'écriture
      */
@@ -96,7 +96,7 @@ public final class OpmlWriter {
      * Ajoute un élément outline au document OPML.
      *
      * @param bodyElement Élément body parent
-     * @param item Item OPML à ajouter
+     * @param item        Item OPML à ajouter
      */
     private static void addOutline(Element bodyElement, ItemOpml item) {
         Element outlineElement = bodyElement.addElement("outline");
@@ -116,7 +116,7 @@ public final class OpmlWriter {
     /**
      * Écrit le document dans le flux de sortie.
      *
-     * @param document Document à écrire
+     * @param document     Document à écrire
      * @param outputStream Flux de sortie où écrire le document
      * @throws OpmlWriterException si une erreur survient lors de l'écriture
      */

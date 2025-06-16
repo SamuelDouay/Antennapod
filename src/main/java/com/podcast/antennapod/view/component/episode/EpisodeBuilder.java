@@ -81,7 +81,7 @@ public class EpisodeBuilder {
         setOnMouseHandler(box);
 
         HBox.setHgrow(box, Priority.ALWAYS);
-        box.setPadding( new Insets(8.0, 16.0, 8.0, 16.0));
+        box.setPadding(new Insets(8.0, 16.0, 8.0, 16.0));
         box.setAlignment(Pos.CENTER);
 
         return box;
@@ -98,7 +98,8 @@ public class EpisodeBuilder {
         image.setFitWidth(40.0);
 
         Label title = new Label(episodeItem.getName());
-        title.maxWidth(360.0);
+        title.setMinWidth(500.0);
+        title.setMaxWidth(500.0);
 
         if (episodeItem.isRead()) {
             title.setTextFill(ColorThemeConstants.getGrey800());

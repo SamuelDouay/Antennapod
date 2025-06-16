@@ -1,5 +1,6 @@
 package com.podcast.antennapod.util.rss;
 
+import com.podcast.antennapod.test.rss.FeedItem;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 

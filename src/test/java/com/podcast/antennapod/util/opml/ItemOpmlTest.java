@@ -1,5 +1,6 @@
 package com.podcast.antennapod.util.opml;
 
+import com.podcast.antennapod.test.opml.ItemOpml;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 

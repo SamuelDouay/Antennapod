@@ -1,4 +1,4 @@
-package com.podcast.antennapod.util.rss;
+package com.podcast.antennapod.test.rss;
 
 public class FeedItem {
     private String title;
