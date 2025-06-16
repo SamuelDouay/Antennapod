@@ -2,6 +2,7 @@ package com.podcast.antennapod.view.layout;
 
 import com.podcast.antennapod.item.ItemManager;
 import com.podcast.antennapod.item.NavigationItem;
+import com.podcast.antennapod.service.NavigationService;
 import com.podcast.antennapod.view.component.navigation.NavigationComponent;
 import com.podcast.antennapod.view.layout.context.FeedContext;
 import com.podcast.antennapod.view.util.ColorThemeConstants;
@@ -84,29 +85,10 @@ public class NavigationContainer {
     private ScrollPane createScrollList() {
         VBox box = createList();
 
-        for (int i = 0; i < 5; i++) {
-            NavigationItem podcast1 = new NavigationItem(String.valueOf(NavigationContainer.class.getResource("/images/zerl.jpg")), "Zack en Roue Libre by Zack Nani", 12);
-            NavigationItem podcast2 = new NavigationItem(String.valueOf(NavigationContainer.class.getResource("/images/heure_du_monde.png")), "L'heure du monde");
-            NavigationItem podcast3 = new NavigationItem(String.valueOf(NavigationContainer.class.getResource("/images/small_talk.jpg")), "Small Tallk - Kobini", 142);
-            NavigationItem podcast4 = new NavigationItem(String.valueOf(NavigationContainer.class.getResource("/images/underscore.jpeg")), "Underscore_", 5);
-            NavigationItem podcast5 = new NavigationItem(String.valueOf(NavigationContainer.class.getResource("/images/ex.jpeg")), "Ex...", 200);
-            NavigationItem podcast6 = new NavigationItem(String.valueOf(NavigationContainer.class.getResource("/images/ex.jpeg")), "Ex...");
+        NavigationService navigationService = new NavigationService();
 
-            HBox box1 = createNavigationComponent(podcast1, LayoutType.FEED);
-            HBox box2 = createNavigationComponent(podcast2, LayoutType.FEED);
-            HBox box3 = createNavigationComponent(podcast3, LayoutType.FEED);
-            HBox box4 = createNavigationComponent(podcast4, LayoutType.FEED);
-            HBox box5 = createNavigationComponent(podcast5, LayoutType.FEED);
-            HBox box6 = createNavigationComponent(podcast6, LayoutType.FEED);
-
-            listNav.add(box1);
-            listNav.add(box2);
-            listNav.add(box3);
-            listNav.add(box4);
-            listNav.add(box5);
-            listNav.add(box6);
-
-            box.getChildren().addAll(box1, box2, box3, box4, box5, box6);
+        for (NavigationItem navigationItem : navigationService.getList()) {
+            box.getChildren().add(createNavigationComponent(navigationItem, LayoutType.FEED));
         }
 
         ScrollPane scrollPane = getScrollPane(box);

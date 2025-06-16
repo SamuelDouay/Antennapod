@@ -187,16 +187,6 @@ public class HomeLayout extends Layout implements ContextualLayout {
             box.getChildren().add(IMAGE_COMPONENT.createImageCard(e.getUrlImage(), e.getName(), e.getDate()));
         }
 
-        /*
-        box.getChildren().add(IMAGE_COMPONENT.createImageCard(IMAGE_EX, TITLE_EXAMPLE, "24/05/25"));
-        box.getChildren().add(IMAGE_COMPONENT.createImageCard(IMAGE_HDM, TITLE_EXAMPLE, "24/12/24"));
-        box.getChildren().add(IMAGE_COMPONENT.createImageCard(IMAGE_SMLTLK, TITLE_EXAMPLE, "11/05/25"));
-        box.getChildren().add(IMAGE_COMPONENT.createImageCard(IMAGE_UNDERSCORE, TITLE_EXAMPLE, "15/05/24"));
-        box.getChildren().add(IMAGE_COMPONENT.createImageCard(IMAGE_ZERL, TITLE_EXAMPLE, "09/03/24"));
-        box.getChildren().add(IMAGE_COMPONENT.createImageCard(IMAGE_UNDERSCORE, TITLE_EXAMPLE, "12/12/25"));
-        box.getChildren().add(IMAGE_COMPONENT.createImageCard(IMAGE_ZERL, TITLE_EXAMPLE, "16/11/24"));
-        box.getChildren().add(IMAGE_COMPONENT.createImageCard(IMAGE_SMLTLK, TITLE_EXAMPLE, "12/03/24")); */
-
         scrollPane.setContent(box);
         return scrollPane;
     }

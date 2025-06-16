@@ -7,7 +7,6 @@ module com.podcast.antennapod {
     requires org.kordamp.ikonli.javafx;
     requires javafx.controls;
     requires org.kordamp.ikonli.materialdesign2;
-    requires org.slf4j;
     requires java.sql;
 
     exports com.podcast.antennapod;
