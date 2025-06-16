@@ -28,10 +28,12 @@ public class NavigationContainer {
     private final ItemManager manager;
     private final List<HBox> listNav;
     private LayoutManager layoutManager;
+    private final NavigationService navigationService;
 
     public NavigationContainer() {
         this.manager = new ItemManager();
         this.listNav = new ArrayList<>();
+        this.navigationService = new NavigationService();
     }
 
     public NavigationContainer(LayoutManager layoutManager) {
@@ -61,9 +63,9 @@ public class NavigationContainer {
         NavigationItem homeItem = new NavigationItem(new FontIcon(MaterialDesignH.HOME), "Home");
         homeItem.setSelected(true);
         NavigationItem playlistItem = new NavigationItem(new FontIcon(MaterialDesignP.PLAYLIST_PLAY), "Queue");
-        NavigationItem inboxItem = new NavigationItem(new FontIcon(MaterialDesignI.INBOX), "Inbox", 12);
+        NavigationItem inboxItem = new NavigationItem(new FontIcon(MaterialDesignI.INBOX), "Inbox", navigationService.getNumberOfInbox());
         NavigationItem episodesItem = new NavigationItem(new FontIcon(MaterialDesignR.RSS), "Episodes");
-        NavigationItem subscriptionsItem = new NavigationItem(new FontIcon(MaterialDesignV.VIEW_GRID_OUTLINE), "Subscription");
+        NavigationItem subscriptionsItem = new NavigationItem(new FontIcon(MaterialDesignV.VIEW_GRID_OUTLINE), "Subscription", navigationService.getNumberOfInbox());
         NavigationItem downloadsItem = new NavigationItem(new FontIcon(MaterialDesignD.DOWNLOAD), "Downloads", 123);
         NavigationItem historyItem = new NavigationItem(new FontIcon(MaterialDesignH.HISTORY), "Playback history");
         NavigationItem addPodcastItem = new NavigationItem(new FontIcon(MaterialDesignP.PLUS), "Add podcast");
@@ -84,8 +86,6 @@ public class NavigationContainer {
 
     private ScrollPane createScrollList() {
         VBox box = createList();
-
-        NavigationService navigationService = new NavigationService();
 
         for (NavigationItem navigationItem : navigationService.getList()) {
             box.getChildren().add(createNavigationComponent(navigationItem, LayoutType.FEED));

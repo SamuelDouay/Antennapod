@@ -13,6 +13,10 @@ public class NavigationService {
     }
 
     public List<NavigationItem> getList() {
-        return this.navigationDao.getList();
+        return navigationDao.getList();
+    }
+
+    public int getNumberOfInbox() {
+        return navigationDao.getNumberOfInbox();
     }
 }
